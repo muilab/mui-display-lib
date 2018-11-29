@@ -1,7 +1,5 @@
 # -*- coding: utf-8 -*-
 
-# Learn more: https://github.com/kennethreitz/setup.py
-
 from setuptools import setup, find_packages
 
 
@@ -12,13 +10,14 @@ with open('LICENSE') as f:
     license = f.read()
 
 setup(
-    name='sample',
-    version='0.1.0',
-    description='Sample package for Python-Guide.org',
+    name='mui_ui',
+    version='0.0.1',
+    description='UI Library for mui',
     long_description=readme,
-    author='Kenneth Reitz',
-    author_email='me@kennethreitz.com',
-    url='https://github.com/kennethreitz/samplemod',
+    author='Takuya Kubota',
+    author_email='kubota@muilab.com',
+    install_requires=['crc8','pyserial','Pillow','numpy'],
+    url='https://github.com/muilab/mui-display-lib',
     license=license,
     packages=find_packages(exclude=('tests', 'docs'))
 )
