@@ -14,7 +14,7 @@ EV_KEY = 0x01       # event type key (touch down or up or hold)
 BTN_TOUCH = 0x14a   # event code touch
 VALUE_UP = 0        # evnet value up
 VALUE_DOWN = 1      # event value down
-VALUE_HOLD = 2      # event value hold
+VALUE_MOVE = 2      # event value move
 
 EV_ABS = 0x03   # event type Axis postion report
 ABS_X = 0x00    # event code Axis X
@@ -31,7 +31,7 @@ class MotionEvent():
         timestamp
 
     action : int
-        touch action type. VALUE_UP or VALUE_DOWN or VALUE_HOLD
+        touch action type. VALUE_UP or VALUE_DOWN or VALUE_MOVE
 
     x : int
         touch x position
@@ -42,7 +42,7 @@ class MotionEvent():
 
     def __init__(self):
         self._timestamp = 0
-        self._action = VALUE_DOWN
+        self._action = VALUE_UP
         self._x = 0
         self._y = 0
 
@@ -114,6 +114,7 @@ class InputHandler():
         self.loop.run_until_complete(self.eventLoop())
 
     async def eventLoop(self):
+        changeKey = False
         async for ev in self.device.async_read_loop():
             #print(ev)
 
@@ -123,8 +124,11 @@ class InputHandler():
 
             if ev.type == EV_SYN:
                 # last data sing for multi part touch events.
+                if changeKey == False:
+                    self.motionEvent.setAction(VALUE_MOVE)
                 self.motionEvent.setTimestamp(ev.timestamp())
                 self.handleInputEvent(self.motionEvent)
+                changeKey = False
                 
             if (ev.type == EV_ABS and ev.code == ABS_X):
                 self.motionEvent.setX(ev.value // 2)
@@ -134,6 +138,7 @@ class InputHandler():
 
             if (ev.type == EV_KEY):
                 self.motionEvent.setAction(ev.value)
+                changeKey = True
 
     def handleInputEvent(self, e:MotionEvent):
         self.inputEventListener.onInputEvent(e)
