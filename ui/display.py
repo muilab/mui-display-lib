@@ -171,7 +171,8 @@ class Display:
 
 
 # for TEST
-#d=Display()
-#d.turnOff(2)
-#time.sleep(2)
-#d.turnOn(2)
+if __name__ == '__main__':
+    d=Display()
+    d.turnOff(2)
+    time.sleep(2)
+    d.turnOn(2)

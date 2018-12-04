@@ -135,20 +135,24 @@ class FontPos:
 
 
 # for test
-font = MuiFont() # mui font
-d = Display()    # mui display
+if __name__ == '__main__':
+    font = MuiFont() # mui font
+    d = Display()    # mui display
 
-text = 'Hello World'
+    text = 'Hello World'
 
-offsetX = 0
-for t in text:
-    tM = font.getText(t)
-    tM.setStartX(offsetX)
-    offsetX += tM.width
-    d.setLayout(tM)
+    offsetX = 0
+    for t in text:
+        tM = font.getText(t)
+        tM.setStartX(offsetX)
+        offsetX += tM.width
+        d.setLayout(tM)
 
-d.updateLayout()
-d.refreshDisplay(0, 100)
+    d.updateLayout()
+    d.refreshDisplay(0, 100)
+
+    
+
 
 
 
