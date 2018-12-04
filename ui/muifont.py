@@ -14,12 +14,12 @@ class MuiFont:
 
     def __init__(self):
         # load font data file
-        im = Image.open('mui_gothic_01.png')
+        im = Image.open('assets/mui_gothic_01.png')
         self.fontData = im.load()
 
         # load font information file
         self.fontMap = {}
-        f = open('sjis_unicode_convert_table.csv', 'r')
+        f = open('assets/sjis_unicode_convert_table.csv', 'r')
         reader = csv.reader(f)
         for row in reader:
             w = ""
