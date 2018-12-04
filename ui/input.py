@@ -1,34 +1,109 @@
+
 # mui touch panel event class
 # -*- coding: utf-8 -*-
 
+import sys
 import asyncio
-import evdev
+from evdev import InputDevice, categorize, ecodes, list_devices, KeyEvent
+
 
 EV_SYN = 0x00   # event type sync
 SYN_REPORT = 0  # event code sync report
 
-EV_KEY = 0x01       # event type key (touch down or up)
+EV_KEY = 0x01       # event type key (touch down or up or hold)
 BTN_TOUCH = 0x14a   # event code touch
-VALUE_DOWN = 1      # event value down
 VALUE_UP = 0        # evnet value up
+VALUE_DOWN = 1      # event value down
+VALUE_HOLD = 2      # event value hold
 
 EV_ABS = 0x03   # event type Axis postion report
 ABS_X = 0x00    # event code Axis X
 ABS_Y = 0x01    # event code Axis Y
 
-def inputEventListener(action, x, y):
+
+class MotionEvent():
     """
-    Callback for input event from mui touch panel 
+    Touch event class
+
+    Attributes
+    -----------
+    timestamp :  float
+        timestamp
+
+    action : int
+        touch action type. VALUE_UP or VALUE_DOWN or VALUE_HOLD
+
+    x : int
+        touch x position
+
+    y : int
+        touch y position
     """
-    pass 
+
+    def __init__(self):
+        self._timestamp = 0
+        self._action = VALUE_DOWN
+        self._x = 0
+        self._y = 0
+
+    def __str__(self):
+        msg = '--- MotionEvent at {:f}, action {:d}, x {:d}, y {:d} ---'
+        return msg.format(self.timestamp, self.action, self.x, self.y)
+
+    @property
+    def timestamp(self):
+        return self._timestamp
+
+    @property
+    def action(self):
+        return self._action
+
+    @property
+    def x(self):
+        return self._x
+
+    @property
+    def y(self):
+        return self._y
+
+    def setTimestamp(self, t):
+        self._timestamp = t
+
+    def setAction(self, action):
+        self._action = action
+    
+    def setX(self, x):
+        self._x = x
+
+    def setY(self, y):
+        self._y = y
+    
+
+class InputEventListener():
+    """
+    Interface definition class for a callback to be invoked when a touch event will occur.
+    If you want to receive touch event, please override onInputEvent method.
+    """
+
+    def onInputEvent(self, e:MotionEvent):
+        """
+        touch event callback
+
+        Parameters
+        -----------
+        e : MotionEvent
+        """
+        raise NotImplementedError
+
 
 class InputHandler():
 
-    def __init__(self, listener:inputEventListener):
+    def __init__(self, listener:InputEventListener):
+        self.motionEvent = None
         self.inputEventListener = listener
 
         # get mui touch panel
-        devices = [evdev.InputDevice(path) for path in evdev.list_devices()]
+        devices = [InputDevice(path) for path in list_devices()]
         for device in devices:
             if device.name == 'Atmel maXTouch Touchscreen':
                 print(device)
@@ -40,11 +115,46 @@ class InputHandler():
 
     async def eventLoop(self):
         async for ev in self.device.async_read_loop():
+            #print(ev)
+
             # handle input event
-            pass
+            if self.motionEvent == None:
+                self.motionEvent = MotionEvent()
 
-    def handleInputEvent(self, action, x, y):
-        self.inputEventListener(action, x, y)
+            if ev.type == EV_SYN:
+                # last data sing for multi part touch events.
+                self.motionEvent.setTimestamp(ev.timestamp())
+                self.handleInputEvent(self.motionEvent)
+                
+            if (ev.type == EV_ABS and ev.code == ABS_X):
+                self.motionEvent.setX(ev.value // 2)
 
+            if (ev.type == EV_ABS and ev.code == ABS_Y):
+                self.motionEvent.setY(ev.value // 20)
+
+            if (ev.type == EV_KEY):
+                self.motionEvent.setAction(ev.value)
+
+    def handleInputEvent(self, e:MotionEvent):
+        self.inputEventListener.onInputEvent(e)
+
+
+
+# for test
+class TestInputEventListener(InputEventListener):
+    def __init__(self):
+        super().__init__()
+
+    def onInputEvent(self, e:MotionEvent):
+        print(e)
+
+if __name__ == '__main__':
+    try:
+        listener = TestInputEventListener()
+        input = InputHandler(listener)
+        input.startEventLoop()
+    except (KeyboardInterrupt, EOFError):
+        pass
+    sys.exit(0)
 
 
