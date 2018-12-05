@@ -1,8 +1,0 @@
-#
-
-# lib version
-__version__ = '0.0.1'
-
-# muiΒ Display size
-DISPLAY_WIDTH = 200
-DISPLAY_HEIGHT = 32

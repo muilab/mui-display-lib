@@ -4,22 +4,48 @@
 from PIL import Image
 import csv
 
-from matrix import Matrix
-from display import Display
+import os
+name = os.path.dirname(os.path.abspath(__name__))
+
+pJ = os.path.join(name, './ui/assets/mui_gothic_01.png')
+fontFile = os.path.normpath(pJ)
+print(fontFile)
+
+pJ = os.path.join(name, './ui/assets/sjis_unicode_convert_table.csv')
+fontInfoFile = os.path.normpath(pJ)
+print(fontInfoFile)
+
+try:
+    from display import Display
+    from matrix import Matrix
+except ImportError:
+    from . import Display
+    from . import Matrix
+
 
 class MuiFont:
     """
     font class for mui
     """
 
+    _instance = None
+
+    @classmethod
+    def get_instance(cls):
+        if not cls._instance:
+            cls._instance = cls()
+
+        return cls._instance
+
+
     def __init__(self):
         # load font data file
-        im = Image.open('assets/mui_gothic_01.png')
+        im = Image.open(fontFile)
         self.fontData = im.load()
 
         # load font information file
         self.fontMap = {}
-        f = open('assets/sjis_unicode_convert_table.csv', 'r')
+        f = open(fontInfoFile)
         reader = csv.reader(f)
         for row in reader:
             w = ""
@@ -136,7 +162,7 @@ class FontPos:
 
 # for test
 if __name__ == '__main__':
-    font = MuiFont() # mui font
+    font = MuiFont.get_instance() # mui font
     d = Display()    # mui display
 
     text = 'Hello World'

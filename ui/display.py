@@ -4,7 +4,10 @@ import crc8
 import serial
 import time
 
-from matrix import Matrix
+try:
+    from matrix import Matrix
+except ImportError:
+    from . import Matrix
 
 ACK = 0x06
 NACK = 0x15
