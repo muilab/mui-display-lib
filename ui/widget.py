@@ -4,6 +4,7 @@
 try:
     from parts import AbsParts
     from matrix import Matrix
+    from input import MotionEvent
 except ImportError:
     from . import AbsParts
     from . import Matrix
@@ -25,6 +26,15 @@ class Widget(AbsParts):
         parts.x = self.x + parts.x
         parts.y = self.y + parts.y
         self._partsList.append(parts)
+
+
+    def dispatchTouchEvent(self, e):
+        for p in reversed(list(self._partsList)):
+            if p.visible == True:
+                result = p.dispatchTouchEvent(e)
+                if result == True:
+                    break
+
 
     def getMatrix(self):
         m = Matrix(self.width, self.height)

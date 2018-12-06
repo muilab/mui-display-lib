@@ -94,7 +94,7 @@ class MuiFont:
         return None
 
     def _readFontData(self, fontPos):
-        print(fontPos.toString())
+        #print(fontPos)
         fW = fontPos.width
         fH = fontPos.height
         mt = Matrix(fW, fH)
@@ -156,8 +156,9 @@ class FontPos:
     def row(self):
         return self._row
 
-    def toString(self):
-        print('row:', self._row, ', col:', self._col, ", w:", self._width, ", h:", self._height)
+    def __str__(self):
+        msg = 'row {:d}, col {:d}, w {:d}, h {:d}'
+        return msg.format(self._row, self._col, self._width, self._height)
 
 
 # for test

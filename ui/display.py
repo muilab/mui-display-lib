@@ -32,8 +32,8 @@ class Display:
 
     def turnOn(self, fade):
         packet = self._createDisplayReqCommand(0, fade, 100)
-        n = self.port.write(packet) # off
-        print('>', n, packet)
+        n = self.port.write(packet) # on
+        #print('>', n, packet)
         ack = self.port.read()
         if ack[0] == NACK:
             print('<', 1, ack)
@@ -48,7 +48,7 @@ class Display:
     def turnOff(self, fade):
         packet = self._createDisplayReqCommand(2, fade, 100)
         n = self.port.write(packet) # off
-        print('>', n, packet)
+        #print('>', n, packet)
         ack = self.port.read()
         if ack[0] == NACK:
             print('<', 1, ack)
@@ -66,24 +66,29 @@ class Display:
 
     def updateLayout(self):
         packet = self._createLayoutCommand()
-        n = self.port.write(packet) # off
-        print('>', n, packet)
+        n = self.port.write(packet)
+        #print('>', n, packet)
         rsly = self.port.read(1024)
-        print('<', len(rsly), rsly)
+        #print('<', len(rsly), rsly)
+        self.port.write([ACK])
 
     def refreshDisplay(self, fade, duty):
         packet = self._createDisplayReqCommand(1, fade, duty)
-        n = self.port.write(packet) # off
-        print('>', n, packet)
-        ack = self.port.read()
+        n = self.port.write(packet)
+        #print('>', n, packet)
+        ack = []
+        while True:
+            ack = self.port.read()
+            if len(ack) != 0:
+                break;
         if ack[0] == NACK:
             print('<', 1, ack)
             raise Exception('NACK', packet)
-        print('<', 1, ack)
+        #print('<', 1, ack)
         rdly = self.port.read(17)
-        print('<', len(rdly), rdly)
+        #print('<', len(rdly), rdly)
         self.port.write([ACK])
-        print('>', 1, ACK)
+        #print('>', 1, ACK)
         
     def clearDisplay(self):
         pass

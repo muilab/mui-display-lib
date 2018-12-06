@@ -2,6 +2,31 @@
 # -*- coding: utf-8 -*-
 
 from abc import ABCMeta, abstractmethod
+from evdev import ecodes
+
+try:
+    from input import MotionEvent
+except ImportError:
+    pass
+#    from . import InputEventListener
+#    from . import MotionEvent
+
+
+class OnTouchEventListener():
+
+    def onTouch(self, view, e):
+        """
+        callback method to be invoked when a touched target view.
+
+        Parameters
+        -----------
+        view : AbsParts
+            target view instance
+        e : Motionevent
+            motion event
+        """
+        raise NotImplementedError
+
 
 class AbsParts(metaclass=ABCMeta):
 
@@ -16,6 +41,21 @@ class AbsParts(metaclass=ABCMeta):
     @abstractmethod
     def getMatrix(self):
         raise NotImplementedError()
+
+    def addOnTouchViewListener(self, listener: OnTouchEventListener):
+        self.OnTouchEventListener = listener
+
+    def dispatchTouchEvent(self, e):
+        #print('-- dispatchTouchEvent() --')
+        if (e.action == 0) and self.hitTest(e.x, e.y) and (self.OnTouchEventListener != None):
+            self.OnTouchEventListener.onTouch(self, e)
+            return True
+
+        self.onTouch(e)
+        return False
+
+    def onTouch(self, e):
+        pass
 
     def hitTest(self, x, y):
         if self._visible == False:

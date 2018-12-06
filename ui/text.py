@@ -31,11 +31,13 @@ class Text(AbsParts):
         super().__init__(name)
         self._text = text
         self._border = border
+        self._textAlignment = TextAlignment.LEFT
 
 
-    def setText(self, text:str, textAlignment:TextAlignment=TextAlignment.LEFT):
+    def setText(self, text:str, textAlignment:TextAlignment=None):
         self._text = text
-        self._textAlignment = textAlignment
+        if textAlignment != None:
+            self._textAlignment = textAlignment
 
 
     def setTextAlignment(self, textAlignment:TextAlignment):
@@ -110,26 +112,25 @@ class Text(AbsParts):
                     # notify text if out from view area
                     pass
 
-                # write border
-                if self._border == Border.BOTTOM:
-                    yOffset += 8
-                    if m.height > 8:
-                        for i in range(maxX):
-                            m.matrix[yOffset][i] = 1
-
-                elif self._border == Border.AROUND:
-                    yOffset += 9
-                    maxX = maxX + 2
-                    if self._textAlignment == TextAlignment.CENTER:
-                        maxX = self.width
-
+            # write border
+            if self._border == Border.BOTTOM:
+                yOffset += 8
+                if m.height > 8:
                     for i in range(maxX):
-                        m.matrix[0][i] = 1
                         m.matrix[yOffset][i] = 1
 
-                    for i in range(yOffset):
-                        m.matrix[i][0] = 1
-                        m.matrix[i][maxX - 1] = 1
+            elif self._border == Border.AROUND:
+                maxX = maxX + 2
+                if self._textAlignment == TextAlignment.CENTER:
+                    maxX = self.width
+
+                for i in range(maxX):
+                    m.matrix[0][i] = 1
+                    m.matrix[self.height-1][i] = 1
+
+                for i in range(self.height - 1):
+                    m.matrix[i][0] = 1
+                    m.matrix[i][maxX - 1] = 1
 
         return m
 
@@ -138,16 +139,24 @@ class Text(AbsParts):
         """
         calcurate text width
         """
+        textMaxWidth = 0
         textWidth = 0
         for s in text:
-            tM = font.getText(s)
-            tM.startX = self.x + textWidth
+            if (s == '\n'):
+                textWidth = 0
+            else:
+                tM = font.getText(s)
+                tM.startX = self.x + textWidth
 
-            if (s == '\n') or ((tM.startX + tM.width) > (self.x + self.width)):
-                break
-            textWidth += tM.width
+                if ((tM.startX + tM.width) > (self.x + self.width)):
+                    textWidth = 0
+                else:
+                    textWidth += tM.width
+
+            if textMaxWidth < textWidth:
+                textMaxWidth = textWidth
         
-        return textWidth
+        return textMaxWidth
 
 
     def getTextHeight(self, font, text):
@@ -158,14 +167,18 @@ class Text(AbsParts):
         textHeight = 8
 
         for s in text:
-            tM = font.getText(s)
-            tM.startX = self.x + textWidth
-
-            if (s == '\n') or ((tM.startX + tM.width) > (self.x + self.width)):
+            if (s == '\n'):
                 textHeight += LINE_OFFSET
                 textWidth = 0
+            else:
+                tM = font.getText(s)
+                tM.startX = self.x + textWidth
 
-            textWidth += tM.width
+                if ((tM.startX + tM.width) > (self.x + self.width)):
+                    textHeight += LINE_OFFSET
+                    textWidth = 0
+
+                textWidth += tM.width
         
         return textHeight
 
