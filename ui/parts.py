@@ -37,6 +37,7 @@ class AbsParts(metaclass=ABCMeta):
         self._y = 0
         self._width = 0
         self._height = 0
+        self.OnTouchEventListener = None
 
     @abstractmethod
     def getMatrix(self):
@@ -47,7 +48,7 @@ class AbsParts(metaclass=ABCMeta):
 
     def dispatchTouchEvent(self, e):
         #print('-- dispatchTouchEvent() --')
-        if (e.action == 0) and self.hitTest(e.x, e.y) and (self.OnTouchEventListener != None):
+        if (self.OnTouchEventListener != None) and (e.action == 0) and self.hitTest(e.x, e.y):
             self.OnTouchEventListener.onTouch(self, e)
             return True
 
