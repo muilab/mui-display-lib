@@ -1,6 +1,7 @@
 # mui ui text view class
 # -*- coding: utf-8 -*-
 
+import time
 from enum import Enum
 
 try:
@@ -32,6 +33,8 @@ class Text(AbsParts):
         self._text = text
         self._border = border
         self._textAlignment = TextAlignment.LEFT
+        self._oldContent = None
+        self._needRenderContent = True
 
 
     def setText(self, text:str, textAlignment:TextAlignment=None):
@@ -39,19 +42,28 @@ class Text(AbsParts):
         if textAlignment != None:
             self._textAlignment = textAlignment
 
+        self._needRenderContent = True
+
 
     def setTextAlignment(self, textAlignment:TextAlignment):
         self._textAlignment = textAlignment
+        self._needRenderContent = True
 
 
     def setBorder(self, border:Border):
         self._border = border
+        self._needRenderContent = True
 
 
     def getMatrix(self):
         """
         Return Matrix data for display draw
         """
+        #sT = time.time()
+
+        if (self._oldContent != None) and (self._needRenderContent == False):
+            return self._oldContent
+
         m = Matrix(self.width, self.height)
         m.startX = self.x
         m.startY = self.y
@@ -131,6 +143,12 @@ class Text(AbsParts):
                 for i in range(self.height - 1):
                     m.matrix[i][0] = 1
                     m.matrix[i][maxX - 1] = 1
+
+        #eR = time.time() - sT
+        #print("render text time : {0}".format(eR))
+
+        self._oldContent = m
+        self._needRenderContent = False
 
         return m
 

@@ -5,6 +5,8 @@
 
 import sys
 import asyncio
+import time
+
 from mui_ui import Display, MuiFont, Text, Widget, Border, TextAlignment, MotionEvent, InputEventListener, InputHandler , OnTouchEventListener   
 
 
@@ -43,8 +45,11 @@ class SampleUI(InputEventListener, OnTouchEventListener):
         self.touchCount = 0
 
     def updateUI(self):
+        # set layout data
         self.display.setLayout(self.ui.getMatrix())
+        # update Display internal data buffer (does not refesh display)
         self.display.updateLayout()
+        # refresh Display
         self.display.refreshDisplay(0, 100)
 
     def mainLoop(self):
@@ -56,8 +61,9 @@ class SampleUI(InputEventListener, OnTouchEventListener):
         #print(e)
 
     def onTouch(self, view, e: MotionEvent):
-        # 
+        # handling touch events
         if view is self.views['text1']:
+            s = time.time()
             print('touched text view!')
             self.touchCount += 1
             msg = '-{:d}-'
@@ -65,6 +71,9 @@ class SampleUI(InputEventListener, OnTouchEventListener):
             print(msg)
             self.views['text2'].setText(msg)
             self.updateUI()
+            e = time.time() - s
+            print("update time : {0}".format(e))
+
 
 
 if __name__ == "__main__":

@@ -38,6 +38,14 @@ class Matrix:
     def startY(self, startY):
         self._startY = startY
     
+    @width.setter
+    def width(self, width):
+        self._width = width
+
+    @height.setter
+    def height(self, height):
+        self._height = height
+
     def __str__(self):
         for h in range(self._height):
             print(self.matrix[h,:])
@@ -60,6 +68,21 @@ class Matrix:
                 if ((y >= bT) and (y < bB) and (x >= bL) and (x < bR)):
                     self.matrix[y - self.startY][x - self.startX] = b.matrix[y - bT][x - bL]
         
+
+    def copy(self, src: 'Matrix'):
+        if src == None:
+            return
+        # copy matrix
+        self.startX = src.startX
+        self.startY = src.startY
+        self.width = src.width
+        self.height = src.height
+
+        #self.matrix = np.asarray([[0] * self.width for i in range(self.height)], dtype='int8')
+        #for y in range(self.height):
+        #    for x in range(self.width):
+        #        self.matrix[y][x] = src.matrix[y][x]
+        self.matrix = np.copy(src.matrix)
 
 
     def setStartX(self, x):

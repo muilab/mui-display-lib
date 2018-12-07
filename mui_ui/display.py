@@ -20,6 +20,7 @@ class Display:
         print("create display class")
         # create led matrix
         self.ledMatrix = Matrix(200, 32)
+        self.ledMatrixBuf = Matrix(200, 32) # buffer for old data
 
         # open UART port
         self.port = serial.Serial('/dev/ttyS0',
@@ -65,12 +66,19 @@ class Display:
                 self.ledMatrix.matrix[y + matrixInfo.startY][x + matrixInfo.startX] = matrixInfo.matrix[y][x]
 
     def updateLayout(self):
-        packet = self._createLayoutCommand()
+        #sT = time.time()
+        packet = self._createLayoutCommandForDiff()
         n = self.port.write(packet)
+        #rT = time.time()
         #print('>', n, packet)
-        rsly = self.port.read(1024)
+        rsly = self.port.read(1)
         #print('<', len(rsly), rsly)
-        self.port.write([ACK])
+        #self.port.write([ACK])
+
+        # store current layout info
+        self.ledMatrixBuf.copy(self.ledMatrix)
+        #eT = time.time()
+        #print("after send comannd time {0}".format(eT - rT))
 
     def refreshDisplay(self, fade, duty):
         packet = self._createDisplayReqCommand(1, fade, duty)
@@ -172,6 +180,113 @@ class Display:
         hash = crc8.crc8()
         hash.update(buf[14:822])
         buf[823] = hash.digest()[0]
+        return buf
+
+    def _createLayoutCommandForDiff(self):
+
+        posX = 0
+        posY = 0
+        w = 0
+        h = 0
+        dataLen = 0
+
+        minX = 200
+        maxX = -1
+        minY = 32
+        maxY = -1
+
+        # search data changed area
+        for y in range(32):
+            for x in range(200):
+                if (self.ledMatrixBuf.matrix[y][x] != self.ledMatrix.matrix[y][x]):
+                    if x <= minX:
+                        minX = x
+
+                    if x >= maxX:
+                        maxX = x
+
+                    if y <= minY:
+                        minY = y
+
+                    if y >= maxY:
+                        maxY = y
+
+        #print("minX {0}, maxX {1}, minY {2}, maxY {3}".format(minX, maxX, minY, maxY))
+
+        # check change data is exist?
+        if (maxX == -1) or (maxY == -1):
+            # no data has changed
+            print('-- no data has changed --')
+            return
+
+        # calc diff data area size and data size
+        minX = (minX // 8) * 8
+        maxX = ((maxX // 8) * 8) + 8
+        if maxX > 200:
+            maxX = 200
+
+        maxY = maxY + 1
+        if maxY > 32:
+            maxY = 32
+
+        posX = minX
+        posY = minY
+        w = maxX - minX
+        h = maxY - minY
+        dataLen = ((w // 8) * h) + 8
+        #print("data length {0}".format(dataLen))
+
+        buf = bytearray(dataLen + 16)
+        buf[0] = 0x16       # SYN
+        buf[1] = 0x16       # SYN
+        buf[2] = 0x01       # SOH
+        buf[3:7] = b'QSLY'
+        buf[7] = ((dataLen >> 8) & 0xFF)
+        buf[8] = (dataLen & 0xFF)
+        buf[9] = ((dataLen >> 8) & 0xFF)
+        buf[10] = (dataLen & 0xFF)
+        buf[11] = 0x17      # ETB
+        hash = crc8.crc8()
+        hash.update(buf[3:11])
+        buf[12] = hash.digest()[0]
+        buf[13] = 0x02      # STX
+        buf[14] = 0x00      # x-pos
+        buf[15] = minX      # x-pos
+        buf[16] = 0x00      # y-pos
+        buf[17] = minY      # y-pos
+        buf[18] = 0x00
+        buf[19] = w         # diff area width
+        buf[20] = 0x00
+        buf[21] = h         # diff area height
+
+        index = 0
+        for y in range(minY, maxY, 1):
+            for x in range(minX, maxX, 8):
+                tmp = 0
+                if self.ledMatrix.matrix[y][x + 0] == 1:
+                    tmp |= 0x80
+                if self.ledMatrix.matrix[y][x + 1] == 1:
+                    tmp |= 0x40
+                if self.ledMatrix.matrix[y][x + 2] == 1:
+                    tmp |= 0x20
+                if self.ledMatrix.matrix[y][x + 3] == 1:
+                    tmp |= 0x10
+                if self.ledMatrix.matrix[y][x + 4] == 1:
+                    tmp |= 0x08
+                if self.ledMatrix.matrix[y][x + 5] == 1:
+                    tmp |= 0x04
+                if self.ledMatrix.matrix[y][x + 6] == 1:
+                    tmp |= 0x02
+                if self.ledMatrix.matrix[y][x + 7] == 1:
+                    tmp |= 0x01
+
+                buf[22 + index] = tmp
+                index += 1
+
+        buf[index + 22] = 0x03
+        hash = crc8.crc8()
+        hash.update(buf[14:(index + 22)])
+        buf[index + 23] = hash.digest()[0]
         return buf
 
     def toString(self):
