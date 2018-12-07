@@ -114,7 +114,7 @@ class Text(AbsParts):
         """
         Return Matrix data for display draw
         """
-        sT = time.time()
+        #sT = time.time()
 
         if (self._oldContent != None) and (self._needRenderContent == False):
             return self._oldContent
@@ -203,8 +203,8 @@ class Text(AbsParts):
                     m.matrix[i][0] = 1
                     m.matrix[i][bMaxX - 1] = 1
 
-        eR = time.time() - sT
-        print("render text time : {0}".format(eR))
+        #eR = time.time() - sT
+        #print("render text time : {0}".format(eR))
 
         self._oldContent = m
         self._needRenderContent = False

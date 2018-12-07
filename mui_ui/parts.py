@@ -28,6 +28,13 @@ class OnTouchEventListener():
         raise NotImplementedError
 
 
+class OnUpdateRequestListener():
+
+    def onUpdateView(self, view):
+        pass
+
+
+
 class AbsParts(metaclass=ABCMeta):
 
     def __init__(self, name=None):
@@ -38,6 +45,7 @@ class AbsParts(metaclass=ABCMeta):
         self._width = 0
         self._height = 0
         self.OnTouchEventListener = None
+        self.OnUpdateRequestListener = None
 
     @abstractmethod
     def getMatrix(self):
@@ -45,6 +53,10 @@ class AbsParts(metaclass=ABCMeta):
 
     def addOnTouchViewListener(self, listener: OnTouchEventListener):
         self.OnTouchEventListener = listener
+
+    def addOnUpdateViewListener(self, listener: OnUpdateRequestListener):
+        self.OnUpdateRequestListener = listener
+
 
     def dispatchTouchEvent(self, e):
         #print('-- dispatchTouchEvent() --')
