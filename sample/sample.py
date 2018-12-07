@@ -75,7 +75,6 @@ class SampleUI(InputEventListener, OnTouchEventListener):
             print("update time : {0}".format(e))
 
 
-
 if __name__ == "__main__":
     try:
         app = SampleUI()

@@ -35,6 +35,9 @@ class Text(AbsParts):
         self._textAlignment = TextAlignment.LEFT
         self._oldContent = None
         self._needRenderContent = True
+        self._oldXOffset = 0
+        self._oldYOffset = 0
+        self._oldOrgXOffset = 0
 
 
     def setText(self, text:str, textAlignment:TextAlignment=None):
@@ -43,6 +46,14 @@ class Text(AbsParts):
             self._textAlignment = textAlignment
 
         self._needRenderContent = True
+
+
+    def addText(self, text: str):
+        if self._text == None:
+            self._text = ''
+
+        self._text = self._text + text
+        self._addTextMatrix(text)
 
 
     def setTextAlignment(self, textAlignment:TextAlignment):
@@ -55,11 +66,55 @@ class Text(AbsParts):
         self._needRenderContent = True
 
 
+    def _addTextMatrix(self, text: str):
+        font = MuiFont.get_instance()
+
+        yOffset = self._oldYOffset
+        xOffset = self._oldXOffset
+        xOffsetOrg = self._oldOrgXOffset
+        isOverArea = False
+
+        m = self._oldContent
+
+        for s in text:                
+            if s == '\n':
+                yOffset += LINE_OFFSET
+                xOffset = xOffsetOrg
+
+                if ((yOffset + 8) > (self.y + self.height)):
+                    isOverArea = True
+            else:
+                textM = font.getText(s)
+                textM.startX = self.x + xOffset
+                textM.startY = self.y + yOffset
+
+                if ((textM.startX + textM.width) > (self.x + self.width)):
+                    xOffset = 0
+                    yOffset += LINE_OFFSET
+
+                    textM.startX = self.x + xOffset
+                    textM.startY = self.y + yOffset
+
+                # merge char matrix data to area matrix
+                m.merge(textM)
+
+                xOffset += textM.width
+
+            # check text is out from this view area
+            if (isOverArea or (((xOffset + 8) > (self.x + self.width)) and ((yOffset + LINE_OFFSET) > (self.y + self.height)))):
+                # notify text if out from view area
+                pass
+
+        self._oldXOffset = xOffset
+        self._oldYOffset = yOffset
+
+
+
     def getMatrix(self):
         """
         Return Matrix data for display draw
         """
-        #sT = time.time()
+        sT = time.time()
 
         if (self._oldContent != None) and (self._needRenderContent == False):
             return self._oldContent
@@ -67,6 +122,10 @@ class Text(AbsParts):
         m = Matrix(self.width, self.height)
         m.startX = self.x
         m.startY = self.y
+
+        xOffset = 0
+        xOffsetOrg = 0
+        yOffset = 0
 
         if self._text != None:
             font = MuiFont.get_instance()
@@ -126,29 +185,32 @@ class Text(AbsParts):
 
             # write border
             if self._border == Border.BOTTOM:
-                yOffset += 8
+                bYOffset = yOffset + 8
                 if m.height > 8:
                     for i in range(maxX):
-                        m.matrix[yOffset][i] = 1
+                        m.matrix[bYOffset][i] = 1
 
             elif self._border == Border.AROUND:
-                maxX = maxX + 2
+                bMaxX = maxX + 2
                 if self._textAlignment == TextAlignment.CENTER:
-                    maxX = self.width
+                    bMaxX = self.width
 
-                for i in range(maxX):
+                for i in range(bMaxX):
                     m.matrix[0][i] = 1
                     m.matrix[self.height-1][i] = 1
 
                 for i in range(self.height - 1):
                     m.matrix[i][0] = 1
-                    m.matrix[i][maxX - 1] = 1
+                    m.matrix[i][bMaxX - 1] = 1
 
-        #eR = time.time() - sT
-        #print("render text time : {0}".format(eR))
+        eR = time.time() - sT
+        print("render text time : {0}".format(eR))
 
         self._oldContent = m
         self._needRenderContent = False
+        self._oldXOffset = xOffset
+        self._oldYOffset = yOffset
+        self._oldOrgXOffset = xOffsetOrg
 
         return m
 

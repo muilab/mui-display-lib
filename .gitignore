@@ -3,6 +3,9 @@ __pycache__/
 *.py[cod]
 *$py.class
 
+# my test
+sample/mui_*
+
 # Editor
 .vscode
 

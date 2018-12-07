@@ -77,11 +77,6 @@ class Matrix:
         self.startY = src.startY
         self.width = src.width
         self.height = src.height
-
-        #self.matrix = np.asarray([[0] * self.width for i in range(self.height)], dtype='int8')
-        #for y in range(self.height):
-        #    for x in range(self.width):
-        #        self.matrix[y][x] = src.matrix[y][x]
         self.matrix = np.copy(src.matrix)
 
 

@@ -60,6 +60,7 @@ class Display:
         self.port.write([ACK])
         print('>', 1, ACK)
 
+
     def setLayout(self, matrixInfo):
         for y in range(matrixInfo.height):
             for x in range(matrixInfo.width):
@@ -68,6 +69,9 @@ class Display:
     def updateLayout(self):
         #sT = time.time()
         packet = self._createLayoutCommandForDiff()
+        if packet == None:
+            return
+
         n = self.port.write(packet)
         #rT = time.time()
         #print('>', n, packet)
@@ -98,8 +102,22 @@ class Display:
         self.port.write([ACK])
         #print('>', 1, ACK)
         
+    def _updateLayoutForce(self, fade, duty):
+        packet = self._createLayoutCommand()
+        if packet == None:
+            return
+
+        n = self.port.write(packet)
+        rsly = self.port.read(1)
+
+        # store current layout info
+        self.ledMatrixBuf.copy(self.ledMatrix)
+        
+
     def clearDisplay(self):
-        pass
+        self.ledMatrix = Matrix(200, 32) # clear
+        self._updateLayoutForce(0, 100)
+        self.refreshDisplay(0, 100)
 
     def getMuiID(self):
         pass
