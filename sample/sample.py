@@ -1,9 +1,11 @@
-# mui sample app
 # -*- coding: utf-8 -*-
+
+# mui sample app
+
 
 import sys
 import asyncio
-from ui import Display, MuiFont, Text, Widget, Border, TextAlignment, MotionEvent, InputEventListener, InputHandler , OnTouchEventListener   
+from mui_ui import Display, MuiFont, Text, Widget, Border, TextAlignment, MotionEvent, InputEventListener, InputHandler , OnTouchEventListener   
 
 
 class SampleUI(InputEventListener, OnTouchEventListener):
@@ -49,23 +51,30 @@ class SampleUI(InputEventListener, OnTouchEventListener):
         self.input.startEventLoop()
 
     def onInputEvent(self, e: MotionEvent):
+        # dispatch touch event to all views
         self.ui.dispatchTouchEvent(e)
         #print(e)
 
     def onTouch(self, view, e: MotionEvent):
-        print('touched text view!')
-        self.touchCount += 1
-        msg = '-{:d}-'
-        msg = msg.format(self.touchCount)
-        print(msg)
-        self.views['text2'].setText(msg)
-        self.updateUI()
+        # 
+        if view is self.views['text1']:
+            print('touched text view!')
+            self.touchCount += 1
+            msg = '-{:d}-'
+            msg = msg.format(self.touchCount)
+            print(msg)
+            self.views['text2'].setText(msg)
+            self.updateUI()
 
 
 if __name__ == "__main__":
     try:
         app = SampleUI()
+
+        # draw UI
         app.updateUI()
+
+        # start capture touch panel event
         app.mainLoop()
     except (KeyboardInterrupt, EOFError):
         pass

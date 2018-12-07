@@ -7,11 +7,11 @@ import csv
 import os
 name = os.path.dirname(os.path.abspath(__name__))
 
-pJ = os.path.join(name, './ui/assets/mui_gothic_01.png')
+pJ = os.path.join(name, './mui_ui/assets/mui_gothic_01.png')
 fontFile = os.path.normpath(pJ)
 print(fontFile)
 
-pJ = os.path.join(name, './ui/assets/sjis_unicode_convert_table.csv')
+pJ = os.path.join(name, './mui_ui/assets/sjis_unicode_convert_table.csv')
 fontInfoFile = os.path.normpath(pJ)
 print(fontInfoFile)
 
