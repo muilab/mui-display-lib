@@ -5,13 +5,13 @@ from PIL import Image
 import csv
 
 import os
-name = os.path.dirname(os.path.abspath(__name__))
+name = os.path.dirname(os.path.abspath(__file__))
 
-pJ = os.path.join(name, './mui_ui/assets/mui_gothic_01.png')
+pJ = os.path.join(name, './assets/mui_gothic_01.png')
 fontFile = os.path.normpath(pJ)
 print(fontFile)
 
-pJ = os.path.join(name, './mui_ui/assets/sjis_unicode_convert_table.csv')
+pJ = os.path.join(name, './assets/sjis_unicode_convert_table.csv')
 fontInfoFile = os.path.normpath(pJ)
 print(fontInfoFile)
 

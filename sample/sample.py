@@ -7,8 +7,10 @@ import sys
 import asyncio
 import time
 
-from mui_ui import Display, MuiFont, Text, Widget, Border, TextAlignment, MotionEvent, InputEventListener, InputHandler , OnTouchEventListener   
+from mui_ui import Display, MuiFont, Text, Image, Widget, Border, TextAlignment, MotionEvent, InputEventListener, InputHandler , OnTouchEventListener   
 
+import os
+dir = os.path.dirname(os.path.abspath(__file__))
 
 class SampleUI(InputEventListener, OnTouchEventListener):
 
@@ -20,6 +22,8 @@ class SampleUI(InputEventListener, OnTouchEventListener):
         self.display = Display()
 
         # create application ui
+
+        # clicable text view
         self.ui = Widget(200, 32) # max size
         text1 = Text('Hello\nPlease touch!')
         text1.setTextAlignment(TextAlignment.CENTER)
@@ -31,16 +35,44 @@ class SampleUI(InputEventListener, OnTouchEventListener):
         text1.addOnTouchViewListener(self)
         self.ui.addParts(text1)
 
+        # text view as label
         text2 = Text('---')
         text2.x = 0
         text2.y = 0
         text2.width = 100
-        text2.height = 32
+        text2.height = 10
         self.ui.addParts(text2)
+
+        # add weather icon
+        fileName1 = os.path.normpath(os.path.join(dir, './icon_weather.png'))
+        icon1 = Image(fileName1)
+        icon1.addOnTouchViewListener(self)
+        # add clock icon
+        fileName2 = os.path.normpath(os.path.join(dir, './icon_clock.png'))
+        icon2 = Image(fileName2)
+        # add voice icon
+        fileName3 = os.path.normpath(os.path.join(dir, './icon_voice.png'))
+        icon3 = Image(fileName3)
         
+        # create icon widget
+        icons = Widget((icon1.width + icon2.width + icon3.width), max(icon1.height, icon2.height, icon3.height))
+        icons.x = 0
+        icons.y = 32 - icons.height
+        self.ui.addParts(icons)
+
+        # add icons to icon widget
+        icons.addParts(icon1)
+        icon2.x = icon1.width
+        icons.addParts(icon2)
+        icon3.x = icon2.x + icon2.width
+        icons.addParts(icon3)
+
+
         self.views = {}
         self.views['text1'] = text1
         self.views['text2'] = text2
+        self.views['icons'] = icons
+        self.views['icon_weather'] = icon1
 
         self.touchCount = 0
 
@@ -58,21 +90,27 @@ class SampleUI(InputEventListener, OnTouchEventListener):
     def onInputEvent(self, e: MotionEvent):
         # dispatch touch event to all views
         self.ui.dispatchTouchEvent(e)
-        #print(e)
+        # print(e)
 
     def onTouch(self, view, e: MotionEvent):
         # handling touch events
         if view is self.views['text1']:
-            s = time.time()
             print('touched text view!')
+
+            # increment touch count
             self.touchCount += 1
             msg = '-{:d}-'
-            msg = msg.format(self.touchCount)
-            print(msg)
-            self.views['text2'].setText(msg)
+            self.views['text2'].setText(msg.format(self.touchCount))
+
+            # toggle icon visible
+            # when views is invisible, do not occur touch event
+            self.views['icons'].visible = not self.views['icons'].visible
+
+            # update UI
             self.updateUI()
-            e = time.time() - s
-            print("update time : {0}".format(e))
+
+        elif view is self.views['icon_weather']:
+            print('touched weather icon')
 
 
 if __name__ == "__main__":
