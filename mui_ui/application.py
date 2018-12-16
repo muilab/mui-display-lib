@@ -43,6 +43,11 @@ class AbsApp(metaclass=ABCMeta):
                 if result == True:
                     break
 
+    def dispatchScrollEvent(self, scrollX, scrollY):
+        pass
+
+    def dispathFlingEvent(self, veocityX, veocityY):
+        pass
 
     def close(self):
         self.stopTask()

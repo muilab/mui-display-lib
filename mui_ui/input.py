@@ -50,6 +50,13 @@ class MotionEvent():
         msg = '--- MotionEvent at {:f}, action {:d}, x {:d}, y {:d} ---'
         return msg.format(self.timestamp, self.action, self.x, self.y)
 
+    def copy(self, e: 'MotionEvent'):
+        self._timestamp = e.timestamp
+        self._action = e.action
+        self._x = e.x
+        self._y = e.y
+        
+
     @property
     def timestamp(self):
         return self._timestamp
@@ -66,18 +73,22 @@ class MotionEvent():
     def y(self):
         return self._y
 
-    def setTimestamp(self, t):
+    @timestamp.setter
+    def timestamp(self, t):
         self._timestamp = t
 
-    def setAction(self, action):
+    @action.setter
+    def action(self, action):
         self._action = action
-    
-    def setX(self, x):
+
+    @x.setter
+    def x(self, x):
         self._x = x
 
-    def setY(self, y):
+    @y.setter
+    def y(self, y):
         self._y = y
-    
+        
 
 class InputEventListener():
     """
@@ -125,19 +136,19 @@ class InputHandler():
             if ev.type == EV_SYN:
                 # last data sing for multi part touch events.
                 if changeKey == False:
-                    self.motionEvent.setAction(VALUE_MOVE)
-                self.motionEvent.setTimestamp(ev.timestamp())
+                    self.motionEvent.action = VALUE_MOVE
+                self.motionEvent.timestamp = ev.timestamp()
                 self.handleInputEvent(self.motionEvent)
                 changeKey = False
                 
             if (ev.type == EV_ABS and ev.code == ABS_X):
-                self.motionEvent.setX(ev.value // 2)
+                self.motionEvent.x = (ev.value // 2)
 
             if (ev.type == EV_ABS and ev.code == ABS_Y):
-                self.motionEvent.setY(ev.value // 20)
+                self.motionEvent.y = (ev.value // 20)
 
             if (ev.type == EV_KEY):
-                self.motionEvent.setAction(ev.value)
+                self.motionEvent.action = ev.value
                 changeKey = True
 
     def handleInputEvent(self, e:MotionEvent):

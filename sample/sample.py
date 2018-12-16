@@ -7,12 +7,14 @@ import sys
 import asyncio
 import time
 
-from mui_ui import Display, MuiFont, Text, Image, Widget, Border, TextAlignment, MotionEvent, InputEventListener, InputHandler , OnTouchEventListener   
+from mui_ui import Display, MuiFont, Text, Image, Widget, Border, AbsApp, Message, DigitalClock
+from mui_ui import TextAlignment, MotionEvent, InputEventListener, InputHandler, OnTouchEventListener, AppEventListener, OnUpdateRequestListener  
+from mui_ui import GestureListener, GestureDetector
 
 import os
 dir = os.path.dirname(os.path.abspath(__file__))
 
-class SampleUI(InputEventListener, OnTouchEventListener):
+class SampleUI(InputEventListener, OnTouchEventListener, GestureListener):
 
     def __init__(self):
         # connect to mui touchpanel
@@ -67,6 +69,8 @@ class SampleUI(InputEventListener, OnTouchEventListener):
         icon3.x = icon2.x + icon2.width
         icons.addParts(icon3)
 
+        # create gesture detector (for catch swipe action)
+        self._gestureDetector = GestureDetector(self)
 
         self.views = {}
         self.views['text1'] = text1
@@ -90,7 +94,9 @@ class SampleUI(InputEventListener, OnTouchEventListener):
     def onInputEvent(self, e: MotionEvent):
         # dispatch touch event to all views
         self.ui.dispatchTouchEvent(e)
-        # print(e)
+
+        # determin gesture
+        self._gestureDetector.onTouchEvent(e)
 
     def onTouch(self, view, e: MotionEvent):
         # handling touch events
@@ -111,6 +117,15 @@ class SampleUI(InputEventListener, OnTouchEventListener):
 
         elif view is self.views['icon_weather']:
             print('touched weather icon')
+
+    def onScroll(self, e1: MotionEvent,  e2: MotionEvent, x, y):
+        # handling scroll event
+        print('** scroll **')
+
+    def onFling(self, e1: MotionEvent,  e2: MotionEvent, x, y):
+        # handling swipe event
+        print('*** swipe ***')
+
 
 
 if __name__ == "__main__":

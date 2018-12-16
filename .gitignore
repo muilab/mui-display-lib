@@ -5,6 +5,8 @@ __pycache__/
 
 # my test
 sample/mui_*
+client_*
+assistant/
 
 # Editor
 .vscode
