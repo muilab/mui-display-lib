@@ -21,7 +21,7 @@ except ImportError:
 class DigitalClock(Widget):
 
     def __init__(self, name='digital clock'):
-        super().__init__(40, 10, name)
+        super().__init__(30, 10, name)
 
         hour = Text('00')
         hour.width = 12
@@ -51,6 +51,14 @@ class DigitalClock(Widget):
         task = Thread(target= self.updateClock)
         self._doTask = True
         task.start()
+
+    def setSize(self, x, y, w, h):
+        super().setSize(x, y, w, h)
+
+        if hasattr(self, '_views'):
+            hour = self._views.get('h')
+            if hour is not None:   
+                print(hour.x, hour.y)
 
 
     def stopTick(self):

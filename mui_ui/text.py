@@ -39,17 +39,20 @@ class Text(AbsParts):
         self._oldYOffset = 0
         self._oldOrgXOffset = 0
 
-
     def setText(self, text:str, textAlignment:TextAlignment=None):
-        self._text = text
-        if textAlignment != None:
+        if type(text) is not str:
+            self._text = str(text)
+        else:
+            self._text = text
+
+        if textAlignment is not None:
             self._textAlignment = textAlignment
 
         self._needRenderContent = True
 
 
     def addText(self, text: str):
-        if self._text == None:
+        if self._text is None:
             self._text = ''
 
         self._text = self._text + text
@@ -116,7 +119,7 @@ class Text(AbsParts):
         """
         #sT = time.time()
 
-        if (self._oldContent != None) and (self._needRenderContent == False):
+        if (self._oldContent is not None) and (self._needRenderContent is False):
             return self._oldContent
 
         m = Matrix(self.width, self.height)

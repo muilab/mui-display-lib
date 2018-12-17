@@ -7,6 +7,9 @@ import sys
 import asyncio
 import time
 
+from threading import Lock
+mutex = Lock()
+
 from mui_ui import Display, MuiFont, Text, Image, Widget, Border, AbsApp, Message, DigitalClock
 from mui_ui import TextAlignment, MotionEvent, InputEventListener, InputHandler, OnTouchEventListener, AppEventListener, OnUpdateRequestListener  
 from mui_ui import GestureListener, GestureDetector
@@ -80,13 +83,16 @@ class SampleUI(InputEventListener, OnTouchEventListener, GestureListener):
 
         self.touchCount = 0
 
-    def updateUI(self):
+    def updateUI(self, fade=0):
+        mutex.acquire()
         # set layout data
-        self.display.setLayout(self.ui.getMatrix())
+        self.display.setLayout(self.app.getUI())
         # update Display internal data buffer (does not refesh display)
         self.display.updateLayout()
         # refresh Display
-        self.display.refreshDisplay(0, 100)
+        time.sleep(0.05)
+        self.display.refreshDisplay(fade, 100)
+        mutex.release()
 
     def mainLoop(self):
         self.input.startEventLoop()

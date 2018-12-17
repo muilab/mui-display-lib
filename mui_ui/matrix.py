@@ -47,12 +47,15 @@ class Matrix:
         self._height = height
 
     def __str__(self):
+        np.set_printoptions(linewidth=np.inf)
         for h in range(self._height):
-            print(self.matrix[h,:])
+            print(self.matrix[h,0:min(self._width, 100)])
+
+        return ''
 
 
     def merge(self, b: 'Matrix'):
-        if b == None:
+        if b is None:
             return
 
         bottom = self.startY + self.height
@@ -63,14 +66,14 @@ class Matrix:
         bR = b.startX + b.width
         bB = b.startY + b.height
 
-        for y in range(bottom):
-            for x in range(right):
+        for y in range(self.startY, bottom):
+            for x in range(self.startX, right):
                 if ((y >= bT) and (y < bB) and (x >= bL) and (x < bR)):
-                    self.matrix[y - self.startY][x - self.startX] = b.matrix[y - bT][x - bL]
+                    self.matrix[y - self.startY][x - self.startX] |= b.matrix[y - bT][x - bL]
         
 
     def copy(self, src: 'Matrix'):
-        if src == None:
+        if src is None:
             return
         # copy matrix
         self.startX = src.startX

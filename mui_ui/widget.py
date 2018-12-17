@@ -27,6 +27,20 @@ class Widget(AbsParts):
         parts.y = self.y + parts.y
         self._partsList.append(parts)
 
+    def setSize(self, x, y, width, height):
+        print('--- call setSize in widget ---', y, self._y)
+        diffX = x - self._x
+        diffY = y - self._y
+        print('--- diff Y ', diffY)
+
+        super().setSize(x, y, width, height)
+
+        for p in list(self._partsList):
+            print('--- current y', p.y)
+            p.x = p.x + diffX
+            p.y = p.y + diffY
+            print('+++ after y', p.y)
+
 
     def dispatchTouchEvent(self, e):
         for p in reversed(list(self._partsList)):

@@ -229,7 +229,7 @@ class Display:
                     if y >= maxY:
                         maxY = y
 
-        #print("minX {0}, maxX {1}, minY {2}, maxY {3}".format(minX, maxX, minY, maxY))
+        # print("minX {0}, maxX {1}, minY {2}, maxY {3}".format(minX, maxX, minY, maxY))
 
         # check change data is exist?
         if (maxX == -1) or (maxY == -1):

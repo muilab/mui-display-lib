@@ -57,6 +57,11 @@ class AbsParts(metaclass=ABCMeta):
     def addOnUpdateViewListener(self, listener: OnUpdateRequestListener):
         self.OnUpdateRequestListener = listener
 
+    def setSize(self, x, y, width, height):
+        self._x = x
+        self._y = y
+        self._width = width
+        self._height = height
 
     def dispatchTouchEvent(self, e):
         #print('-- dispatchTouchEvent() --')
@@ -103,7 +108,7 @@ class AbsParts(metaclass=ABCMeta):
 
     @x.setter
     def x(self, x):
-        self._x = x
+        self.setSize(x, self._y, self._width, self._height)
 
     @property
     def y(self):
@@ -111,7 +116,7 @@ class AbsParts(metaclass=ABCMeta):
 
     @y.setter
     def y(self, y):
-        self._y = y
+        self.setSize(self._x, y, self._width, self._height)
 
     @property
     def width(self):
@@ -119,7 +124,7 @@ class AbsParts(metaclass=ABCMeta):
 
     @width.setter
     def width(self, width):
-        self._width = width
+        self.setSize(self._x, self._y, width, self._height)
 
     @property
     def height(self):
@@ -127,6 +132,6 @@ class AbsParts(metaclass=ABCMeta):
 
     @height.setter
     def height(self, height):
-        self._height = height
+        self.setSize(self._x, self._y, self._width, height)
 
         

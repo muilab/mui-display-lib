@@ -17,6 +17,9 @@ class AppEventListener():
     def requestUpdateDisplay(self, app, fade):
         raise NotImplementedError
 
+    def setNextApp(self, app):
+        raise NotImplementedError
+
     def onCloseApp(self, app):
         raise NotImplementedError
 
@@ -25,7 +28,17 @@ class AbsApp(metaclass=ABCMeta):
     
     def __init__(self, appEventListener: AppEventListener):
         self._views = []
+        self._vDic = {}
         self.appEventListener = appEventListener
+
+    def addView(self, v: AbsParts):
+        self._views.append(v)
+
+    def setView(self, v: AbsParts, name: str):
+        self._vDic[name] = v
+
+    def getView(self, name: str) -> AbsParts:
+        return self._vDic.get(name) 
 
     @abstractmethod
     def startTask(self):

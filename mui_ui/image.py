@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-# mui ui text view class
+# mui ui / image view class
 
 from PIL import Image as ImgLib
 
@@ -19,14 +19,22 @@ class Image(AbsParts):
         # load image data
         self._loadImage()
 
-    def setImage(self, img:str):
-        if img == None:
+    def setImage(self, img: str):
+        if img is None:
             self._src = None
             self._imgData = Matrix(1, 1)
             return
 
         self._src = img
         self._loadImage()
+
+    def setImageData(self, imgData: Matrix):
+        if imgData is None:
+            self.deleteImage()
+            return
+
+        self._imgData = imgData
+
 
     def deleteImage(self):
         self.setImage(None)
@@ -37,7 +45,7 @@ class Image(AbsParts):
         return self._imgData
 
     def _loadImage(self):
-        if self._src == None:
+        if self._src is None:
             return
 
         # load target file
@@ -49,8 +57,12 @@ class Image(AbsParts):
         for y in range(im.height):
             for x in range(im.width):
                 color = data[x,y]
-                if color[0] == 0 and color[1] == 0 and color[2] == 0:
-                    self._imgData.matrix[y][x] = 1
+                if type(color) is int:
+                    if color == 1:
+                        self._imgData.matrix[y][x] = 1
+                else:
+                    if color[0] == 0 and color[1] == 0 and color[2] == 0:
+                        self._imgData.matrix[y][x] = 1
 
         self.width = im.width
         self.height = im.height
