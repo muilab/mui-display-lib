@@ -5,9 +5,9 @@ import serial
 import time
 
 try:
-    from matrix import Matrix
+   from matrix import Matrix, check_diff_range
 except ImportError:
-    from . import Matrix
+   from . import Matrix, check_diff_range
 
 ACK = 0x06
 NACK = 0x15
@@ -20,7 +20,6 @@ class Display:
         print("create display class")
         # create led matrix
         self.ledMatrix = Matrix(200, 32)
-#        print(self.ledMatrix)
         self.ledMatrixBuf = Matrix(200, 32) # buffer for old data
 
         # open UART port
@@ -77,7 +76,7 @@ class Display:
         packet = self._createLayoutCommandForDiff()
         if packet == None:
             return
-
+        #cT = time.time()
         n = self.port.write(packet)
         #rT = time.time()
         #print('>', n, packet)
@@ -88,7 +87,8 @@ class Display:
         # store current layout info
         self.ledMatrixBuf.copy(self.ledMatrix)
         #eT = time.time()
-        #print("after send comannd time {0}".format(eT - rT))
+        # print("create comannd time {0}".format(cT - sT))
+        # print("send comannd time {0}".format(rT - sT))
 
     def refreshDisplay(self, fade, duty):
         packet = self._createDisplayReqCommand(1, fade, duty)
@@ -221,26 +221,32 @@ class Display:
         minY = 32
         maxY = -1
 
-        mOld = self.ledMatrixBuf.matrix
-        mNew = self.ledMatrix.matrix
+        # mOld = self.ledMatrixBuf.matrix
+        # mNew = self.ledMatrix.matrix
 
-        # search data changed area
-        for y in range(32):
-            for x in range(200):
-                if (mOld[y][x] != mNew[y][x]):
-                    if x <= minX:
-                        minX = x
+        #search data changed area
+        # for y in range(32):
+        #     for x in range(200):
+        #         if (mOld[y][x] != mNew[y][x]):
+        #             if x <= minX:
+        #                 minX = x
 
-                    if x >= maxX:
-                        maxX = x
+        #             if x >= maxX:
+        #                 maxX = x
 
-                    if y <= minY:
-                        minY = y
+        #             if y <= minY:
+        #                 minY = y
 
-                    if y >= maxY:
-                        maxY = y
+        #             if y >= maxY:
+        #                 maxY = y
 
+        diffRange = check_diff_range(self.ledMatrixBuf.matrix, self.ledMatrix.matrix)
+        minX = diffRange[0]
+        maxX = diffRange[1]
+        minY = diffRange[2]
+        maxY = diffRange[3]
         # print("minX {0}, maxX {1}, minY {2}, maxY {3}".format(minX, maxX, minY, maxY))
+
 
         # check change data is exist?
         if (maxX == -1) or (maxY == -1):
@@ -292,21 +298,21 @@ class Display:
         for y in range(minY, maxY, 1):
             for x in range(minX, maxX, 8):
                 tmp = 0
-                if mNew[y][x + 0] == 1:
+                if self.ledMatrix.matrix[y][x + 0] == 1:
                     tmp |= 0x80
-                if mNew[y][x + 1] == 1:
+                if self.ledMatrix.matrix[y][x + 1] == 1:
                     tmp |= 0x40
-                if mNew[y][x + 2] == 1:
+                if self.ledMatrix.matrix[y][x + 2] == 1:
                     tmp |= 0x20
-                if mNew[y][x + 3] == 1:
+                if self.ledMatrix.matrix[y][x + 3] == 1:
                     tmp |= 0x10
-                if mNew[y][x + 4] == 1:
+                if self.ledMatrix.matrix[y][x + 4] == 1:
                     tmp |= 0x08
-                if mNew[y][x + 5] == 1:
+                if self.ledMatrix.matrix[y][x + 5] == 1:
                     tmp |= 0x04
-                if mNew[y][x + 6] == 1:
+                if self.ledMatrix.matrix[y][x + 6] == 1:
                     tmp |= 0x02
-                if mNew[y][x + 7] == 1:
+                if self.ledMatrix.matrix[y][x + 7] == 1:
                     tmp |= 0x01
 
                 buf[22 + index] = tmp

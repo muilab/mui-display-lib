@@ -72,19 +72,17 @@ class AbsApp(metaclass=ABCMeta):
 
 
     def getUI(self)-> Matrix:
-        s = time.time()
+        # s = time.time()
         m = Matrix(200, 32)
         m.startX = 0
         m.startY = 0
-        e1 = time.time()
 
         views = self._views
 
         for v in views:
             if v.visible is True:
-                m.merge(v.getMatrix(), True)
+                m.merge(v.getMatrix())
 
-        e = time.time()
-        print('!!!*** merge to UI ', (e - s))
-        # print('???*** create UI ', (e1 - s))
+        # e = time.time()
+        # print('!!!*** merge to UI ', (e - s))
         return m

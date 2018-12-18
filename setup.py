@@ -1,7 +1,9 @@
 # -*- coding: utf-8 -*-
 
-from setuptools import setup, find_packages
-
+from distutils.core import setup
+from setuptools import find_packages
+from Cython.Distutils import build_ext
+from Cython.Build import cythonize
 
 with open('README.rst') as f:
     readme = f.read()
@@ -19,6 +21,6 @@ setup(
     install_requires=['crc8','pyserial','Pillow','numpy','evdev'],
     url='https://github.com/muilab/mui-display-lib',
     license=license,
-    packages=find_packages(exclude=('tests', 'docs'))
+    packages=find_packages(exclude=('tests', 'docs')),
+    ext_modules=cythonize("./mui_ui/matrix.pyx")
 )
-

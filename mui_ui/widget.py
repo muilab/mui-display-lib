@@ -23,7 +23,7 @@ class Widget(AbsParts):
         self._partsList = []
         self.width = width
         self.height = height
-        self.m = Matrix(width, height)
+        #self.m = Matrix(width, height)
 
     def addParts(self, parts:AbsParts):
         parts.x = self.x + parts.x
@@ -53,14 +53,17 @@ class Widget(AbsParts):
     def getMatrix(self):
 
         # s = time.time()
-        if self._isChange is False:
-            return self.m
-        else:
-            self.m = Matrix(self.width, self.height)
-            self.m.startX = self.x
-            self.m.startY = self.y
+        # if self._isChange is False:
+        #     return self.m
+        # else:
+        #     self.m = Matrix(self.width, self.height)
+        #     self.m.startX = self.x
+        #     self.m.startY = self.y
 
-        m = self.m
+        # m = self.m
+        m = Matrix(self.width, self.height)
+        m.startX = self.x
+        m.startY = self.y
         parts = self._partsList
 
         for p in parts:
@@ -71,4 +74,4 @@ class Widget(AbsParts):
         # e = time.time()
         # print('*** merge ', (e - s))
         self._isChange = False
-        return self.m
+        return m

@@ -1,7 +1,7 @@
+# -*- coding: utf-8 -*-
 
 # matrix class
 
-#import numpy as np
 import copy
 
 import time
@@ -15,7 +15,6 @@ class Matrix:
         self._startY = 0
         self._width = w
         self._height = h
-#        self.matrix = np.asarray([[0] * w for i in range(h)], dtype='int8')
         self.matrix = [[0 for i in range(w)] for j in range(h)]
 
     @property
@@ -80,8 +79,7 @@ class Matrix:
 
         w = self.width
         h = self.height
-        if t is True:
-            print('--- matrix size ', w, h)
+        if w == 200 and h == 32:
             for y in range(bT, bB):
                 for x in range(bL, bR):
                     if (y < h) and (x < w):

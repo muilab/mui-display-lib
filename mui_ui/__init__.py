@@ -1,6 +1,6 @@
 #
 
-from mui_ui.matrix import Matrix
+from mui_ui.matrix import Matrix, check_diff_range
 from mui_ui.display import Display
 from mui_ui.muifont import MuiFont
 from mui_ui.parts import AbsParts, OnTouchEventListener, OnUpdateRequestListener
