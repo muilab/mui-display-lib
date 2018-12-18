@@ -12,6 +12,7 @@ from mui_ui.gesturedetector import GestureListener, GestureDetector
 from mui_ui.application import AbsApp, AppEventListener
 from mui_ui.app_message import Message
 from mui_ui.clock import DigitalClock
+from mui_ui.slider import Slider
 
 # lib version
 __version__ = '0.0.1'
