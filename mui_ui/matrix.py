@@ -1,7 +1,10 @@
 
 # matrix class
 
-import numpy as np
+#import numpy as np
+import copy
+
+import time
 
 class Matrix:
     """
@@ -12,7 +15,8 @@ class Matrix:
         self._startY = 0
         self._width = w
         self._height = h
-        self.matrix = np.asarray([[0] * w for i in range(h)], dtype='int8')
+#        self.matrix = np.asarray([[0] * w for i in range(h)], dtype='int8')
+        self.matrix = [[0 for i in range(w)] for j in range(h)]
 
     @property
     def startX(self):
@@ -54,23 +58,45 @@ class Matrix:
         return ''
 
 
-    def merge(self, b: 'Matrix'):
+    def merge(self, b: 'Matrix', t=False):
         if b is None:
             return
 
+        s = time.time()
+
         bottom = self.startY + self.height
         right = self.startX + self.width
+
+        m = self.matrix
+        sY = self.startY
+        sX = self.startX
 
         bL = b.startX
         bT = b.startY
         bR = b.startX + b.width
         bB = b.startY + b.height
 
-        for y in range(self.startY, bottom):
-            for x in range(self.startX, right):
-                if ((y >= bT) and (y < bB) and (x >= bL) and (x < bR)):
-                    self.matrix[y - self.startY][x - self.startX] |= b.matrix[y - bT][x - bL]
-        
+        bm = b.matrix
+
+        w = self.width
+        h = self.height
+        if t is True:
+            print('--- matrix size ', w, h)
+            for y in range(bT, bB):
+                for x in range(bL, bR):
+                    if (y < h) and (x < w):
+                        m[y][x] |= bm[y - bT][x - bL]
+        else:
+            for y in range(sY, bottom):
+                for x in range(sX, right):
+                    if ((y >= bT) and (y < bB) and (x >= bL) and (x < bR)):
+                        m[y - sY][x - sX] |= bm[y - bT][x - bL]
+
+
+
+        e = time.time()
+        if t is True:
+            print('... merge time ', (e - s))
 
     def copy(self, src: 'Matrix'):
         if src is None:
@@ -80,7 +106,9 @@ class Matrix:
         self.startY = src.startY
         self.width = src.width
         self.height = src.height
-        self.matrix = np.copy(src.matrix)
+
+#        self.matrix = np.copy(src.matrix)
+        self.matrix = copy.deepcopy(src.matrix)
 
 
     def setStartX(self, x):

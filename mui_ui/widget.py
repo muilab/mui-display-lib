@@ -1,6 +1,8 @@
 # mui ui text view class
 # -*- coding: utf-8 -*-
 
+import time
+
 try:
     from parts import AbsParts
     from matrix import Matrix
@@ -21,6 +23,7 @@ class Widget(AbsParts):
         self._partsList = []
         self.width = width
         self.height = height
+        self.m = Matrix(width, height)
 
     def addParts(self, parts:AbsParts):
         parts.x = self.x + parts.x
@@ -28,22 +31,19 @@ class Widget(AbsParts):
         self._partsList.append(parts)
 
     def setSize(self, x, y, width, height):
-        print('--- call setSize in widget ---', y, self._y)
         diffX = x - self._x
         diffY = y - self._y
-        print('--- diff Y ', diffY)
 
         super().setSize(x, y, width, height)
 
         for p in list(self._partsList):
-            print('--- current y', p.y)
             p.x = p.x + diffX
             p.y = p.y + diffY
-            print('+++ after y', p.y)
 
 
     def dispatchTouchEvent(self, e):
-        for p in reversed(list(self._partsList)):
+        parts = self._partsList
+        for p in reversed(list(parts)):
             if p.visible == True:
                 result = p.dispatchTouchEvent(e)
                 if result == True:
@@ -51,12 +51,24 @@ class Widget(AbsParts):
 
 
     def getMatrix(self):
-        m = Matrix(self.width, self.height)
-        m.startX = self.x
-        m.startY = self.y
 
-        for p in self._partsList:
+        # s = time.time()
+        if self._isChange is False:
+            return self.m
+        else:
+            self.m = Matrix(self.width, self.height)
+            self.m.startX = self.x
+            self.m.startY = self.y
+
+        m = self.m
+        parts = self._partsList
+
+        for p in parts:
             if p.visible == True:
                 m.merge(p.getMatrix())
 
-        return m
+
+        # e = time.time()
+        # print('*** merge ', (e - s))
+        self._isChange = False
+        return self.m

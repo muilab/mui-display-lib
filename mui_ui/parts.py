@@ -40,6 +40,7 @@ class AbsParts(metaclass=ABCMeta):
     def __init__(self, name=None):
         self._name = name
         self._visible = True
+        self._isChange = True
         self._x = 0
         self._y = 0
         self._width = 0
@@ -62,6 +63,7 @@ class AbsParts(metaclass=ABCMeta):
         self._y = y
         self._width = width
         self._height = height
+        self._isChange = True
 
     def dispatchTouchEvent(self, e):
         #print('-- dispatchTouchEvent() --')

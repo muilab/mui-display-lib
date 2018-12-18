@@ -20,6 +20,7 @@ class Display:
         print("create display class")
         # create led matrix
         self.ledMatrix = Matrix(200, 32)
+#        print(self.ledMatrix)
         self.ledMatrixBuf = Matrix(200, 32) # buffer for old data
 
         # open UART port
@@ -62,9 +63,14 @@ class Display:
 
 
     def setLayout(self, matrixInfo):
-        for y in range(matrixInfo.height):
-            for x in range(matrixInfo.width):
-                self.ledMatrix.matrix[y + matrixInfo.startY][x + matrixInfo.startX] = matrixInfo.matrix[y][x]
+        # s = time.time()
+        # for y in range(matrixInfo.height):
+        #     for x in range(matrixInfo.width):
+        #         self.ledMatrix.matrix[y + matrixInfo.startY][x + matrixInfo.startX] = matrixInfo.matrix[y][x]
+        self.ledMatrix.matrix = matrixInfo.matrix
+
+        # e = time.time()
+        # print('??? setLayout ', (e - s))
 
     def updateLayout(self):
         #sT = time.time()
@@ -170,25 +176,27 @@ class Display:
         buf[20] = 0x00
         buf[21] = 32        # display-height
 
+        m = self.ledMatrix.matrix
+
         index = 0
         for y in range(32):
             for x in range(0, 200, 8):
                 tmp = 0
-                if self.ledMatrix.matrix[y][x + 0] == 1:
+                if m[y][x + 0] == 1:
                     tmp |= 0x80
-                if self.ledMatrix.matrix[y][x + 1] == 1:
+                if m[y][x + 1] == 1:
                     tmp |= 0x40
-                if self.ledMatrix.matrix[y][x + 2] == 1:
+                if m[y][x + 2] == 1:
                     tmp |= 0x20
-                if self.ledMatrix.matrix[y][x + 3] == 1:
+                if m[y][x + 3] == 1:
                     tmp |= 0x10
-                if self.ledMatrix.matrix[y][x + 4] == 1:
+                if m[y][x + 4] == 1:
                     tmp |= 0x08
-                if self.ledMatrix.matrix[y][x + 5] == 1:
+                if m[y][x + 5] == 1:
                     tmp |= 0x04
-                if self.ledMatrix.matrix[y][x + 6] == 1:
+                if m[y][x + 6] == 1:
                     tmp |= 0x02
-                if self.ledMatrix.matrix[y][x + 7] == 1:
+                if m[y][x + 7] == 1:
                     tmp |= 0x01
 
                 buf[22 + index] = tmp
@@ -213,10 +221,13 @@ class Display:
         minY = 32
         maxY = -1
 
+        mOld = self.ledMatrixBuf.matrix
+        mNew = self.ledMatrix.matrix
+
         # search data changed area
         for y in range(32):
             for x in range(200):
-                if (self.ledMatrixBuf.matrix[y][x] != self.ledMatrix.matrix[y][x]):
+                if (mOld[y][x] != mNew[y][x]):
                     if x <= minX:
                         minX = x
 
@@ -281,21 +292,21 @@ class Display:
         for y in range(minY, maxY, 1):
             for x in range(minX, maxX, 8):
                 tmp = 0
-                if self.ledMatrix.matrix[y][x + 0] == 1:
+                if mNew[y][x + 0] == 1:
                     tmp |= 0x80
-                if self.ledMatrix.matrix[y][x + 1] == 1:
+                if mNew[y][x + 1] == 1:
                     tmp |= 0x40
-                if self.ledMatrix.matrix[y][x + 2] == 1:
+                if mNew[y][x + 2] == 1:
                     tmp |= 0x20
-                if self.ledMatrix.matrix[y][x + 3] == 1:
+                if mNew[y][x + 3] == 1:
                     tmp |= 0x10
-                if self.ledMatrix.matrix[y][x + 4] == 1:
+                if mNew[y][x + 4] == 1:
                     tmp |= 0x08
-                if self.ledMatrix.matrix[y][x + 5] == 1:
+                if mNew[y][x + 5] == 1:
                     tmp |= 0x04
-                if self.ledMatrix.matrix[y][x + 6] == 1:
+                if mNew[y][x + 6] == 1:
                     tmp |= 0x02
-                if self.ledMatrix.matrix[y][x + 7] == 1:
+                if mNew[y][x + 7] == 1:
                     tmp |= 0x01
 
                 buf[22 + index] = tmp

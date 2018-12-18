@@ -119,6 +119,10 @@ class Text(AbsParts):
         """
         #sT = time.time()
 
+        text = self._text
+        if text is None:
+            return None
+
         if (self._oldContent is not None) and (self._needRenderContent is False):
             return self._oldContent
 
@@ -130,81 +134,80 @@ class Text(AbsParts):
         xOffsetOrg = 0
         yOffset = 0
 
-        if self._text != None:
-            font = MuiFont.get_instance()
+        font = MuiFont.get_instance()
 
-            maxX = 0
-            xOffset = yOffset = 2 if self._border == Border.AROUND else 0
+        maxX = 0
+        xOffset = yOffset = 2 if self._border == Border.AROUND else 0
 
-            if self._textAlignment == TextAlignment.CENTER:
-                tW = self.getTextWidth(font, self._text)
-                dX = self.width - tW
-                xOffset = dX // 2
-                xOffset += 1 if self._border == Border.AROUND else 0
+        if self._textAlignment == TextAlignment.CENTER:
+            tW = self.getTextWidth(font, self._text)
+            dX = self.width - tW
+            xOffset = dX // 2
+            xOffset += 1 if self._border == Border.AROUND else 0
 
-                tH = self.getTextHeight(font, self._text)
-                dY = self.height - tH
-                yOffset = dY // 2
-            elif self._textAlignment == TextAlignment.RIGHT: 
-                tW = self.getTextWidth(font, self._text)
-                dX = self.width - tW
-                dx -= 1 if self._border == Bordor.AROUND else 0
-                xOffset = dx
+            tH = self.getTextHeight(font, self._text)
+            dY = self.height - tH
+            yOffset = dY // 2
+        elif self._textAlignment == TextAlignment.RIGHT: 
+            tW = self.getTextWidth(font, self._text)
+            dX = self.width - tW
+            dx -= 1 if self._border == Bordor.AROUND else 0
+            xOffset = dx
 
-            xOffsetOrg = xOffset
-            isOverArea = False
+        xOffsetOrg = xOffset
+        isOverArea = False
 
-            # draw text
-            for s in self._text:                
-                if s == '\n':
+        # draw text
+        for s in text:                
+            if s == '\n':
+                yOffset += LINE_OFFSET
+                xOffset = xOffsetOrg
+
+                if ((yOffset + 8) > (self.y + self.height)):
+                    isOverArea = True
+            else:
+                textM = font.getText(s)
+                textM.startX = self.x + xOffset
+                textM.startY = self.y + yOffset
+
+                if ((textM.startX + textM.width) > (self.x + self.width)):
+                    xOffset = 0
                     yOffset += LINE_OFFSET
-                    xOffset = xOffsetOrg
 
-                    if ((yOffset + 8) > (self.y + self.height)):
-                        isOverArea = True
-                else:
-                    textM = font.getText(s)
                     textM.startX = self.x + xOffset
                     textM.startY = self.y + yOffset
 
-                    if ((textM.startX + textM.width) > (self.x + self.width)):
-                        xOffset = 0
-                        yOffset += LINE_OFFSET
+                # merge char matrix data to area matrix
+                m.merge(textM)
 
-                        textM.startX = self.x + xOffset
-                        textM.startY = self.y + yOffset
+                xOffset += textM.width
+                if maxX < xOffset:
+                    maxX = xOffset
 
-                    # merge char matrix data to area matrix
-                    m.merge(textM)
+            # check text is out from this view area
+            if (isOverArea or (((xOffset + 8) > (self.x + self.width)) and ((yOffset + LINE_OFFSET) > (self.y + self.height)))):
+                # notify text if out from view area
+                pass
 
-                    xOffset += textM.width
-                    if maxX < xOffset:
-                        maxX = xOffset
+        # write border
+        if self._border == Border.BOTTOM:
+            bYOffset = yOffset + 8
+            if m.height > 8:
+                for i in range(maxX):
+                    m.matrix[bYOffset][i] = 1
 
-                # check text is out from this view area
-                if (isOverArea or (((xOffset + 8) > (self.x + self.width)) and ((yOffset + LINE_OFFSET) > (self.y + self.height)))):
-                    # notify text if out from view area
-                    pass
+        elif self._border == Border.AROUND:
+            bMaxX = maxX + 2
+            if self._textAlignment == TextAlignment.CENTER:
+                bMaxX = self.width
 
-            # write border
-            if self._border == Border.BOTTOM:
-                bYOffset = yOffset + 8
-                if m.height > 8:
-                    for i in range(maxX):
-                        m.matrix[bYOffset][i] = 1
+            for i in range(bMaxX):
+                m.matrix[0][i] = 1
+                m.matrix[self.height-1][i] = 1
 
-            elif self._border == Border.AROUND:
-                bMaxX = maxX + 2
-                if self._textAlignment == TextAlignment.CENTER:
-                    bMaxX = self.width
-
-                for i in range(bMaxX):
-                    m.matrix[0][i] = 1
-                    m.matrix[self.height-1][i] = 1
-
-                for i in range(self.height - 1):
-                    m.matrix[i][0] = 1
-                    m.matrix[i][bMaxX - 1] = 1
+            for i in range(self.height - 1):
+                m.matrix[i][0] = 1
+                m.matrix[i][bMaxX - 1] = 1
 
         #eR = time.time() - sT
         #print("render text time : {0}".format(eR))

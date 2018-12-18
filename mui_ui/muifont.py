@@ -105,11 +105,14 @@ class MuiFont:
         if fH > 8:
             fH = 8
 
+        fontData = self.fontData
+        matrix = mt.matrix
+
         for y in range(fontPos.row, fontPos.row + fH):
             for x in range(fontPos.col, fontPos.col + fW):
-                color = self.fontData[x,y]
+                color = fontData[x,y]
                 if color == 0:
-                    mt.matrix[y - fontPos.row][x - fontPos.col] = 1
+                    matrix[y - fontPos.row][x - fontPos.col] = 1
 
         return mt
 

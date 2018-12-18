@@ -4,6 +4,8 @@
 
 from abc import ABCMeta, abstractmethod
 
+import time
+
 try:
     from matrix import Matrix
     from parts import AbsParts
@@ -50,7 +52,8 @@ class AbsApp(metaclass=ABCMeta):
 
 
     def dispatchTouchEvent(self, e):
-        for v in reversed(list(self._views)):
+        views = self._views
+        for v in reversed(list(views)):
             if v.visible == True:
                 result = v.dispatchTouchEvent(e)
                 if result == True:
@@ -69,12 +72,19 @@ class AbsApp(metaclass=ABCMeta):
 
 
     def getUI(self)-> Matrix:
+        s = time.time()
         m = Matrix(200, 32)
         m.startX = 0
         m.startY = 0
+        e1 = time.time()
 
-        for v in self._views:
-            if v.visible == True:
-                m.merge(v.getMatrix())
+        views = self._views
 
+        for v in views:
+            if v.visible is True:
+                m.merge(v.getMatrix(), True)
+
+        e = time.time()
+        print('!!!*** merge to UI ', (e - s))
+        # print('???*** create UI ', (e1 - s))
         return m

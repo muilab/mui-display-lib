@@ -75,7 +75,9 @@ class DigitalClock(Widget):
             sec = now.second
             self._views[":"].visible = sec % 2 == 0
 
-            if self.OnUpdateRequestListener != None:
+            self._isChange = True
+
+            if self.OnUpdateRequestListener is not None:
                 self.OnUpdateRequestListener.onUpdateView(self)
 
             eT = time.time()

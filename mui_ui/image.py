@@ -54,15 +54,16 @@ class Image(AbsParts):
 
         # copy image data to matrix
         self._imgData = Matrix(im.width, im.height)
+        imgData = self._imgData
         for y in range(im.height):
             for x in range(im.width):
                 color = data[x,y]
                 if type(color) is int:
                     if color == 1:
-                        self._imgData.matrix[y][x] = 1
+                        imgData.matrix[y][x] = 1
                 else:
                     if color[0] == 0 and color[1] == 0 and color[2] == 0:
-                        self._imgData.matrix[y][x] = 1
+                        imgData.matrix[y][x] = 1
 
         self.width = im.width
         self.height = im.height
