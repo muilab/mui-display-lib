@@ -49,7 +49,7 @@ class Slider(Widget):
 
     def setValue(self, value):
         self._thumbPos = (self.width // self._max) * value
-        self._views["thumb"].x = self.x + (self._thumbPos - 4)
+        self._views["thumb"].x = self.x + (self._thumbPos - 3)
         
     def dispatchTouchEvent(self, e: MotionEvent):
         action = e.action
@@ -67,7 +67,14 @@ class Slider(Widget):
         oldX = self._views["thumb"].x
 
         self._thumbPos = e.x - self.x
-        newX = self.x + (self._thumbPos - 4)
+        if self._thumbPos < 0:
+            self._thumbPos = 0
+        elif self._thumbPos > self.width:
+            self._thumbPos = self.width
+
+        newX = self.x + (self._thumbPos - 3)
+        if newX > (self.x + self.width - 6):
+            newX = self.x + self.width - 6
         self._views["thumb"].x = newX
 
         # no need to change
