@@ -55,12 +55,15 @@ class SampleUI(InputEventListener, OnTouchEventListener, GestureListener):
         # add clock icon
         fileName2 = os.path.normpath(os.path.join(dir, './icon_clock.png'))
         icon2 = Image(fileName2)
+        # add clock icon
+        fileName4 = os.path.normpath(os.path.join(dir, './icon_sound.png'))
+        icon4 = Image(fileName4)
         # add voice icon
         fileName3 = os.path.normpath(os.path.join(dir, './icon_voice.png'))
         icon3 = Image(fileName3)
         
         # create icon widget
-        icons = Widget((icon1.width + icon2.width + icon3.width), max(icon1.height, icon2.height, icon3.height))
+        icons = Widget((icon1.width + icon2.width + icon4.width + icon3.width), max(icon1.height, icon2.height, icon3.height, icon4.height))
         icons.x = 0
         icons.y = 32 - icons.height
         self.ui.addParts(icons)
@@ -69,7 +72,9 @@ class SampleUI(InputEventListener, OnTouchEventListener, GestureListener):
         icons.addParts(icon1)
         icon2.x = icon1.width
         icons.addParts(icon2)
-        icon3.x = icon2.x + icon2.width
+        icon4.x = icon2.x + icon2.width
+        icons.addParts(icon4)
+        icon3.x = icon4.x + icon4.width
         icons.addParts(icon3)
 
         # create gesture detector (for catch swipe action)
@@ -86,11 +91,10 @@ class SampleUI(InputEventListener, OnTouchEventListener, GestureListener):
     def updateUI(self, fade=0):
         mutex.acquire()
         # set layout data
-        self.display.setLayout(self.app.getUI())
+        self.display.setLayout(self.ui.getMatrix())
         # update Display internal data buffer (does not refesh display)
         self.display.updateLayout()
         # refresh Display
-        time.sleep(0.05)
         self.display.refreshDisplay(fade, 100)
         mutex.release()
 
