@@ -4,6 +4,8 @@ import crc8
 import serial
 import time
 
+import RPi.GPIO as GPIO 
+
 try:
    from matrix import Matrix, check_diff_range
 except ImportError:
@@ -29,6 +31,20 @@ class Display:
                      bytesize=serial.EIGHTBITS,
                      stopbits=1,
                      timeout=1)
+
+        self._reset()
+
+
+    def _reset(self):
+        GPIO.setmode(GPIO.BCM)
+        GPIO.setup(26, GPIO.OUT)
+        GPIO.output(26, GPIO.LOW)
+        time.sleep(0.02)
+        GPIO.output(26, GPIO.HIGH)
+
+        r = self.port.read(17)
+        # print('<', len(r), r)
+        self.port.write([ACK])
 
 
     def turnOn(self, fade):
