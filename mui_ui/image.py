@@ -62,8 +62,12 @@ class Image(AbsParts):
                     if color == 1:
                         imgData.matrix[y][x] = 1
                 else:
-                    if color[0] == 0 and color[1] == 0 and color[2] == 0:
-                        imgData.matrix[y][x] = 1
+                    if len(color) == 4:
+                        if color[0] == 0 and color[1] == 0 and color[2] == 0 and color[3] == 255:
+                            imgData.matrix[y][x] = 1
+                    else:
+                        if color[0] == 0 and color[1] == 0 and color[2] == 0:
+                            imgData.matrix[y][x] = 1
 
         self.width = im.width
         self.height = im.height

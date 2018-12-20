@@ -155,8 +155,8 @@ class Text(AbsParts):
         elif self._textAlignment == TextAlignment.RIGHT: 
             tW = self.getTextWidth(font, self._text)
             dX = self.width - tW
-            dx -= 1 if self._border == Bordor.AROUND else 0
-            xOffset = dx
+            dX -= 1 if self._border == Border.AROUND else 0
+            xOffset = dX
 
         xOffsetOrg = xOffset
         isOverArea = False

@@ -13,6 +13,13 @@ except ImportError:
 import os
 dir = os.path.dirname(os.path.abspath(__file__))
 
+
+class SliderEventListener:
+
+    def onSliderValueChanged(self, prevVal, newVal):
+        pass
+
+
 class Slider(Widget):
     def __init__(self, width, maxVal, name='slider'):
         super().__init__(width=width, height=11, name=name)
@@ -42,10 +49,14 @@ class Slider(Widget):
         self._isMoving = False
         self._lastUpdate = 0
 
+        self._listener = None
+
+
+    def addEventListener(self, listener: SliderEventListener):
+        self._listener = listener
 
     def getValue(self):
         return (self._thumbPos // (self.width / self._max))
-
 
     def setValue(self, value):
         self._thumbPos = (self.width // self._max) * value
@@ -64,6 +75,7 @@ class Slider(Widget):
         if action == VALUE_UP:
             self._isMoving = False
 
+        oldValue = self.getValue()
         oldX = self._views["thumb"].x
 
         self._thumbPos = e.x - self.x
@@ -93,6 +105,9 @@ class Slider(Widget):
         # display update request
         if self.OnUpdateRequestListener is not None:
             self.OnUpdateRequestListener.onUpdateView(self)
+
+        if action == VALUE_UP and self._listener is not None:
+            self._listener.onValueChanged(oldValue, self.getValue())
 
 
 

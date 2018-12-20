@@ -67,8 +67,16 @@ class AbsApp(metaclass=ABCMeta):
 
     def close(self):
         self.stopTask()
-        if self.appEventListener != None:
+        if self.appEventListener is not None:
             self.appEventListener.onCloseApp(self)
+
+    def updateRequest(self, fade):
+        if self.appEventListener is not None:
+            self.appEventListener.requestUpdateDisplay(self, fade)
+
+    def setNextApp(self, app):
+        if self.appEventListener is not None:
+            self.appEventListener.setNextApp(app)
 
 
     def getUI(self)-> Matrix:
