@@ -4,6 +4,7 @@
 
 import time
 from threading import Thread
+from threading import Timer
 
 try:
     from application import AbsApp, AppEventListener
@@ -33,22 +34,17 @@ class Message(AbsApp, OnTouchEventListener):
     def setMessage(self, msg: str):
         if self._task != None:
             return
-
         self._msg = msg
-        self._task = Thread(target= self.showMessage)
-        self._doTask = True
-        self._task.start()
         
-
     def showMessage(self):
         for s in self._msg:
-            print("--- call task ---")
+            # print("--- call task ---")
             tS = time.time()
             self._textView.addText(s)
             self.appEventListener.requestUpdateDisplay(self, 0)
             tE = time.time()
             diff = tE - tS
-            print("--- time : {0} ---", diff)
+            # print("--- time : {0} ---", diff)
             if diff < 0.25:
                 time.sleep(0.25 - (tE - tS))
 
@@ -64,9 +60,14 @@ class Message(AbsApp, OnTouchEventListener):
         self.stopTask()
         self.close()
 
-
     def startTask(self):
-        pass
+        t = Timer(0.5, self._startShowMessage)
+        t.start()
+
+    def _startShowMessage(self):
+        self._task = Thread(target= self.showMessage)
+        self._doTask = True
+        self._task.start()
 
     def stopTask(self):
         self._doTask = False

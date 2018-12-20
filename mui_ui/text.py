@@ -78,6 +78,10 @@ class Text(AbsParts):
         isOverArea = False
 
         m = self._oldContent
+        if m is None:
+            m = Matrix(self.width, self.height)
+            m.startX = self.x
+            m.startY = self.y
 
         for s in text:                
             if s == '\n':

@@ -39,11 +39,11 @@ class Display:
         if ack[0] == NACK:
             print('<', 1, ack)
             raise Exception('NACK', packet)
-        print('<', 1, ack)
+        # print('<', 1, ack)
         rdly = self.port.read(17)
-        print('<', len(rdly), rdly)
+        # print('<', len(rdly), rdly)
         self.port.write([ACK])
-        print('>', 1, ACK)
+        # print('>', 1, ACK)
 
 
     def turnOff(self, fade):
@@ -54,11 +54,11 @@ class Display:
         if ack[0] == NACK:
             print('<', 1, ack)
             raise Exception('NACK', packet)
-        print('<', 1, ack)
+        # print('<', 1, ack)
         rdly = self.port.read(17)
-        print('<', len(rdly), rdly)
+        # print('<', len(rdly), rdly)
         self.port.write([ACK])
-        print('>', 1, ACK)
+        # print('>', 1, ACK)
 
 
     def setLayout(self, matrixInfo):
@@ -80,7 +80,7 @@ class Display:
         n = self.port.write(packet)
         #rT = time.time()
         #print('>', n, packet)
-        rsly = self.port.read(1)
+        #rsly = self.port.read(1)
         #print('<', len(rsly), rsly)
         #self.port.write([ACK])
 

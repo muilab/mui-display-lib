@@ -83,7 +83,7 @@ class Slider(Widget):
 
         self._isChange = True
         time = e.timestamp
-        if time - self._lastUpdate < 0.025:
+        if time - self._lastUpdate < 0.015:
             # if very close to previous update time, skip this update request
             self._lastUpdate = time
             return
