@@ -49,19 +49,25 @@ class Slider(Widget):
         self._isMoving = False
         self._lastUpdate = 0
 
-        self._listener = None
+        self._sliderListener = None
 
 
     def addEventListener(self, listener: SliderEventListener):
-        self._listener = listener
+        self._sliderListener = listener
 
     def getValue(self):
-        return (self._thumbPos // (self.width / self._max))
+        return int((self._thumbPos // (self.width / self._max)))
 
     def setValue(self, value):
-        self._thumbPos = (self.width // self._max) * value
-        self._views["thumb"].x = self.x + (self._thumbPos - 3)
-        
+        if value > self._max:
+            value = self._max
+        elif value < 0:
+            value = 0
+
+        self._thumbPos = int((self.width / self._max) * value)
+        self._views["thumb"].x = self.x + (self._thumbPos - 4)
+
+
     def dispatchTouchEvent(self, e: MotionEvent):
         action = e.action
         if (action == VALUE_MOVE) and self._isMoving is False:
@@ -84,13 +90,15 @@ class Slider(Widget):
         elif self._thumbPos > self.width:
             self._thumbPos = self.width
 
-        newX = self.x + (self._thumbPos - 3)
+        newX = self.x + (self._thumbPos - 4)
         if newX > (self.x + self.width - 6):
             newX = self.x + self.width - 6
         self._views["thumb"].x = newX
 
         # no need to change
         if newX == oldX:
+            if action == VALUE_UP and self._sliderListener is not None:
+                self._sliderListener.onSliderValueChanged(oldValue, self.getValue())
             return
 
         self._isChange = True
@@ -105,9 +113,6 @@ class Slider(Widget):
         # display update request
         if self.OnUpdateRequestListener is not None:
             self.OnUpdateRequestListener.onUpdateView(self)
-
-        if action == VALUE_UP and self._listener is not None:
-            self._listener.onValueChanged(oldValue, self.getValue())
 
 
 
