@@ -16,7 +16,7 @@ dir = os.path.dirname(os.path.abspath(__file__))
 
 class SliderEventListener:
 
-    def onSliderValueChanged(self, prevVal, newVal):
+    def onSliderValueChanged(self, slider, prevVal, newVal):
         pass
 
 
@@ -98,7 +98,7 @@ class Slider(Widget):
         # no need to change
         if newX == oldX:
             if action == VALUE_UP and self._sliderListener is not None:
-                self._sliderListener.onSliderValueChanged(oldValue, self.getValue())
+                self._sliderListener.onSliderValueChanged(self, oldValue, self.getValue())
             return
 
         self._isChange = True

@@ -9,9 +9,9 @@ import time
 try:
     from matrix import Matrix
     from parts import AbsParts
+    from input import MotionEvent
 except ImportError:
-    from . import Matrix
-    from . import AbsParts
+    from . import Matrix, AbsParts, MotionEvent
 
 
 class AppEventListener():
@@ -59,10 +59,10 @@ class AbsApp(metaclass=ABCMeta):
                 if result == True:
                     break
 
-    def dispatchScrollEvent(self, scrollX, scrollY):
+    def dispatchScrollEvent(self, start_event: MotionEvent, end_event: MotionEvent, scrollX, scrollY):
         pass
 
-    def dispathFlingEvent(self, veocityX, veocityY):
+    def dispathFlingEvent(self,  start_event: MotionEvent, end_event: MotionEvent, veocityX, veocityY):
         pass
 
     def close(self):
