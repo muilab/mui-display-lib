@@ -41,7 +41,7 @@ class GestureDetector():
     def onTouchEvent(self, e: MotionEvent):
         x = e.x
         y = e.y
-        
+
         if e.action == VALUE_DOWN:
             self._lastX = x
             self._lastY = y
@@ -52,7 +52,7 @@ class GestureDetector():
             downMotion.copy(e)
             self._downMotion = downMotion
 
-        elif e.action == VALUE_MOVE:
+        elif e.action == VALUE_MOVE and self._downMotion is not None:
             if self._inTapRegion:
                 scrollX = self._lastFocusX - x
                 scrollY = self._lastFocusY - y
@@ -65,7 +65,7 @@ class GestureDetector():
                     self._lastFocusY = y
                     self._inTapRegion = False
 
-        elif e.action == VALUE_UP:
+        elif e.action == VALUE_UP and self._downMotion is not None:
             deltaT = (e.timestamp - self._downMotion.timestamp) * 1000
             deltaX = abs(x - self._lastX)
             deltaY = abs(y - self._lastY)
