@@ -38,6 +38,8 @@ class Text(AbsParts):
         self._oldXOffset = 0
         self._oldYOffset = 0
         self._oldOrgXOffset = 0
+        self._text_index = 0
+        self._draw_out_area = False
 
     def setText(self, text:str, textAlignment:TextAlignment=None):
         if type(text) is not str:
@@ -49,6 +51,11 @@ class Text(AbsParts):
             self._textAlignment = textAlignment
 
         self._needRenderContent = True
+        self._oldXOffset = 0
+        self._oldYOffset = 0
+        self._oldOrgXOffset = 0
+        self._text_index = 0
+        self._oldContent = None
 
 
     def addText(self, text: str):
@@ -108,13 +115,14 @@ class Text(AbsParts):
                 xOffset += textM.width
 
             # check text is out from this view area
-            if (isOverArea or (((xOffset + 8) > (self.x + self.width)) and ((yOffset + LINE_OFFSET) > (self.y + self.height)))):
+            if (isOverArea or (((xOffset + 8) > self.width) and ((yOffset + LINE_OFFSET) > self.height))):
                 # notify text if out from view area
-                pass
+                self._onTextFull(self._text_index)
+
+            self._text_index += 1
 
         self._oldXOffset = xOffset
         self._oldYOffset = yOffset
-
 
 
     def getMatrix(self):
@@ -128,11 +136,13 @@ class Text(AbsParts):
             return None
 
         if (self._oldContent is not None) and (self._needRenderContent is False):
+            self._oldContent.startX = self.x
+            self._oldContent.startY = self.y
             return self._oldContent
 
-        m = Matrix(self.width, self.height)
-        m.startX = self.x
-        m.startY = self.y
+        # m = Matrix(self.width, self.height)
+        # m.startX = self.x
+        # m.startY = self.y
 
         xOffset = 0
         xOffsetOrg = 0
@@ -143,13 +153,14 @@ class Text(AbsParts):
         maxX = 0
         xOffset = yOffset = 2 if self._border == Border.AROUND else 0
 
+        tH = self.getTextHeight(font, self._text)
         if self._textAlignment == TextAlignment.CENTER:
             tW = self.getTextWidth(font, self._text)
             dX = self.width - tW
             xOffset = dX // 2
             xOffset += 1 if self._border == Border.AROUND else 0
 
-            tH = self.getTextHeight(font, self._text)
+            # tH = self.getTextHeight(font, self._text)
             dY = self.height - tH
             yOffset = dY // 2
         elif self._textAlignment == TextAlignment.RIGHT: 
@@ -158,10 +169,16 @@ class Text(AbsParts):
             dX -= 1 if self._border == Border.AROUND else 0
             xOffset = dX
 
+        m = Matrix(self.width, tH if self._draw_out_area else self.height)
+        m.startX = self.x
+        m.startY = self.y
+
         xOffsetOrg = xOffset
         isOverArea = False
 
         # draw text
+        self._text_index = 0
+        call_text_full = False
         for s in text:                
             if s == '\n':
                 yOffset += LINE_OFFSET
@@ -189,9 +206,13 @@ class Text(AbsParts):
                     maxX = xOffset
 
             # check text is out from this view area
-            if (isOverArea or (((xOffset + 8) > (self.x + self.width)) and ((yOffset + LINE_OFFSET) > (self.y + self.height)))):
+            if (isOverArea or (((xOffset + 8) > self.width) and ((yOffset + LINE_OFFSET) > self.height))):
                 # notify text if out from view area
-                pass
+                if call_text_full is False:
+                    self._onTextFull(self._text_index)
+                    call_text_full = True
+
+            self._text_index += 1
 
         # write border
         if self._border == Border.BOTTOM:
@@ -272,6 +293,8 @@ class Text(AbsParts):
         
         return textHeight
 
+    def _onTextFull(self, text_index):
+        pass
 
 
 

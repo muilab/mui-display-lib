@@ -1,5 +1,6 @@
 #cython: boundscheck=False, wraparound=False, nonecheck=False
 from cython.view cimport array
+from libc.stdio cimport printf
 
 cdef class Matrix:
     cdef public int startX
@@ -33,21 +34,27 @@ cdef class Matrix:
         cdef int bR = b.startX + b.width
         cdef int bB = b.startY + b.height
 
+        cdef int bH = b.height
+        cdef int bW = b.width
+
         #bm = b.matrix
 
         cdef int w = self.width
         cdef int h = self.height
         if w == 200 and h == 32:
+            #printf("---- start full merge ---")
             for y in range(bT, bB):
                 for x in range(bL, bR):
-                    if (y < h) and (x < w):
+                    if ((y < h) and (x < w) and (y >= bT) and ((y - bT) < bH) and (x >= bL) and ((x - bL) < bW) and (y >= 0) and (x >= 0)):
                         if (b.matrix[y - bT][x - bL] != 0):
                             self.matrix[y][x] = 1
                         #self.matrix[y][x] |= b.matrix[y - bT][x - bL]
         else:
+            #printf("---- start part merge ---")
             for y in range(sY, bottom):
                 for x in range(sX, right):
-                    if ((y >= bT) and (y < bB) and (x >= bL) and (x < bR)):
+                    if ((y >= bT) and (y < bB) and (x >= bL) and (x < bR) and 
+                        ((y - bT) < bH) and ((x - bL) < bW) and ((y - sY) >= 0) and ((x - sX) >= 0) and ((y - sY) < h) and ((x - sX) < w)):
                         if b.matrix[y - bT][x - bL] != 0:
                             self.matrix[y - sY][x - sX] = 1
                         #self.matrix[y - sY][x - sX] |= b.matrix[y - bT][x - bL]
