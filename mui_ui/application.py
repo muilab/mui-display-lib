@@ -50,6 +50,12 @@ class AbsApp(metaclass=ABCMeta):
     def stopTask(self):
         raise NotImplementedError
 
+    def onTurnOffDisplay(self) -> bool:
+        """
+        return True / False
+        True: allow turn off display
+        """
+        raise NotImplementedError
 
     def dispatchTouchEvent(self, e):
         views = self._views

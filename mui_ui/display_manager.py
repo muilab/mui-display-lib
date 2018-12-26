@@ -21,7 +21,16 @@ class DisplayEventListener(metaclass=ABCMeta):
         raise NotImplementedError()
 
 
-class DisplayManager():
+class DisplayManager(object):
+
+    _instance = None
+
+    @classmethod
+    def get_instance(cls):
+        if not cls._instance:
+            cls._instance = cls()
+
+        return cls._instance
 
     def __init__(self, listener: DisplayEventListener, time_to_dismiss:float=15):
         if listener is None:
@@ -31,7 +40,11 @@ class DisplayManager():
         self._time_to_dismiss = time_to_dismiss
         self._timer = None
         self._on = True
+
+    def setEventListener(self, listener: DisplayEventListener):
+        self.listener = listener
     
+
     def startDismissTimer(self):
         if self._timer is not None:
             self._timer.cancel()
@@ -56,3 +69,11 @@ class DisplayManager():
     @on.setter
     def on(self, on):
         self._on = on
+
+    @property
+    def time_to_dismiss(self):
+        return self._time_to_dismiss
+
+    @time_to_dismiss.setter
+    def time_to_dismiss(self, t):
+        self._time_to_dismiss = t
