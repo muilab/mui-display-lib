@@ -9,25 +9,44 @@ try:
 except ImportError:
     from . import Text, Border, TextAlignment
 
+
+class TypeWriterEventListener(object):
+
+    def onTypeFinished(self):
+        pass
+
+    def onScrollStart(self):
+        pass
+
+    def onScrollFinished(self):
+        pass
+
+
 class TypeWriterText(Text):
 
     def __init__(self, text:str=None, border:Border=Border.NONE, name='auto scroll textview'):
         super().__init__(text, border, name)
         self._srcText = text
+        self._orgText = text
+        self._typedTextCount = 0
         self._scrolling = False
         self._draw_out_area = False
         self._doTask = False
         self._task = None
+        self._typewriterEventListener = None
 
+    def addTypeWriterEvent(self, l: TypeWriterEventListener):
+        self._typewriterEventListener = l
 
     def setText(self, text:str, textAlignment:TextAlignment=None):
         if self._task is not None and self._task.is_alive() is True:
-#            self.stopTypewriter()
             self._task.join()
             time.sleep(0.5)
 
         super().setText('', textAlignment)
         self._srcText = text
+        self._orgText = text
+        self._typedTextCount = 0
 
         t = Timer(0.1, self.startTypewriter)
         t.start()
@@ -42,46 +61,61 @@ class TypeWriterText(Text):
 
     def stopTypewriter(self):
         self._doTask = False
+        if self._task is not None:
+            self._task.join()
 
 
     def _doTypewriter(self):
-        print('---- start type writer ----', self._srcText)
+        # print('---- start type writer ----', self._srcText)
         l = self.OnUpdateRequestListener
+        if l is None:
+            self._doTask = False
+            return
 
         for s in self._srcText:
             tS = time.time()
             super().addText(s)
+            self._typedTextCount += 1
             l.onUpdateView(self)
 
             if self._doTask is False:
-                print('**** break!! ****')
                 break
 
             tE = time.time()
             diff = tE - tS
-            # print("--- time : {0} ---", diff)
             if diff < 0.15:
                 time.sleep(0.15 - diff)
 
         self._doTask = False
 
+        # if typed all text, notify all task finish        
+        if (self._typedTextCount == len(self._orgText)) and self._typedTextCount > 0:
+            if self._typewriterEventListener is not None:
+                self._typewriterEventListener.onTypeFinished()
+
+
     def _onTextFull(self, text_index):
+        """
+        text_index is drawn text index when text is full in current view region
+        """
         if self._scrolling is True:
             return
 
-        print('----- on text full -----')
         self._doTask = False
         t = Timer(0.2, self._scroll, [text_index])
         t.start()        
 
 
     def _scroll(self, text_index):
-        print('----- start scroll ----')
         self._scrolling = True
+
         l = self.OnUpdateRequestListener
         if l is None:
-            print('---- listener is null ---')
             return
+
+        # notify scroll start
+        if self._typewriterEventListener is not None:
+            self._typewriterEventListener.onScrollStart()
 
         org_y = self.y
         for y in range(0, self.height, 4):
@@ -96,6 +130,10 @@ class TypeWriterText(Text):
 
         self._scrolling = False
         self._y = org_y
+
+        # notify scroll finish
+        if self._typewriterEventListener is not None:
+            self._typewriterEventListener.onScrollFinished()
 
         # set new text
         #super().setText(newText)
