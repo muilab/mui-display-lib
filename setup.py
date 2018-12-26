@@ -22,5 +22,7 @@ setup(
     url='https://github.com/muilab/mui-display-lib',
     license=license,
     packages=find_packages(exclude=('tests', 'docs')),
+    package_dir={'mui_ui':'mui_ui'},
+    package_data={'mui_ui':['assets/*']},
     ext_modules=cythonize("./mui_ui/matrix.pyx")
 )
