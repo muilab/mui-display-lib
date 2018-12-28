@@ -52,9 +52,17 @@ class Display:
         n = self.port.write(packet) # on
         #print('>', n, packet)
         ack = self.port.read()
+        if len(ack) == 0:
+            print('receive NACK, re-send turnOn')
+            self.turnOn(fade)
+            return
+
         if ack[0] == NACK:
-            print('<', 1, ack)
-            raise Exception('NACK', packet)
+            # print('<', 1, ack)
+            # raise Exception('NACK', packet)
+            print('receive NACK, re-send turnOn')
+            self.turnOn(fade)
+            return
         # print('<', 1, ack)
         rdly = self.port.read(17)
         # print('<', len(rdly), rdly)
@@ -67,9 +75,17 @@ class Display:
         n = self.port.write(packet) # off
         #print('>', n, packet)
         ack = self.port.read()
+        if len(ack) == 0:
+            print('receive NACK, re-send turnOff')
+            self.turnOff(fade)
+            return
+
         if ack[0] == NACK:
-            print('<', 1, ack)
-            raise Exception('NACK', packet)
+            # print('<', 1, ack)
+            # raise Exception('NACK', packet)
+            print('receive NACK, re-send turnOff')
+            self.turnOff(fade)
+            return
         # print('<', 1, ack)
         rdly = self.port.read(17)
         # print('<', len(rdly), rdly)
@@ -110,14 +126,18 @@ class Display:
         packet = self._createDisplayReqCommand(1, fade, duty)
         n = self.port.write(packet)
         #print('>', n, packet)
-        ack = []
-        while True:
-            ack = self.port.read()
-            if len(ack) != 0:
-                break;
+        ack = self.port.read()
+        if len(ack) == 0:
+            print('receive NACK, re-send refreshDisplay')
+            self.refreshDisplay(fade, duty)
+            return
+
         if ack[0] == NACK:
-            print('<', 1, ack)
-            raise Exception('NACK', packet)
+            # print('<', 1, ack)
+            # raise Exception('NACK', packet)
+            print('receive NACK, re-send refreshDisplay')
+            self.refreshDisplay(fade, duty)
+            return
         #print('<', 1, ack)
         rdly = self.port.read(17)
         #print('<', len(rdly), rdly)

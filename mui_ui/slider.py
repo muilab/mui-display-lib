@@ -74,6 +74,9 @@ class Slider(Widget):
             return
 
         if (action != VALUE_MOVE) and (self.hitTest(e.x, e.y) is False):
+            if self._isMoving is True and self._sliderListener is not None:
+                # update when out focus from this view
+                self._sliderListener.onSliderValueChanged(self, self.getValue(), self.getValue())
             self._isMoving = False
             return
 
@@ -113,9 +116,4 @@ class Slider(Widget):
         # display update request
         if self.OnUpdateRequestListener is not None:
             self.OnUpdateRequestListener.onUpdateView(self)
-
-
-
-
-
     
