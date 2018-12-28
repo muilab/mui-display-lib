@@ -4,7 +4,7 @@
 # please use as a part of your applicaion
 
 import time
-from datetime import datetime
+from datetime import datetime, timezone
 from threading import Thread
 
 try:
@@ -20,7 +20,7 @@ except ImportError:
 
 class DigitalClock(Widget):
 
-    def __init__(self, name='digital clock'):
+    def __init__(self, name='digital clock', timezone:timezone=None):
         super().__init__(30, 10, name)
 
         hour = Text('00')
@@ -46,6 +46,7 @@ class DigitalClock(Widget):
         self._views[":"] = coron
 
         self._doTask = False
+        self._timezone = timezone
 
     def startTick(self):
         task = Thread(target= self.updateClock)
@@ -68,7 +69,11 @@ class DigitalClock(Widget):
     def updateClock(self):        
         while self._doTask:
             sT = time.time()
-            now = datetime.now()
+            if self._timezone is None:
+                now = datetime.now()
+            else:
+                now = datetime.now(self._timezone)
+
             self._views["h"].setText(now.strftime('%H'))
             self._views["m"].setText(now.strftime('%M'))
 
