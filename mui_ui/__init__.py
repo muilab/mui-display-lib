@@ -1,5 +1,4 @@
 #
-
 from mui_ui.matrix import Matrix, check_diff_range
 from mui_ui.display import Display
 from mui_ui.display_manager import DisplayManager, DisplayEventListener
@@ -16,6 +15,7 @@ from mui_ui.application import AbsApp, AppEventListener
 from mui_ui.app_message import Message
 from mui_ui.clock import DigitalClock
 from mui_ui.slider import Slider, SliderEventListener
+from mui_ui.keyboard import Keyboard, KeyboardListener
 
 # lib version
 __version__ = '0.0.1'

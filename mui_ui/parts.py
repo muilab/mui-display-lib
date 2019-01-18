@@ -87,6 +87,9 @@ class AbsParts(metaclass=ABCMeta):
         b = self._y + self._height
         return ((x >= l) and (x <= r) and (y >= t) and (y <= b))
 
+    def updateRequest(self):
+        if self.OnUpdateRequestListener is not None:
+            self.OnUpdateRequestListener.onUpdateView(self)
 
     @property
     def name(self):

@@ -65,6 +65,13 @@ class Text(AbsParts):
         self._text = self._text + text
         self._addTextMatrix(text)
 
+    def deleteLastChar(self):
+        if self._text is None:
+            return
+
+        newText = self._text[0:-1]
+        self.setText(newText)
+
 
     def setTextAlignment(self, textAlignment:TextAlignment):
         self._textAlignment = textAlignment

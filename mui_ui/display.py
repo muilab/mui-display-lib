@@ -6,6 +6,8 @@ import time
 
 import RPi.GPIO as GPIO 
 
+from threading import Lock
+
 try:
    from matrix import Matrix, check_diff_range
 except ImportError:
@@ -14,25 +16,30 @@ except ImportError:
 ACK = 0x06
 NACK = 0x15
 
-class Display:
+class Display(object):
     """
     mui Display API class
     """
-    def __init__(self):
+    def __init__(self, device_name='/dev/ttyS0', debug=False):
         print("create display class")
+        self.mutex = Lock()
+
         # create led matrix
         self.ledMatrix = Matrix(200, 32)
         self.ledMatrixBuf = Matrix(200, 32) # buffer for old data
 
         # open UART port
-        self.port = serial.Serial('/dev/ttyS0',
+        self.port = serial.Serial(device_name,
                      115200,
                      parity=serial.PARITY_NONE,
                      bytesize=serial.EIGHTBITS,
                      stopbits=1,
                      timeout=1)
-
+        
+        self.debug = debug
         self._reset()
+        self.port.reset_input_buffer()
+        self.port.reset_output_buffer()
 
 
     def _reset(self):
@@ -41,57 +48,18 @@ class Display:
         GPIO.output(26, GPIO.LOW)
         time.sleep(0.02)
         GPIO.output(26, GPIO.HIGH)
-
-        r = self.port.read(17)
-        # print('<', len(r), r)
-        self.port.write([ACK])
+        time.sleep(0.5)
 
 
     def turnOn(self, fade):
         packet = self._createDisplayReqCommand(0, fade, 100)
-        n = self.port.write(packet) # on
-        #print('>', n, packet)
-        ack = self.port.read()
-        if len(ack) == 0:
-            print('receive NACK, re-send turnOn')
-            self.turnOn(fade)
-            return
-
-        if ack[0] == NACK:
-            # print('<', 1, ack)
-            # raise Exception('NACK', packet)
-            print('receive NACK, re-send turnOn')
-            self.turnOn(fade)
-            return
-        # print('<', 1, ack)
-        rdly = self.port.read(17)
-        # print('<', len(rdly), rdly)
-        self.port.write([ACK])
-        # print('>', 1, ACK)
-
+        self._writePacket(packet)
+        self._recivePacket(6)
 
     def turnOff(self, fade):
-        packet = self._createDisplayReqCommand(2, fade, 100)
-        n = self.port.write(packet) # off
-        #print('>', n, packet)
-        ack = self.port.read()
-        if len(ack) == 0:
-            print('receive NACK, re-send turnOff')
-            self.turnOff(fade)
-            return
-
-        if ack[0] == NACK:
-            # print('<', 1, ack)
-            # raise Exception('NACK', packet)
-            print('receive NACK, re-send turnOff')
-            self.turnOff(fade)
-            return
-        # print('<', 1, ack)
-        rdly = self.port.read(17)
-        # print('<', len(rdly), rdly)
-        self.port.write([ACK])
-        # print('>', 1, ACK)
-
+        packet = self._createDisplayReqCommand(2, fade, 0)
+        self._writePacket(packet)
+        self._recivePacket(6)
 
     def setLayout(self, matrixInfo):
         # s = time.time()
@@ -108,49 +76,59 @@ class Display:
         packet = self._createLayoutCommandForDiff()
         if packet == None:
             return
-        #cT = time.time()
-        n = self.port.write(packet)
-        #rT = time.time()
-        #print('>', n, packet)
-        #rsly = self.port.read(1)
-        #print('<', len(rsly), rsly)
-        #self.port.write([ACK])
+
+        self._writePacket(packet)
+        self._recivePacket(6)
 
         # store current layout info
         self.ledMatrixBuf.copy(self.ledMatrix)
         #eT = time.time()
-        # print("create comannd time {0}".format(cT - sT))
-        # print("send comannd time {0}".format(rT - sT))
+        #print("create comannd time {0}".format(cT - sT))
+        #print("send comannd time {0}".format(rT - sT))
 
     def refreshDisplay(self, fade, duty):
         packet = self._createDisplayReqCommand(1, fade, duty)
-        n = self.port.write(packet)
-        #print('>', n, packet)
-        ack = self.port.read()
-        if len(ack) == 0:
-            print('receive NACK, re-send refreshDisplay')
-            self.refreshDisplay(fade, duty)
-            return
+        self._writePacket(packet)
+        self._recivePacket(6)
 
-        if ack[0] == NACK:
-            # print('<', 1, ack)
-            # raise Exception('NACK', packet)
-            print('receive NACK, re-send refreshDisplay')
-            self.refreshDisplay(fade, duty)
-            return
-        #print('<', 1, ack)
-        rdly = self.port.read(17)
-        #print('<', len(rdly), rdly)
-        self.port.write([ACK])
-        #print('>', 1, ACK)
+    def _writePacket(self, packet):
+        self.mutex.acquire()
+        self.port.write(packet)
+#        packetlen = len(packet)
+#        buf = bytearray(1)
+#        for i in range(0, packetlen):
+#                buf[0] = packet[i]
+#                self.port.write(buf)
+#                if ( i // 4 == 0 ):
+#                        self.port.flush()
+
+        self.port.flush()
+        if self.debug is True:
+            print('>', packet)
+        time.sleep(0.1)
+        self.mutex.release()
+
+    def _recivePacket(self, rdlen):
+        self.mutex.acquire()
+        self._waitRcvData()
+        rdly = self.port.read(rdlen)
+        if self.debug is True:
+            print('<', len(rdly), rdly)
+        self.mutex.release()
+
+    def _waitRcvData(self):
+        while self.port.in_waiting == 0:
+#                print('Wait reply')
+                time.sleep(0.1)
+
         
     def _updateLayoutForce(self, fade, duty):
         packet = self._createLayoutCommand()
         if packet == None:
             return
 
-        n = self.port.write(packet)
-        rsly = self.port.read(1)
+        self._writePacket(packet)
+        self._recivePacket(6)
 
         # store current layout info
         self.ledMatrixBuf.copy(self.ledMatrix)
@@ -165,52 +143,37 @@ class Display:
         pass
 
     def _createDisplayReqCommand(self, mode, fade, duty):
-        buf = bytearray(19)
-        buf[0] = 0x16       # SYN
-        buf[1] = 0x16       # SYN
-        buf[2] = 0x01       # SOH
-        buf[3:7] = b'QDLY'
-        buf[7] = 0x00
-        buf[8] = 0x03
-        buf[9] = 0x00
-        buf[10] = 0x03
-        buf[11] = 0x17      # ETB
-        hash = crc8.crc8()
-        hash.update(buf[3:11])
-        buf[12] = hash.digest()[0]
-        buf[13] = 0x02      # STX
-        buf[14] = mode      # mode
-        buf[15] = fade      # fade
-        buf[16] = duty      # fade
-        buf[17] = 0x03      # ETX
-        hash = crc8.crc8()
-        hash.update(buf[14:17])
-        buf[18] = hash.digest()[0]
+        buf = bytearray(8)
+        sum = 0
+        buf[0] = 0x00
+        buf[1] = 0x06
+        buf[2] = 0x00
+        buf[3] = 0x03
+        buf[4] = fade
+        buf[5] = duty
+        buf[6] = mode
+        for i in range(2,7):
+                sum = sum + buf[i]
+        buf[7] = (sum & 0xFF)
+        if self.debug is True:
+            print('Sum:', buf[7])
         return buf
 
+
     def _createLayoutCommand(self):
-        buf = bytearray(824)
-        buf[0] = 0x16       # SYN
-        buf[1] = 0x16       # SYN
-        buf[2] = 0x01       # SOH
-        buf[3:7] = b'QSLY'
-        buf[7] = 0x03
-        buf[8] = 0x28
-        buf[9] = 0x03
-        buf[10] = 0x28
-        buf[11] = 0x17      # ETB
-        hash = crc8.crc8()
-        hash.update(buf[3:11])
-        buf[12] = hash.digest()[0]
-        buf[13] = 0x02      # STX
-        buf[14] = 0x00      # x-pos
-        buf[15] = 0x00      # x-pos
-        buf[16] = 0x00      # y-pos
-        buf[17] = 0x00      # y-pos
-        buf[18] = 0x00
-        buf[19] = 200       # display-width
-        buf[20] = 0x00
-        buf[21] = 32        # display-height
+        buf = bytearray(813)
+        buf[0] = 0x03
+        buf[1] = 0x2B
+        buf[2] = 0x00
+        buf[3] = 0x02
+        buf[4] = 0		# x-pos
+        buf[5] = 0
+        buf[6] = 0		# y-pos
+        buf[7] = 0
+        buf[8] = 0		# width
+        buf[9] = 200
+        buf[10] = 0		# height
+        buf[11] = 32		
 
         m = self.ledMatrix.matrix
 
@@ -235,13 +198,16 @@ class Display:
                 if m[y][x + 7] == 1:
                     tmp |= 0x01
 
-                buf[22 + index] = tmp
+                buf[12+index] = tmp
                 index += 1
 
-        buf[822] = 0x03
-        hash = crc8.crc8()
-        hash.update(buf[14:822])
-        buf[823] = hash.digest()[0]
+        sum = 0
+        for i in range(2,812):
+                sum = sum + buf[i]
+
+        buf[812] = sum & 0xFF
+        if self.debug is True:
+            print('checksum' , buf[812] )
         return buf
 
     def _createLayoutCommandForDiff(self):
@@ -281,13 +247,15 @@ class Display:
         maxX = diffRange[1]
         minY = diffRange[2]
         maxY = diffRange[3]
-        # print("minX {0}, maxX {1}, minY {2}, maxY {3}".format(minX, maxX, minY, maxY))
+        if self.debug is True:
+            print("minX {0}, maxX {1}, minY {2}, maxY {3}".format(minX, maxX, minY, maxY))
 
 
         # check change data is exist?
         if (maxX == -1) or (maxY == -1):
             # no data has changed
-            print('-- no data has changed --')
+            if self.debug is True:
+                print('-- no data has changed --')
             return
 
         # calc diff data area size and data size
@@ -305,30 +273,22 @@ class Display:
         w = maxX - minX
         h = maxY - minY
         dataLen = ((w // 8) * h) + 8
-        #print("data length {0}".format(dataLen))
+        if self.debug is True:
+            print("data length {0}".format(dataLen))
 
-        buf = bytearray(dataLen + 16)
-        buf[0] = 0x16       # SYN
-        buf[1] = 0x16       # SYN
-        buf[2] = 0x01       # SOH
-        buf[3:7] = b'QSLY'
-        buf[7] = ((dataLen >> 8) & 0xFF)
-        buf[8] = (dataLen & 0xFF)
-        buf[9] = ((dataLen >> 8) & 0xFF)
-        buf[10] = (dataLen & 0xFF)
-        buf[11] = 0x17      # ETB
-        hash = crc8.crc8()
-        hash.update(buf[3:11])
-        buf[12] = hash.digest()[0]
-        buf[13] = 0x02      # STX
-        buf[14] = 0x00      # x-pos
-        buf[15] = minX      # x-pos
-        buf[16] = 0x00      # y-pos
-        buf[17] = minY      # y-pos
-        buf[18] = 0x00
-        buf[19] = w         # diff area width
-        buf[20] = 0x00
-        buf[21] = h         # diff area height
+        buf = bytearray(dataLen + 5)
+        buf[0] = (( dataLen + 3) >> 8) & 0xFF
+        buf[1] = (( dataLen + 3) & 0xFF )
+        buf[2] = 0x00
+        buf[3] = 0x02
+        buf[4] = 0x00
+        buf[5] = minX
+        buf[6] = 0x00
+        buf[7] = minY
+        buf[8] = 0x00
+        buf[9] = w
+        buf[10] = 0x00
+        buf[11] = h
 
         index = 0
         for y in range(minY, maxY, 1):
@@ -351,13 +311,13 @@ class Display:
                 if self.ledMatrix.matrix[y][x + 7] == 1:
                     tmp |= 0x01
 
-                buf[22 + index] = tmp
+                buf[12 + index] = tmp
                 index += 1
 
-        buf[index + 22] = 0x03
-        hash = crc8.crc8()
-        hash.update(buf[14:(index + 22)])
-        buf[index + 23] = hash.digest()[0]
+        sum = 0
+        for i in range(2, dataLen + 5):
+                sum = sum + buf[i]
+        buf[dataLen + 4] = (sum & 0xFF)
         return buf
 
     def toString(self):

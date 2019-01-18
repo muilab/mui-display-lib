@@ -19,6 +19,9 @@ class Image(AbsParts):
         # load image data
         self._loadImage()
 
+        self._offset_x = 0
+        self._offset_y = 0
+
     def setImage(self, img: str):
         if img is None:
             self._src = None
@@ -40,8 +43,8 @@ class Image(AbsParts):
         self.setImage(None)
 
     def getMatrix(self):
-        self._imgData.startX = self.x
-        self._imgData.startY = self.y
+        self._imgData.startX = self.x - self._offset_x
+        self._imgData.startY = self.y - self._offset_y
         return self._imgData
 
     def _loadImage(self):
@@ -72,3 +75,18 @@ class Image(AbsParts):
         self.width = im.width
         self.height = im.height
 
+    @property
+    def offset_y(self):
+        return self._offset_y
+
+    @offset_y.setter
+    def offset_y(self, offset):
+        self._offset_y = offset
+
+    @property
+    def offset_x(self):
+        return self._offset_x
+
+    @offset_x.setter
+    def offset_x(self, offset):
+        self._offset_x = offset

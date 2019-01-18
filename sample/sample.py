@@ -13,6 +13,7 @@ mutex = Lock()
 from mui_ui import Display, MuiFont, Text, Image, Widget, Border, AbsApp, Message, DigitalClock
 from mui_ui import TextAlignment, MotionEvent, InputEventListener, InputHandler, OnTouchEventListener, AppEventListener, OnUpdateRequestListener  
 from mui_ui import GestureListener, GestureDetector
+from mui_ui import Keyboard, KeyboardListener
 
 import os
 dir = os.path.dirname(os.path.abspath(__file__))
@@ -137,10 +138,90 @@ class SampleUI(InputEventListener, OnTouchEventListener, GestureListener):
         print('*** swipe ***')
 
 
+class SampleUI2(InputEventListener, OnTouchEventListener, GestureListener, OnUpdateRequestListener, KeyboardListener):
+
+    def __init__(self):
+        # connect to mui touchpanel
+        self.input = InputHandler(self)
+
+        # connect to mui display
+        self.display = Display(debug=True)
+        self.display.clearDisplay()
+
+        # create application ui
+        self.ui = Widget(200, 32) # max size
+
+        # add keyboard
+        keyboard = Keyboard(listener=self)
+        keyboard.setSize(0, 11, keyboard.width, keyboard.height)
+        keyboard.addOnUpdateViewListener(self)
+        self.ui.addParts(keyboard)
+
+        text = Text('')
+        text.setSize(0, 0, 200, 11)
+        self.ui.addParts(text)
+
+        # create gesture detector (for catch swipe action)
+        self._gestureDetector = GestureDetector(self)
+
+        self.views = {}
+        self.views['text'] = text
+
+    def updateUI(self, fade=0):
+        mutex.acquire()
+        # set layout data
+        self.display.setLayout(self.ui.getMatrix())
+        # update Display internal data buffer (does not refesh display)
+        self.display.updateLayout()
+        # refresh Display
+        self.display.refreshDisplay(fade, 100)
+        mutex.release()
+
+    def mainLoop(self):
+        self.input.startEventLoop()
+
+    def onInputEvent(self, e: MotionEvent):
+        # dispatch touch event to all views
+        self.ui.dispatchTouchEvent(e)
+
+        # determin gesture
+        self._gestureDetector.onTouchEvent(e)
+
+    def onTouch(self, view, e: MotionEvent):
+        pass
+
+    def onScroll(self, e1: MotionEvent,  e2: MotionEvent, x, y):
+        # handling scroll event
+        print('** scroll **')
+
+    def onFling(self, e1: MotionEvent,  e2: MotionEvent, x, y):
+        # handling swipe event
+        print('*** swipe ***')
+
+    def onUpdateView(self, view):
+        self.updateUI()
+
+    def onInput(self, char):
+        print('-- input char : ', char)
+        self.views['text'].addText(char)
+        self.updateUI()
+
+    def onDelete(self):
+        print('-- on delete --')
+        self.views['text'].deleteLastChar()
+        self.updateUI()
+
+    def onForward(self):
+        print('-- on forward --')
+
+    def onBack(self):
+        print('-- on back --')
+
+
 
 if __name__ == "__main__":
     try:
-        app = SampleUI()
+        app = SampleUI2()
 
         # draw UI
         app.updateUI()

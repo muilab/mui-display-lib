@@ -3,12 +3,12 @@
 /* BEGIN: Cython Metadata
 {
     "distutils": {
-        "depends": [],
-        "name": "mui_ui.matrix",
+        "depends": [], 
+        "name": "mui_ui.matrix", 
         "sources": [
             "./mui_ui/matrix.pyx"
         ]
-    },
+    }, 
     "module_name": "mui_ui.matrix"
 }
 END: Cython Metadata */

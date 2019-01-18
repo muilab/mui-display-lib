@@ -18,7 +18,7 @@ setup(
     long_description=readme,
     author='Takuya Kubota',
     author_email='kubota@muilab.com',
-    install_requires=['crc8','pyserial','Pillow','numpy','evdev', 'RPi.GPIO'],
+    install_requires=['crc8','pyserial','Pillow','numpy','evdev', 'RPi.GPIO', 'Cython'],
     url='https://github.com/muilab/mui-display-lib',
     license=license,
     packages=find_packages(exclude=('tests', 'docs')),
