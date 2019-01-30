@@ -105,7 +105,7 @@ class Display(object):
         self.port.flush()
         if self.debug is True:
             print('>', packet)
-        time.sleep(0.1)
+        # time.sleep(0.1)
         self.mutex.release()
 
     def _recivePacket(self, rdlen):
