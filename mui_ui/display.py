@@ -206,10 +206,7 @@ class Display(object):
         checksum = checksum & 0xFF
 
         if ( checksum == packet[size-1] ):
-#            print('Packet Check Ok\n')
             return True
-
-#        print('Packet Check Fail')
         return False
 
 
