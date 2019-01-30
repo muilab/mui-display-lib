@@ -54,12 +54,16 @@ class Display(object):
     def turnOn(self, fade):
         packet = self._createDisplayReqCommand(0, fade, 100)
         self._writePacket(packet)
-        self._recivePacket(6)
+        rcvpacket = self._recivePacket(6)
+        if ( self._checkPacket(rcvpacket) == False):
+            print('rcv packet fail')
 
     def turnOff(self, fade):
         packet = self._createDisplayReqCommand(2, fade, 0)
         self._writePacket(packet)
-        self._recivePacket(6)
+        rcvpacket = self._recivePacket(6)
+        if ( self._checkPacket(rcvpacket) == False):
+            print('rcv packet fail')
 
     def setLayout(self, matrixInfo):
         # s = time.time()
@@ -78,9 +82,11 @@ class Display(object):
             return
 
         self._writePacket(packet)
-        self._recivePacket(6)
+        rcvpacket = self._recivePacket(6)
+        if ( self._checkPacket(rcvpacket) == False):
+            print('rcv packet fail')
 
-        # store current layout info
+         # store current layout info
         self.ledMatrixBuf.copy(self.ledMatrix)
         #eT = time.time()
         #print("create comannd time {0}".format(cT - sT))
@@ -89,7 +95,10 @@ class Display(object):
     def refreshDisplay(self, fade, duty):
         packet = self._createDisplayReqCommand(1, fade, duty)
         self._writePacket(packet)
-        self._recivePacket(6)
+        rcvpacket = self._recivePacket(6)
+        if ( self._checkPacket(rcvpacket) == False):
+            return False
+        return True
 
     def _writePacket(self, packet):
         self.mutex.acquire()
@@ -105,7 +114,7 @@ class Display(object):
         self.port.flush()
         if self.debug is True:
             print('>', packet)
-        # time.sleep(0.1)
+#        time.sleep(0.1)
         self.mutex.release()
 
     def _recivePacket(self, rdlen):
@@ -115,11 +124,12 @@ class Display(object):
         if self.debug is True:
             print('<', len(rdly), rdly)
         self.mutex.release()
+        return rdly
 
     def _waitRcvData(self):
         while self.port.in_waiting == 0:
 #                print('Wait reply')
-                time.sleep(0.1)
+                time.sleep(0.01)
 
         
     def _updateLayoutForce(self, fade, duty):
@@ -128,7 +138,9 @@ class Display(object):
             return
 
         self._writePacket(packet)
-        self._recivePacket(6)
+        rcvpacket = self._recivePacket(6)
+        if ( self._checkPacket(rcvpacket) == False):
+            print('rcv fail.')
 
         # store current layout info
         self.ledMatrixBuf.copy(self.ledMatrix)
@@ -139,8 +151,94 @@ class Display(object):
         self._updateLayoutForce(0, 100)
         self.refreshDisplay(0, 100)
 
+    def getVersion(self):
+        version = 0
+        packet = self._createGetVersionCommand()
+        if packet == None:
+            return version
+        
+        self._writePacket(packet)
+        rcvpckt = self._recivePacket(7)
+        if ( self._checkPacket(rcvpckt) == False ):
+            return version
+
+        version = rcvpckt[4] * 256 + rcvpckt[5]
+        print(version)
+        return version
+
     def getMuiID(self):
-        pass
+        packet = self._createGetMuiIDCommand()
+        if packet == None:
+            return
+        
+        self._writePacket(packet)
+        rcvpckt = self._recivePacket(29)
+        if ( self._checkPacket(rcvpckt) == False ):
+            return ""
+
+        #print(rcvpckt)
+        muiId = rcvpckt[4:28].decode('utf-8')
+        print(muiId)
+        return muiId
+
+    def getPanelStatus(self):
+        packet = self._createGetPanelStatus()
+        if packet == None:
+            return
+
+        self._writePacket(packet)
+        rcvpacket = self._recivePacket(15)
+        if ( self._checkPacket(rcvpacket) == False):
+            return
+
+        print(rcvpacket)
+        return
+
+
+    def _checkPacket(self, packet):
+        size = len(packet)
+        if (size < 5):
+            return False
+        checksum = 0
+        for i in range(2, size-1):
+            checksum = checksum + packet[i]
+
+        checksum = checksum & 0xFF
+
+        if ( checksum == packet[size-1] ):
+#            print('Packet Check Ok\n')
+            return True
+
+#        print('Packet Check Fail')
+        return False
+
+
+    def _createGetVersionCommand(self):
+        buf = bytearray(5)
+        buf[0] = 0x00
+        buf[1] = 0x03
+        buf[2] = 0x80
+        buf[3] = 0x00
+        buf[4] = 0x80
+        return buf
+
+    def _createGetMuiIDCommand(self):
+        buf = bytearray(5)
+        buf[0] = 0x00
+        buf[1] = 0x03
+        buf[2] = 0x80
+        buf[3] = 0x01
+        buf[4] = 0x81
+        return buf
+
+    def _createGetPanelStatus(self):
+        buf = bytearray(5)
+        buf[0] = 0x00
+        buf[1] = 0x03
+        buf[2] = 0x80
+        buf[3] = 0x02
+        buf[4] = 0x82
+        return buf
 
     def _createDisplayReqCommand(self, mode, fade, duty):
         buf = bytearray(8)
@@ -166,14 +264,14 @@ class Display(object):
         buf[1] = 0x2B
         buf[2] = 0x00
         buf[3] = 0x02
-        buf[4] = 0		# x-pos
+        buf[4] = 0      # x-pos
         buf[5] = 0
-        buf[6] = 0		# y-pos
+        buf[6] = 0      # y-pos
         buf[7] = 0
-        buf[8] = 0		# width
+        buf[8] = 0      # width
         buf[9] = 200
-        buf[10] = 0		# height
-        buf[11] = 32		
+        buf[10] = 0     # height
+        buf[11] = 32        
 
         m = self.ledMatrix.matrix
 
