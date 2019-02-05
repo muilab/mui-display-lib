@@ -16,6 +16,15 @@ except ImportError:
 ACK = 0x06
 NACK = 0x15
 
+
+def reset_display():
+    GPIO.setmode(GPIO.BCM)
+    GPIO.setup(26, GPIO.OUT)
+    GPIO.output(26, GPIO.LOW)
+    time.sleep(0.02)
+    GPIO.output(26, GPIO.HIGH)
+    time.sleep(0.5)
+
 class Display(object):
     """
     mui Display API class
@@ -43,13 +52,7 @@ class Display(object):
 
 
     def _reset(self):
-        GPIO.setmode(GPIO.BCM)
-        GPIO.setup(26, GPIO.OUT)
-        GPIO.output(26, GPIO.LOW)
-        time.sleep(0.02)
-        GPIO.output(26, GPIO.HIGH)
-        time.sleep(0.5)
-
+        reset_display()
 
     def turnOn(self, fade):
         packet = self._createDisplayReqCommand(0, fade, 100)
