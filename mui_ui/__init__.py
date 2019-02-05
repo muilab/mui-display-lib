@@ -16,6 +16,7 @@ from mui_ui.app_message import Message
 from mui_ui.clock import DigitalClock
 from mui_ui.slider import Slider, SliderEventListener
 from mui_ui.keyboard import Keyboard, KeyboardListener
+from mui_ui.dialog import Dialog, DialogListener
 
 # lib version
 __version__ = '0.0.1'
