@@ -143,7 +143,7 @@ class Display(object):
             return ""
 
         #print(rcvpckt)
-        muiId = rcvpckt[4:28].decode('utf-8')
+        muiId = rcvpckt[4:28].decode('utf-8').strip('\0')
         print(muiId)
         return muiId
 
