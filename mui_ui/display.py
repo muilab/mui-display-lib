@@ -3,6 +3,7 @@
 import crc8
 import serial
 import time
+import itertools
 
 import RPi.GPIO as GPIO 
 
@@ -31,6 +32,10 @@ class Display(object):
     """
     def __init__(self, device_name='/dev/ttyS0', debug=False):
         print("create display class")
+
+        self.buf5 = bytearray(5)
+        self.buf8 = bytearray(8)          
+
         self.mutex = Lock()
 
         # create led matrix
@@ -39,7 +44,7 @@ class Display(object):
 
         # open UART port
         self.port = serial.Serial(device_name,
-                     115200,
+                     460800,
                      parity=serial.PARITY_NONE,
                      bytesize=serial.EIGHTBITS,
                      stopbits=1,
@@ -55,69 +60,28 @@ class Display(object):
         reset_display()
 
     def turnOn(self, fade):
-        packet = self._createDisplayReqCommand(0, fade, 100)
-        self._writePacket(packet)
-        rcvpacket = self._recivePacket(6)
-        if ( self._checkPacket(rcvpacket) == False):
-            print('rcv packet fail')
+        return self._createDisplayReqCommand(0, fade, 100)
 
     def turnOff(self, fade):
-        packet = self._createDisplayReqCommand(2, fade, 0)
-        self._writePacket(packet)
-        rcvpacket = self._recivePacket(6)
-        if ( self._checkPacket(rcvpacket) == False):
-            print('rcv packet fail')
+        return self._createDisplayReqCommand(2, fade, 0)
 
     def setLayout(self, matrixInfo):
-        # s = time.time()
-        # for y in range(matrixInfo.height):
-        #     for x in range(matrixInfo.width):
-        #         self.ledMatrix.matrix[y + matrixInfo.startY][x + matrixInfo.startX] = matrixInfo.matrix[y][x]
         self.ledMatrix.matrix = matrixInfo.matrix
 
-        # e = time.time()
-        # print('??? setLayout ', (e - s))
-
     def updateLayout(self):
-        #sT = time.time()
-        packet = self._createLayoutCommandForDiff()
-        if packet == None:
-            return
-
-        self._writePacket(packet)
-        rcvpacket = self._recivePacket(6)
-        if ( self._checkPacket(rcvpacket) == False):
-            print('rcv packet fail')
-
+        self._createLayoutCommandForDiff()
          # store current layout info
         self.ledMatrixBuf.copy(self.ledMatrix)
-        #eT = time.time()
-        #print("create comannd time {0}".format(cT - sT))
-        #print("send comannd time {0}".format(rT - sT))
 
     def refreshDisplay(self, fade, duty):
-        packet = self._createDisplayReqCommand(1, fade, duty)
-        self._writePacket(packet)
-        rcvpacket = self._recivePacket(6)
-        if ( self._checkPacket(rcvpacket) == False):
-            return False
-        return True
+        rdly = self.port.read(self.port.in_waiting)
+        return self._createDisplayReqCommand(1, fade, duty)
 
     def _writePacket(self, packet):
         self.mutex.acquire()
         self.port.write(packet)
-#        packetlen = len(packet)
-#        buf = bytearray(1)
-#        for i in range(0, packetlen):
-#                buf[0] = packet[i]
-#                self.port.write(buf)
-#                if ( i // 4 == 0 ):
-#                        self.port.flush()
-
-        self.port.flush()
         if self.debug is True:
             print('>', packet)
-#        time.sleep(0.1)
         self.mutex.release()
 
     def _recivePacket(self, rdlen):
@@ -131,8 +95,7 @@ class Display(object):
 
     def _waitRcvData(self):
         while self.port.in_waiting == 0:
-#                print('Wait reply')
-                time.sleep(0.01)
+                time.sleep(0)
 
         
     def _updateLayoutForce(self, fade, duty):
@@ -241,22 +204,23 @@ class Display(object):
         return buf
 
     def _createDisplayReqCommand(self, mode, fade, duty):
-        buf = bytearray(8)
         sum = 0
-        buf[0] = 0x00
-        buf[1] = 0x06
-        buf[2] = 0x00
-        buf[3] = 0x03
-        buf[4] = fade
-        buf[5] = duty
-        buf[6] = mode
+        self.buf8[0] = 0x00
+        self.buf8[1] = 0x06
+        self.buf8[2] = 0x00
+        self.buf8[3] = 0x03
+        self.buf8[4] = fade
+        self.buf8[5] = duty
+        self.buf8[6] = mode
         for i in range(2,7):
-                sum = sum + buf[i]
-        buf[7] = (sum & 0xFF)
+                sum = sum + self.buf8[i]
+        self.buf8[7] = (sum & 0xFF)
         if self.debug is True:
-            print('Sum:', buf[7])
-        return buf
+            print('Sum:', self.buf8[7])
 
+        self._writePacket(self.buf8)
+        rcvpacket = self._recivePacket(6)
+        return self._checkPacket(rcvpacket)
 
     def _createLayoutCommand(self):
         buf = bytearray(813)
@@ -278,23 +242,14 @@ class Display(object):
         index = 0
         for y in range(32):
             for x in range(0, 200, 8):
-                tmp = 0
-                if m[y][x + 0] == 1:
-                    tmp |= 0x80
-                if m[y][x + 1] == 1:
-                    tmp |= 0x40
-                if m[y][x + 2] == 1:
-                    tmp |= 0x20
-                if m[y][x + 3] == 1:
-                    tmp |= 0x10
-                if m[y][x + 4] == 1:
-                    tmp |= 0x08
-                if m[y][x + 5] == 1:
-                    tmp |= 0x04
-                if m[y][x + 6] == 1:
-                    tmp |= 0x02
-                if m[y][x + 7] == 1:
-                    tmp |= 0x01
+                tmp = ( m[y][x + 0] << 7 )
+                tmp |= ( m[y][x + 1] << 6 )
+                tmp |= ( m[y][x + 2] << 5 )
+                tmp |= ( m[y][x + 3] << 4 )
+                tmp |= ( m[y][x + 4] << 3 )
+                tmp |= ( m[y][x + 5] << 2 )
+                tmp |= ( m[y][x + 6] << 1 )
+                tmp |= ( m[y][x + 7] << 0 )
 
                 buf[12+index] = tmp
                 index += 1
@@ -389,37 +344,29 @@ class Display(object):
         buf[11] = h
 
         index = 0
-        for y in range(minY, maxY, 1):
-            for x in range(minX, maxX, 8):
-                tmp = 0
-                if self.ledMatrix.matrix[y][x + 0] == 1:
-                    tmp |= 0x80
-                if self.ledMatrix.matrix[y][x + 1] == 1:
-                    tmp |= 0x40
-                if self.ledMatrix.matrix[y][x + 2] == 1:
-                    tmp |= 0x20
-                if self.ledMatrix.matrix[y][x + 3] == 1:
-                    tmp |= 0x10
-                if self.ledMatrix.matrix[y][x + 4] == 1:
-                    tmp |= 0x08
-                if self.ledMatrix.matrix[y][x + 5] == 1:
-                    tmp |= 0x04
-                if self.ledMatrix.matrix[y][x + 6] == 1:
-                    tmp |= 0x02
-                if self.ledMatrix.matrix[y][x + 7] == 1:
-                    tmp |= 0x01
-
-                buf[12 + index] = tmp
-                index += 1
+        for y, x in itertools.product(range(minY, maxY, 1),range(minX, maxX, 8)):
+            tmp = ( self.ledMatrix.matrix[y][x + 0] << 7 )
+            tmp |= ( self.ledMatrix.matrix[y][x + 1] << 6 )
+            tmp |= ( self.ledMatrix.matrix[y][x + 2] << 5 )
+            tmp |= ( self.ledMatrix.matrix[y][x + 3] << 4 )
+            tmp |= ( self.ledMatrix.matrix[y][x + 4] << 3 )
+            tmp |= ( self.ledMatrix.matrix[y][x + 5] << 2 )
+            tmp |= ( self.ledMatrix.matrix[y][x + 6] << 1 )
+            tmp |= ( self.ledMatrix.matrix[y][x + 7] << 0 )
+            buf[12 + index] = tmp
+            index += 1
 
         sum = 0
         for i in range(2, dataLen + 5):
                 sum = sum + buf[i]
         buf[dataLen + 4] = (sum & 0xFF)
-        return buf
+        self._writePacket(buf)
+#        rcvpacket = self._recivePacket(6)
+#        return self._checkPacket(rcvpacket)
+        return True
 
     def toString(self):
-        self.ledMatrix.toString()
+        self.ledMatrix.toStrin
 
 
 # for TEST
