@@ -71,6 +71,9 @@ class AbsApp(metaclass=ABCMeta):
     def dispathFlingEvent(self,  start_event: MotionEvent, end_event: MotionEvent, veocityX, veocityY):
         pass
 
+    def dispathLongPressEvent(self, event: MotionEvent):
+        pass
+
     def close(self):
         self.stopTask()
         if self.appEventListener is not None:

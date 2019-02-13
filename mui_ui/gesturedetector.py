@@ -7,16 +7,21 @@ try:
 except ImportError:
     from . import MotionEvent, VALUE_UP, VALUE_MOVE, VALUE_DOWN
 
+from threading import Timer
 
 SLOP_SQUARE = 64
 MINIMUM_FLING_VELOCITY = 50
+LONG_PRESS_TIMEOUT = 0.5 # sec
 
 class GestureListener():
 
-    def onScroll(self, e1: MotionEvent,  e2: MotionEvent, x, y):
+    def onScroll(self, e1: MotionEvent,  e2: MotionEvent, velocityX, velocityY):
         pass
 
-    def onFling(self, e1: MotionEvent,  e2: MotionEvent, x, y):
+    def onFling(self, e1: MotionEvent,  e2: MotionEvent, scrollX, scrollY):
+        pass
+
+    def onLongPress(self, e: MotionEvent):
         pass
 
 
@@ -29,6 +34,7 @@ class GestureDetector():
         self._lastFocusY = 0
         self._inTapRegion = False
         self._downMotion = None
+        self._longpressTimer = None
 
     def _cancel(self):
         self._lastX = 0
@@ -37,6 +43,10 @@ class GestureDetector():
         self._lastFocusY = 0
         self._inTapRegion = False
         self._downMotion = None
+
+        if self._longpressTimer is not None:
+            self._longpressTimer.cancel()
+        self._longpressTimer = None
 
     def onTouchEvent(self, e: MotionEvent):
         x = e.x
@@ -52,6 +62,12 @@ class GestureDetector():
             downMotion.copy(e)
             self._downMotion = downMotion
 
+            if self._longpressTimer is not None:
+                self._longpressTimer.cancel()
+
+            self._longpressTimer = Timer(LONG_PRESS_TIMEOUT, self._dispathLongPress)
+            self._longpressTimer.start()
+
         elif e.action == VALUE_MOVE and self._downMotion is not None:
             if self._inTapRegion:
                 scrollX = self._lastFocusX - x
@@ -65,6 +81,10 @@ class GestureDetector():
                     self._lastFocusY = y
                     self._inTapRegion = False
 
+            if self._longpressTimer is not None:
+                self._longpressTimer.cancel()
+
+
         elif e.action == VALUE_UP and self._downMotion is not None:
             deltaT = (e.timestamp - self._downMotion.timestamp) * 1000
             deltaX = abs(x - self._lastX)
@@ -74,6 +94,14 @@ class GestureDetector():
             if (velX > MINIMUM_FLING_VELOCITY) or (velY > MINIMUM_FLING_VELOCITY):
                 self._gestureListener.onFling(self._downMotion, e, velX, velY)
 
+            if self._longpressTimer is not None:
+                self._longpressTimer.cancel()
+
         else:
             self._cancel()
+
+    def _dispathLongPress(self):
+        self._gestureListener.onLongPress(self._downMotion)
+
+
 
