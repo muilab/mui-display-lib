@@ -11,7 +11,7 @@ from threading import Timer
 
 SLOP_SQUARE = 64
 MINIMUM_FLING_VELOCITY = 50
-LONG_PRESS_TIMEOUT = 0.5 # sec
+LONG_PRESS_TIMEOUT = 3 # sec
 
 class GestureListener():
 
