@@ -25,6 +25,9 @@ class AppEventListener():
     def onCloseApp(self, app):
         raise NotImplementedError
 
+    def onChangeDuty(self, duty):
+        raise NotImplementedError
+
 
 class AbsApp(metaclass=ABCMeta):
     
@@ -87,6 +90,9 @@ class AbsApp(metaclass=ABCMeta):
         if self.appEventListener is not None:
             self.appEventListener.setNextApp(app)
 
+    def changeDuty(self, duty):
+        if self.appEventListener is not None:
+            self.appEventListener.onChangeDuty(duty)
 
     def getUI(self)-> Matrix:
         # s = time.time()

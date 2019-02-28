@@ -38,6 +38,8 @@ class Display(object):
 
         self.mutex = Lock()
 
+        self._duty = 100
+
         # create led matrix
         self.ledMatrix = Matrix(200, 32)
         self.ledMatrixBuf = Matrix(200, 32) # buffer for old data
@@ -59,8 +61,11 @@ class Display(object):
     def _reset(self):
         reset_display()
 
+    def setDuty(self, duty):
+        self._duty = duty
+
     def turnOn(self, fade):
-        return self._createDisplayReqCommand(0, fade, 100)
+        return self._createDisplayReqCommand(0, fade, self._duty)
 
     def turnOff(self, fade):
         return self._createDisplayReqCommand(2, fade, 0)
@@ -73,9 +78,9 @@ class Display(object):
          # store current layout info
         self.ledMatrixBuf.copy(self.ledMatrix)
 
-    def refreshDisplay(self, fade, duty):
+    def refreshDisplay(self, fade):
         rdly = self.port.read(self.port.in_waiting)
-        return self._createDisplayReqCommand(1, fade, duty)
+        return self._createDisplayReqCommand(1, fade, self._duty)
 
     def _writePacket(self, packet):
         self.mutex.acquire()
@@ -98,7 +103,7 @@ class Display(object):
                 time.sleep(0)
 
         
-    def _updateLayoutForce(self, fade, duty):
+    def _updateLayoutForce(self, fade):
         packet = self._createLayoutCommand()
         if packet == None:
             return
@@ -114,8 +119,8 @@ class Display(object):
 
     def clearDisplay(self):
         self.ledMatrix = Matrix(200, 32) # clear
-        self._updateLayoutForce(0, 100)
-        self.refreshDisplay(0, 100)
+        self._updateLayoutForce(0)
+        self.refreshDisplay(0)
 
     def getVersion(self):
         version = 0
