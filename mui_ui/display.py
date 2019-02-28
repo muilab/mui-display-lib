@@ -78,7 +78,7 @@ class Display(object):
          # store current layout info
         self.ledMatrixBuf.copy(self.ledMatrix)
 
-    def refreshDisplay(self, fade):
+    def refreshDisplay(self, fade, duty=100):
         rdly = self.port.read(self.port.in_waiting)
         return self._createDisplayReqCommand(1, fade, self._duty)
 
