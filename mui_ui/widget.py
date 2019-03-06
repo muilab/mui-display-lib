@@ -44,10 +44,12 @@ class Widget(AbsParts):
     def dispatchTouchEvent(self, e):
         parts = self._partsList
         for p in reversed(list(parts)):
-            if p.visible == True:
+            if p.visible is True:
                 result = p.dispatchTouchEvent(e)
-                if result == True:
-                    break
+                if result is True:
+                    return True
+
+        return False
 
 
     def getMatrix(self):

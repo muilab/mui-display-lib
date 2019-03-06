@@ -63,10 +63,12 @@ class AbsApp(metaclass=ABCMeta):
     def dispatchTouchEvent(self, e):
         views = self._views
         for v in reversed(list(views)):
-            if v.visible == True:
+            if v.visible is True:
                 result = v.dispatchTouchEvent(e)
-                if result == True:
-                    break
+                if result is True:
+                    return True
+
+        return False
 
     def dispatchScrollEvent(self, start_event: MotionEvent, end_event: MotionEvent, scrollX, scrollY):
         pass
