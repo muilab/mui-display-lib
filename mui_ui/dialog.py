@@ -32,17 +32,17 @@ class Dialog(Widget):
 
 
         btnPositive = Text(pos_text)
-        btnPositive.setSize(115, 24, 20, 8)
+        btnPositive.setSize(110, 24, 20, 8)
         self.addParts(btnPositive)
         self._btnPositive = btnPositive
 
         btnNegative = Text(nega_text)
-        btnNegative.setSize(149, 24, 20, 8)
+        btnNegative.setSize(143, 24, 25, 8)
         self.addParts(btnNegative)
         self._btnNegative = btnNegative
 
         separator = Text('/')
-        separator.setSize(138, 24, 8, 8)
+        separator.setSize(133, 24, 8, 8)
         self.addParts(separator)
 
         self._dialogListener = listener
