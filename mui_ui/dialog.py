@@ -4,11 +4,11 @@
 # if you want display yes/no confirm dialog, please use this class
 
 try:
-    from text import Text
+    from text import Text, Border
     from widget import Widget
     from input import MotionEvent, VALUE_DOWN, VALUE_MOVE, VALUE_UP
 except ImportError:
-    from . import Text, Widget, Image, MotionEvent, VALUE_DOWN, VALUE_MOVE, VALUE_UP
+    from . import Text, Border, Widget, Image, MotionEvent, VALUE_DOWN, VALUE_MOVE, VALUE_UP
 
 
 class DialogListener(object):
@@ -31,13 +31,13 @@ class Dialog(Widget):
         self._message = confirm_message
 
 
-        btnPositive = Text(pos_text)
-        btnPositive.setSize(110, 24, 20, 8)
+        btnPositive = Text(pos_text, border= Border.BOTTOM)
+        btnPositive.setSize(110, 23, 20, 9)
         self.addParts(btnPositive)
         self._btnPositive = btnPositive
 
-        btnNegative = Text(nega_text)
-        btnNegative.setSize(143, 24, 25, 8)
+        btnNegative = Text(nega_text, border= Border.BOTTOM)
+        btnNegative.setSize(143, 23, 25, 9)
         self.addParts(btnNegative)
         self._btnNegative = btnNegative
 
