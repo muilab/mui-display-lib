@@ -1,5 +1,6 @@
-# mui ui layout parts abstract class
 # -*- coding: utf-8 -*-
+
+# mui ui layout parts abstract class
 
 from abc import ABCMeta, abstractmethod
 from evdev import ecodes
@@ -7,12 +8,14 @@ from evdev import ecodes
 try:
     from input import MotionEvent
 except ImportError:
-    pass
-#    from . import InputEventListener
-#    from . import MotionEvent
+   from . import MotionEvent
 
 
-class OnTouchEventListener():
+class OnTouchEventListener(object):
+    """
+    touch event callback.
+    please set this class to touchable view and implement method for handling touch evnet.
+    """
 
     def onTouch(self, view, e):
         """
@@ -28,14 +31,51 @@ class OnTouchEventListener():
         raise NotImplementedError
 
 
-class OnUpdateRequestListener():
+class OnUpdateRequestListener(object):
+    """
+    update request callback.
+    please set this class to need update view and implement method for update UI.
+    """
 
     def onUpdateView(self, view):
+        """
+        callback method to be invoked when need UI update by contents change on view.
+    
+        Parameters
+        ------------
+        view : AbsParts
+            update requested view
+        """
         pass
 
 
 
 class AbsParts(metaclass=ABCMeta):
+    """
+    AbsParts class is abstract and base class of All Views(such as Text, Image, Widget).
+    if you want to implement original custom view, please inherit this class.
+
+    Attributes
+    ----------
+    name : str
+        name of view. use for identify of view
+
+    visible : boolean
+        visibility of view. when set this property to False, the view does not draw on UI.
+
+    x : int
+        x position of view.
+
+    y : int
+        y position of view.
+
+    width : int
+        width of view.
+
+    height : int
+        height of view.
+
+    """
 
     def __init__(self, name=None):
         self._name = name

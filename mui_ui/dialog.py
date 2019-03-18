@@ -12,17 +12,86 @@ except ImportError:
 
 
 class DialogListener(object):
+    """
+    Interface definition class for a callback to be invoked when touch dialog buttons.
+    If you want to receive user selection, please override onPositive and onNegative method.
+    
+    """
 
     def onPositive(self):
+        """
+        callback to be invoked when user selected positive button.
+        """
         pass
 
     def onNegative(self):
+        """
+        callback to be invoked when user selected negative button.
+        """
         pass
 
 
 class Dialog(Widget):
+    """
+    Simple confirmation dialog widget.
+
+    Examples
+    ---------
+    from mui_ui import AbsApp, AppEventListener, Dialog, DialogListener
+
+    class App(AbsApp, DialogListener, OnUpdateRequestListener):
+
+        def __init__(self, appEventListener: AppEventListener):
+            super().__init__(appEventListener)
+
+            # create dialog(on application class)
+            dialog = Dialog(
+                message='dialog message', 
+                pos_text='positive selection button text', 
+                nega_text='negative selection button text', 
+                listener=self)
+            dialog.visible = False # first state of dialog
+            self.addView(dialog)
+            self.setView(dialog, 'dialog')
+    
+            # open dialog
+            dialog.visible = True
+            self.updateRequest(2) # with fede-in/out
+
+        def onPositive(self):
+            # user selected positive button
+
+            # close dialog
+            self.getView('dialog').visible = False
+            self.updateRequest(2)
+
+
+        def onNegative(self):
+            # user selected negative button
+
+            # close dialog
+            self.getView('dialog').visible = False
+            self.updateRequest(2)
+
+    See Also
+    --------
+    DialogListener
+
+    """
 
     def __init__(self, name='dialog', message: str='', pos_text: str='yes', nega_text: str='no', listener: DialogListener=None):
+        """
+        Parameters
+        ------------
+        message : str
+            message text of confirmation
+        pos_text : str
+            positive button text (ex. yes
+        nega_text : str
+            neagative button text (ex. no
+        listener : DialogListener
+            callback
+        """
         super().__init__(200, 32, name)
 
         confirm_message = Text(message)

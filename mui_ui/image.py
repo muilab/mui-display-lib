@@ -11,6 +11,69 @@ except ImportError:
     from . import AbsParts, Matrix
 
 class Image(AbsParts):
+    """
+    Image View
+
+    this view load selected image and convert to Matrix for mui UI drawing.
+    a pixel which color is BLACK be drawn as LED ON, the other color pixel is does not draw.
+
+    Attributes
+    ----------
+    offset_x : int
+        image drawing start position from left side.
+
+    offset_y : int
+        image drawing start position from top side.
+
+
+    Notes
+    -----
+    This view depends on PIL(Python Imaging Library).
+
+
+    Examples
+    ---------
+    from mui_ui import Image, Widget, Display
+
+    # create image
+    image = Image('image file path')
+    image.setPos(10, 10) # set position(x : 10, y : 10). width and height automatically set when set image path.
+
+    # create UI base, full screen size
+    ui = Widget(200, 32)
+
+    # add image view to UI
+    ui.addParts(image)
+
+    # connect to display
+    display = Display()
+
+    # update UI
+    def updateDisplay():
+        # set layout to display
+        display.setLayout(ui.getMatrix())
+        display.updateLayout()
+
+        # update display
+        display.refreshDisplay()
+
+    updateDisplay()
+
+    # change image
+    image.setImage('other image file path')
+    updateDisplay()
+
+    # set offset
+    image.offset_x = 10
+    image.offset_y = -5
+    updateDisplay()
+
+    # clear image
+    image.deleteImage()
+    updateDisplay()
+
+
+    """
 
     def __init__(self, img:str=None, name='imageview'):
         super().__init__(name)        
@@ -30,6 +93,7 @@ class Image(AbsParts):
 
         self._src = img
         self._loadImage()
+        self.setPos(self.x, self.y)
 
     def setImageData(self, imgData: Matrix):
         if imgData is None:
@@ -38,6 +102,8 @@ class Image(AbsParts):
 
         self._imgData = imgData
 
+    def setPos(self, x, y):
+        self.setSize(x, y, self.width, self.height)
 
     def deleteImage(self):
         self.setImage(None)

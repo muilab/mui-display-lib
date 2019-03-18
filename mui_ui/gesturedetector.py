@@ -13,20 +13,86 @@ SLOP_SQUARE = 64
 MINIMUM_FLING_VELOCITY = 50
 LONG_PRESS_TIMEOUT = 3 # sec
 
-class GestureListener():
+class GestureListener(object):
 
-    def onScroll(self, e1: MotionEvent,  e2: MotionEvent, velocityX, velocityY):
+    def onScroll(self, e1: MotionEvent,  e2: MotionEvent, scrollX, scrollY):
         pass
 
-    def onFling(self, e1: MotionEvent,  e2: MotionEvent, scrollX, scrollY):
+    def onFling(self, e1: MotionEvent,  e2: MotionEvent, velocityX, velocityY):
+        """
+        this method invoked when swipe event occured.
+
+        Parameters
+        ------------
+        e1 : MotionEvent
+            start position of swipe event
+        e2 : MotionEvent
+            end position of swipe event
+        velocityX : int
+            distance between e1.x and e2.x
+        velocityY : int
+            distance between e1.y and e2.y
+        """
         pass
 
     def onLongPress(self, e: MotionEvent):
+        """
+        this method invoked when long press event occured.
+
+        Parameters
+        ------------
+        e : MotionEvent
+            event data of started long press
+        """
         pass
 
 
-class GestureDetector():
-    def __init__(self, listener: GestureListener):
+class GestureDetector(object):
+    """
+    GestureDetector can determin touch gestures like swipe, scroll, long press.
+    When occure these gesture event, call callback method of GestureListener.
+
+    USAGE:
+
+    class App(InputEventListener, GestureListener):
+        def __init__(self):
+            # create input event handler
+            self._input = InputHandler(self)
+
+            # create gesture detector
+            self._gesturedetector = GestureDetector(self)
+
+        def mainLoop(self):
+            # start capture touch event
+            self._input.startEventLoop()
+
+        def onInputEvent(self, e: MotionEvnet):
+            # pass motion event data to gesture detector
+            self._gesturedetector.onTouchEvent(e)
+
+        def onFling(self, e1: MotionEvent,  e2: MotionEvent, scrollX, scrollY):
+            # handling swipe event
+
+        def onLongPress(self e: MotionEvent):
+            # handling long press event
+
+
+    # start application
+    app = App()
+    app.mainLoop()
+    
+    """
+
+    def __init__(self, listener: GestureListener, longpress_timeout = LONG_PRESS_TIMEOUT):
+        """
+        Parameters
+        ------------
+        listener: GestureListener
+            callback
+
+        longpress_timeout: number
+            if user keep touch-down and does not move position over this time(seconds), fire long press event.
+        """
         self._gestureListener = listener
         self._lastX = 0
         self._lastY = 0
@@ -35,6 +101,7 @@ class GestureDetector():
         self._inTapRegion = False
         self._downMotion = None
         self._longpressTimer = None
+        self._longpress_timeout = longpress_timeout
 
     def _cancel(self):
         self._lastX = 0
@@ -49,6 +116,14 @@ class GestureDetector():
         self._longpressTimer = None
 
     def onTouchEvent(self, e: MotionEvent):
+        """
+        please pass MotionEvent to this method. when determin gesture, fire target event via GestureListener.
+
+        Parameters
+        ------------
+        e : MotionEvent
+            motion event data that you can get from InputHandler class.
+        """
         x = e.x
         y = e.y
 
@@ -65,7 +140,7 @@ class GestureDetector():
             if self._longpressTimer is not None:
                 self._longpressTimer.cancel()
 
-            self._longpressTimer = Timer(LONG_PRESS_TIMEOUT, self._dispathLongPress)
+            self._longpressTimer = Timer(self._longpress_timeout, self._dispathLongPress)
             self._longpressTimer.start()
 
         elif e.action == VALUE_MOVE and self._downMotion is not None:

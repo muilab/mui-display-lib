@@ -21,7 +21,7 @@ ABS_X = 0x00    # event code Axis X
 ABS_Y = 0x01    # event code Axis Y
 
 
-class MotionEvent():
+class MotionEvent(object):
     """
     Touch event class
 
@@ -90,7 +90,7 @@ class MotionEvent():
         self._y = y
         
 
-class InputEventListener():
+class InputEventListener(object):
     """
     Interface definition class for a callback to be invoked when a touch event will occur.
     If you want to receive touch event, please override onInputEvent method.
@@ -107,16 +107,54 @@ class InputEventListener():
         raise NotImplementedError
 
 
-class InputHandler():
+class InputHandler(object):
+    """
+    InputHandler is handling touch event.
 
-    def __init__(self, listener:InputEventListener):
+    Examples
+    --------
+    from mui_ui import InputHandler, InputEventListener
+
+    class App(InputEventListener):
+        def __init__(self):
+            # create input event handler
+            self._input = InputHandler(self)
+
+        def mainLoop(self):
+            # start capture touch event
+            self._input.startEventLoop()
+
+        def onInputEvent(self, e: MotionEvnet):
+            # handling motion event. for instance, pass to UI(dispatchTouchEvent())
+
+
+    # start application
+    app = App()
+    app.mainLoop()
+
+    See Also
+    --------
+    InputEventListener
+    MotionEvent
+    """
+
+    def __init__(self, listener:InputEventListener, target_device='Atmel maXTouch Touchscreen'):
+        """
+        Parameters
+        ------------
+        listener : InputEventListener
+            callback
+
+        target_device : str
+            touch device name(DO NOT NEED CHANGE)
+        """
         self.motionEvent = None
         self.inputEventListener = listener
 
         # get mui touch panel
         devices = [InputDevice(path) for path in list_devices()]
         for device in devices:
-            if device.name == 'Atmel maXTouch Touchscreen':
+            if device.name == target_device:
                 print(device)
                 self.device = device
     

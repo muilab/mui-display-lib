@@ -16,11 +16,24 @@ dir = os.path.dirname(os.path.abspath(__file__))
 
 
 class KeyboardListener(object):
+    """
+    keyboard event callback.
+    please set this class to Keyboard instance and implement method for handling keyboard events.
+    """
 
     def onInput(self, char:str):
+        """
+        Parameters
+        ------------
+        char : str
+            user touched character
+        """
         pass
 
     def onDelete(self):
+        """
+        this method invoked when user touch [del] button
+        """
         pass
 
     def onForward(self):
@@ -49,7 +62,60 @@ MODE_NUMRIC = 0
 MODE_ALPHABET = 1
 MODE_ALPHABET_UPPER = 2
 
-class Keyboard(Widget):
+class Keyboard(Widget):    
+    """
+    Keyboard widget
+    if you want to use keyboard on mui, please add this widget to application.
+
+    Notes
+    -----
+    this widget is NOT IME and ASCII only.
+
+    Examples
+    -----
+    from mui_ui import AbsApp, AppEventListener, Text, Keyboard, KeyboardListener
+
+    class App(AbsApp, KeyboardListener, OnTouchEventListener, OnUpdateRequestListener):
+
+        def __init__(self, appEventListener: AppEventListener):
+            super().__init__(appEventListener)
+            # create keyboard
+            keyboard = Keyboard(listener=self)
+            keyboard.setPos(0, 11) # set position x : 0, y : 11
+            keyboard.addOnUpdateViewListener(self) # add update view listener
+
+            # create text view
+            input_text = Text('')
+            input_text.setSize(0, 0, 100, 11) # set to above keyboard
+            self.addView(input_text)
+            self.setView(input_text, 'input_text)
+                        
+        def onUpdateView(self, view):
+            # update request
+            self.updateRequest(0)
+
+        def onInput(self, char):
+            # this method is callback of KeyboardListener
+            # if user touch character on keyboard, invoked this method.
+            self.getView('input_text').addText(char)
+
+            # update UI
+            self.updateRequest(0)
+
+        def onDelete(self):
+            # this method is callback of KeyboardListener
+            # if user touch [del] button on keyboard, invoked this method.
+
+            self.getView('input_text').deleteLastChar()
+
+            # update UI
+            self.updateRequest(0)
+        
+    See Also
+    --------
+    KeyboardListener
+    
+    """
 
     def __init__(self, name='keyboard', listener: KeyboardListener=None):
         super().__init__(151, 19, name)
@@ -87,6 +153,10 @@ class Keyboard(Widget):
         self.mode = MODE_NUMRIC
         self.current_top_line = 0
         self._keyboardListener = listener
+
+
+    def setPos(self, x, y):
+        self.setSize(x, y, self.width, self.height)
 
     def addEventListener(self, listener: KeyboardListener):
         self._keyboardListener = listener

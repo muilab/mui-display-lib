@@ -10,7 +10,20 @@ except ImportError:
     from . import Text, Border, TextAlignment
 
 class AutoScrollText(Text):
-    
+    """
+    AutoScroll Text
+
+
+    this class inherit Text view.
+    if text length is too long according to view size, when text is full on view area, start auto scroll and show left text.
+
+
+    See Also
+    --------
+    Text
+    TypeWriterEventListener
+    """
+
     def __init__(self, text:str=None, border:Border=Border.NONE, name='auto scroll textview'):
         super().__init__(text, border, name)
         self._srcText = self._text
@@ -37,7 +50,6 @@ class AutoScrollText(Text):
         self._scrolling = True
         l = self.OnUpdateRequestListener
         if l is None:
-            print('---- listener is null ---')
             return
 
         org_y = self.y

@@ -11,20 +11,45 @@ except ImportError:
 
 
 class TypeWriterEventListener(object):
+    """
+    callback for TypeWirterText view events
+    """
 
     def onTypeFinished(self):
+        """
+        callback to be invoked when finished text type effect.
+        """
         pass
 
     def onScrollStart(self):
+        """
+        callback to be invoked when start scroll text.
+        """
         pass
 
     def onScrollFinished(self):
+        """
+        callback to be invoked when finish scroll text.
+        """
         pass
 
 
 class TypeWriterText(Text):
+    """
+    TypeWriter Text
 
-    def __init__(self, text:str=None, border:Border=Border.NONE, name='auto scroll textview'):
+
+    this class inherit Text view and add effect like a TypeWriter for UI drawing.
+    if text length is too long according to view size, when text is full on view area, start auto scroll and show left text.
+
+
+    See Also
+    --------
+    Text
+    TypeWriterEventListener
+    """
+
+    def __init__(self, text:str=None, border:Border=Border.NONE, name='typewriter textview'):
         super().__init__(text, border, name)
         self._srcText = text
         self._orgText = text

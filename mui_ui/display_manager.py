@@ -22,6 +22,15 @@ class DisplayEventListener(metaclass=ABCMeta):
 
 
 class DisplayManager(object):
+    """
+    DisplayManager class is manage display state(on/off) and notify time for turn off display.
+
+    At default setting, you will recevie callback(DisplayEventListener.onDissmissTime()) 
+    after 15 seconds from called startDismissTimer().
+
+    If you return True to onDismissTime(), DisplayManager call DisplayEventListener.onDismiss(), so please instruct Display class to turn off.
+    If you return False when onDismissTime(), this class restart timer and call callback after 15 seconds. 
+    """
 
     _instance = None
 
@@ -33,6 +42,14 @@ class DisplayManager(object):
         return cls._instance
 
     def __init__(self, listener: DisplayEventListener, time_to_dismiss:float=15):
+        """
+        Parameters
+        ------------
+        listener : DisplayEventListener
+            callback
+        time_to_dismiss : float
+            time to turn off display. default is 15 seconds.
+        """
         if listener is None:
             raise ValueError("listener must be set")
 
