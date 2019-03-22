@@ -1,5 +1,6 @@
-# mui ui text view class
 # -*- coding: utf-8 -*-
+
+# mui ui text view class
 
 import time
 from enum import Enum
@@ -27,6 +28,79 @@ class TextAlignment(Enum):
 
 
 class Text(AbsParts):
+    """
+    Text View
+
+    this view convert text to Matrix data for mui UI drawing.
+    when convert text, this view use the mui font.
+
+    Examples
+    ---------
+    from mui_ui import Text, Border, TextAlignment, Widget, Display
+
+    # create text view
+    text = Text('hello world')
+    text.setSize(0, 0, 100, 8) # set size and position. (x : 0, y : 0, width : 100, height : 8)
+
+    # create UI base, full screen size
+    ui = Widget(200, 32)
+
+    # add text view to UI
+    ui.addParts(text)
+
+    # connect to display
+    display = Display()
+
+    # update UI
+    def updateDisplay():
+        # set layout to display
+        display.setLayout(ui.getMatrix())
+        display.updateLayout()
+
+        # update display
+        display.refreshDisplay()
+
+    updateDisplay()
+
+    # change text
+    text.setText('hello ')
+
+    # add Border to bottom of text
+    text.setSize(0, 0, 100, 9) # please add 1dot for bottom border line.
+    text.setBorder(Border.BOTTOM)
+    updateDisplay()
+
+    # text alignment to right
+    text.setTextAlignment(TextAlignment.RIGHT)
+    updateDisplay()
+
+    # add text
+    text.addText('mui')
+    updateDisplay()
+
+    # delte last char
+    text.deleteLastChar()
+    updateDisplay()
+
+
+    Notes
+    ------
+    minimum height is 8dots. 
+    if you'd like to set Border, please add 1 dot to height when use Border.BOTTOM and 
+    add 4 dot both width and height when use Border.AROUND
+
+    if you'd like to not replace all text but add text, you have to use addText() instead of setText().
+    Because addText() is load matrix data of added text only, so it faster than use setText().
+
+    text to be line fold automatically if it will over view area. but does not consider about hyphenation.
+
+    See Also
+    --------
+    Border
+    TextAlignment
+    MuiFont
+
+    """
 
     def __init__(self, text:str=None, border:Border=Border.NONE, name='textview'):
         super().__init__(name)
@@ -56,7 +130,6 @@ class Text(AbsParts):
         self._oldOrgXOffset = 0
         self._text_index = 0
         self._oldContent = None
-
 
     def addText(self, text: str):
         if self._text is None:

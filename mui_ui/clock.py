@@ -19,8 +19,35 @@ except ImportError:
 
 
 class DigitalClock(Widget):
+    """
+    Digital Clock Widget
+    please use as a part of your application.
+
+    Examples
+    ---------
+    
+    # create clock
+    clock = DigitalClock(timezone=timezone) # please set YOUR Timezone
+    clock.setPos(10, 0) # x=10, y=0
+    clock.addOnUpdateViewListener(listener)
+
+    # start tick
+    clock.startTick()
+
+    # stop tick
+    # note : when application that set-up clock is invisible or display turn off, please call this API.
+    #        because ticker thread require update UI from background every seconds, 
+    #        so unnecessary update event occurs and may make bad effect to update performance.
+    clock.stopTick()
+    """
 
     def __init__(self, name='digital clock', timezone:timezone=None):
+        """
+        Parameters
+        ------------
+        name : str
+        timezone : timezone         
+        """
         super().__init__(30, 10, name)
 
         hour = Text('00')
@@ -49,22 +76,31 @@ class DigitalClock(Widget):
         self._timezone = timezone
 
     def startTick(self):
+        """
+        start clock update
+        """
         task = Thread(target= self.updateClock)
         self._doTask = True
         task.start()
 
-    def setSize(self, x, y, w, h):
-        super().setSize(x, y, w, h)
+    def setPos(self, x, y):
+        """
+        set view position
 
-        if hasattr(self, '_views'):
-            hour = self._views.get('h')
-            if hour is not None:   
-                print(hour.x, hour.y)
-
+        Parameters
+        ----------
+        x : int
+            x position
+        y : int
+            y position
+        """
+        self.setSize(x, y, self.width, self.height)
 
     def stopTick(self):
+        """
+        stop clock update
+        """
         self._doTask = False
-
 
     def updateClock(self):        
         while self._doTask:

@@ -14,13 +14,72 @@ import os
 dir = os.path.dirname(os.path.abspath(__file__))
 
 
-class SliderEventListener:
+class SliderEventListener(object):
+    """
+    slider event callback.
+    please set this class to Slider instance and implement method for handling change slider value.
+    """
 
     def onSliderValueChanged(self, slider, prevVal, newVal):
+        """
+        callback method when invoked user touch or slide thumb control on Slider.
+
+        Parameters
+        -----------
+        slider : Slider
+            Slider which changed value
+        prevVal : int
+            value before change
+        newVal : int
+            value after change
+        """
         pass
 
 
 class Slider(Widget):
+    """
+    Slider is widget for user select value between 0 and maxVal(that you applied).
+
+    Examples
+    ---------
+    from mui_ui import AbsApp, AppEventListener, Text, Slider, SliderEventListener
+
+    class App(AbsApp, SliderEventListener, OnTouchEventListener, OnUpdateRequestListener):
+
+        def __init__(self, appEventListener: AppEventListener):
+            super().__init__(appEventListener)
+            # create slider. set width and max value to 100.
+            slider = Slider(width=50, maxVal=100) 
+            slider.setPos(0, 11) # set position x : 0, y : 11
+            slider.addOnUpdateViewListener(self) # add update view listener
+            slider.setValue(50) # set initial value
+            slider.addEventListener(self) # set callback for change value
+
+            # create text view
+            input_text = Text('')
+            input_text.setSize(0, 0, 100, 11)
+            self.addView(input_text)
+            self.setView(input_text, 'input_text)
+                        
+        def onUpdateView(self, view):
+            # update request
+            self.updateRequest(0)
+
+        def onSliderValueChanged(self, slider, prevVal, newVal):
+            # this method is callback of SliderEventListener
+            # if user touch or slide thumb control on slider, invoked this method.
+
+            self.getView('input_text').setText(str(newVal))
+
+            # update UI
+            self.updateRequest(0)
+
+    See Also
+    --------
+    SliderEventListener
+
+    """
+
     def __init__(self, width, maxVal, name='slider'):
         super().__init__(width=width, height=11, name=name)
 
@@ -51,6 +110,9 @@ class Slider(Widget):
 
         self._sliderListener = None
 
+
+    def setPos(self, x, y):
+        self.setSize(x, y, self.width, self.height)
 
     def addEventListener(self, listener: SliderEventListener):
         self._sliderListener = listener

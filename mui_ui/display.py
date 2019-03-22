@@ -1,3 +1,5 @@
+# -*- coding: utf-8 -*-
+
 # display class
 
 import crc8
@@ -62,25 +64,70 @@ class Display(object):
         reset_display()
 
     def setDuty(self, duty):
+        """
+        change display brightness
+
+        Parameters
+        ------------
+        duty : int
+            display brightness level(1 - 100)
+        """
         self._duty = duty
 
     def turnOn(self, fade):
+        """
+        turn on display
+
+        Parameters
+        ------------
+        fade : int
+            set fade-in effect level(0 - 4 : 0 is do not fade-in)
+        """
         return self._createDisplayReqCommand(0, fade, self._duty)
 
     def turnOff(self, fade):
+        """
+        turn off display
+
+        Parameters
+        -----------
+        fade : int
+            set fade-out effect level(0 - 4 : 0 is do not fade-out)
+        """
         return self._createDisplayReqCommand(2, fade, 0)
 
     def setLayout(self, matrixInfo):
+        """
+        set layout for draw display. this API do not update display but update internal data of this class. 
+        please mind do not update display until call updateLayout() and refreshDisplay().
+
+        Parameters
+        -----------
+        matrixInfo : Matrix
+            ui layout data
+        """
         self.ledMatrix.matrix = matrixInfo.matrix
 
     def updateLayout(self):
+        """
+        update layout for draw display. this API send layout data to display.
+        you have to call refreshDisplay() after this API for update.
+        """
         self._createLayoutCommandForDiff()
          # store current layout info
         self.ledMatrixBuf.copy(self.ledMatrix)
 
-    def refreshDisplay(self, fade, duty=100):
+    def refreshDisplay(self, fade=0, duty=100):
+        """
+        update display by set layout data via setLayout() and updateLayout().
+
+        Parameters
+        ------------
+        fade : deprecated. please use turnOn() and turnOff().
+        duty : deprecated. please use setDuty().
+        """
         rdly = self.port.read(self.port.in_waiting)
-        return self._createDisplayReqCommand(1, fade, self._duty)
+        return self._createDisplayReqCommand(1, 0, self._duty)
 
     def _writePacket(self, packet):
         self.mutex.acquire()
@@ -118,11 +165,17 @@ class Display(object):
         
 
     def clearDisplay(self):
+        """
+        clear display.
+        """
         self.ledMatrix = Matrix(200, 32) # clear
         self._updateLayoutForce(0)
         self.refreshDisplay(0)
 
     def getVersion(self):
+        """
+        get firmware version
+        """
         version = 0
         packet = self._createGetVersionCommand()
         if packet == None:
@@ -138,6 +191,9 @@ class Display(object):
         return version
 
     def getMuiID(self):
+        """
+        get mui ID.
+        """
         packet = self._createGetMuiIDCommand()
         if packet == None:
             return
@@ -153,6 +209,9 @@ class Display(object):
         return muiId
 
     def getPanelStatus(self):
+        """
+        get display status(include error).
+        """
         packet = self._createGetPanelStatus()
         if packet == None:
             return

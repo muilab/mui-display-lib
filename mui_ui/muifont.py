@@ -1,5 +1,6 @@
-# mui font class
 # -*- coding: utf-8 -*-
+
+# mui font class
 
 from PIL import Image
 import csv
@@ -26,6 +27,12 @@ except ImportError:
 class MuiFont:
     """
     font class for mui
+
+    mui has a original Bitmap font. when you use Text view, automatically used this font.
+
+    Notes
+    -----
+    mui font supports ASCII and Japanese(第二水準の漢字まで), at this moment. 
     """
 
     _instance = None

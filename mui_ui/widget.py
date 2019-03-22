@@ -30,6 +30,9 @@ class Widget(AbsParts):
         parts.y = self.y + parts.y
         self._partsList.append(parts)
 
+    def setPos(self, x, y):
+        self.setSize(x, y, self.width, self.height)
+
     def setSize(self, x, y, width, height):
         diffX = x - self._x
         diffY = y - self._y
@@ -53,16 +56,6 @@ class Widget(AbsParts):
 
 
     def getMatrix(self):
-
-        # s = time.time()
-        # if self._isChange is False:
-        #     return self.m
-        # else:
-        #     self.m = Matrix(self.width, self.height)
-        #     self.m.startX = self.x
-        #     self.m.startY = self.y
-
-        # m = self.m
         m = Matrix(self.width, self.height)
         m.startX = self.x
         m.startY = self.y
@@ -72,8 +65,5 @@ class Widget(AbsParts):
             if p.visible == True:
                 m.merge(p.getMatrix())
 
-
-        # e = time.time()
-        # print('*** merge ', (e - s))
         self._isChange = False
         return m
