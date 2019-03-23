@@ -11,8 +11,8 @@ Samples:
   `samples`_
 
 license:
-  `Apatch 2.0`_
+  `Apache 2.0`_
 
 .. _mui for developers: https://www.kickstarter.com/projects/1391686171/mui-interactive-wood-panel-for-peaceful-digital-li
 .. _samples: /sample
-.. _Apatch 2.0: ./LICENSE
+.. _Apache 2.0: ./LICENSE
