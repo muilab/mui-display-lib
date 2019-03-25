@@ -192,6 +192,7 @@ class WiFiSetting(AbsApp, OnTouchEventListener, OnUpdateRequestListener, Keyboar
 
         createCurrentSettingPanel()
         createInputSSIDPanel()
+        createSelectSecurityTypePanel()
         createSecurityKeyInputPanel()
         createConfirmDialog()
 
@@ -478,6 +479,5 @@ class WiFiSetting(AbsApp, OnTouchEventListener, OnUpdateRequestListener, Keyboar
         return self._network.get_wifi_ssid()
 
     def _do_reboot(self):
-        reset_display()
         sb = subprocess.Popen(['reboot'], stdout=subprocess.PIPE)
         
