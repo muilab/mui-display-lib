@@ -146,6 +146,8 @@ class DummyWeatherApp(AbsApp):
             # prev
             self.setNextApp(self._prev)
 
+        return True
+
     def dispathLongPressEvent(self, e):
         pass    
 
@@ -221,6 +223,8 @@ class DummyThermoApp(AbsApp):
         elif e1.x < e2.x:
             # prev
             self.setNextApp(self._prev)
+
+        return True
 
     def dispathLongPressEvent(self, e):
         pass    
@@ -334,7 +338,7 @@ class HomeApp(AbsApp, OnUpdateRequestListener, OnTouchEventListener):
         self.getView('clock').stopTick()
 
     def dispatchFlingEvent(self, e1, e2, x, y):
-        pass
+        return False
 
     def dispathLongPressEvent(self, e):
         pass    
@@ -431,14 +435,18 @@ class MuiMain(InputEventListener, GestureListener, AppEventListener, DisplayEven
 
     def onInputEvent(self, e: MotionEvent):
         if self.display_manager.on is False:
-            self.display_manager.on = True
-            self.updateUI(fade=2, turn_on=True)
-
-        # dispath touch event to current application
-        self.app.dispatchTouchEvent(e)
+            if e.action == 0:
+                self.display_manager.on = True
+                self.updateUI(fade=2, turn_on=True)
+                self.display_manager.startDismissTimer()
+            return
 
         # pass to gesture detector
-        self.gesture_detector.onTouchEvent(e)
+        handle = self.gesture_detector.onTouchEvent(e)
+
+        # dispath touch event to current application
+        if handle is False:
+            self.app.dispatchTouchEvent(e)
 
         # reset display turn off timer
         self.display_manager.startDismissTimer()
@@ -493,7 +501,7 @@ class MuiMain(InputEventListener, GestureListener, AppEventListener, DisplayEven
 
     def onFling(self, e1: MotionEvent, e2: MotionEvent, x, y):
         # swipe event occured, pass to current application
-        self.app.dispatchFlingEvent(e1, e2, x, y)
+        return self.app.dispatchFlingEvent(e1, e2, x, y)
 
     def onLongPress(self, e: MotionEvent):
         # long press event occured, pass to current application

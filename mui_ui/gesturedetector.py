@@ -15,10 +15,10 @@ LONG_PRESS_TIMEOUT = 3 # sec
 
 class GestureListener(object):
 
-    def onScroll(self, e1: MotionEvent,  e2: MotionEvent, scrollX, scrollY):
-        pass
+    def onScroll(self, e1: MotionEvent,  e2: MotionEvent, scrollX, scrollY) -> bool:
+        return False
 
-    def onFling(self, e1: MotionEvent,  e2: MotionEvent, velocityX, velocityY):
+    def onFling(self, e1: MotionEvent,  e2: MotionEvent, velocityX, velocityY) -> bool:
         """
         this method invoked when swipe event occured.
 
@@ -33,7 +33,7 @@ class GestureListener(object):
         velocityY : int
             distance between e1.y and e2.y
         """
-        pass
+        return False
 
     def onLongPress(self, e: MotionEvent):
         """
@@ -124,6 +124,7 @@ class GestureDetector(object):
         e : MotionEvent
             motion event data that you can get from InputHandler class.
         """
+        handle = False
         x = e.x
         y = e.y
 
@@ -151,7 +152,7 @@ class GestureDetector(object):
                 deltaY = y - self._lastY
                 distance = (deltaX * deltaX) + (deltaY * deltaY)
                 if distance > SLOP_SQUARE:
-                    self._gestureListener.onScroll(self._downMotion, e, scrollX, scrollY)
+                    handle = self._gestureListener.onScroll(self._downMotion, e, scrollX, scrollY)
                     self._lastFocusX = x
                     self._lastFocusY = y
                     self._inTapRegion = False
@@ -167,13 +168,16 @@ class GestureDetector(object):
             velX = (deltaX / deltaT) * 1000
             velY = (deltaY / deltaT) * 1000
             if (velX > MINIMUM_FLING_VELOCITY) or (velY > MINIMUM_FLING_VELOCITY):
-                self._gestureListener.onFling(self._downMotion, e, velX, velY)
+                handle = self._gestureListener.onFling(self._downMotion, e, velX, velY)
+                self._cancel()
 
             if self._longpressTimer is not None:
                 self._longpressTimer.cancel()
 
         else:
             self._cancel()
+
+        return handle
 
     def _dispathLongPress(self):
         self._gestureListener.onLongPress(self._downMotion)

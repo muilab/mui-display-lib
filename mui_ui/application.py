@@ -184,13 +184,13 @@ class AbsApp(metaclass=ABCMeta):
 
         return False
 
-    def dispatchScrollEvent(self, start_event: MotionEvent, end_event: MotionEvent, scrollX, scrollY):
+    def dispatchScrollEvent(self, start_event: MotionEvent, end_event: MotionEvent, scrollX, scrollY) -> bool:
         """
         dispath scroll event
         """
-        pass
+        return False
 
-    def dispathFlingEvent(self,  start_event: MotionEvent, end_event: MotionEvent, velocityX, velocityY):
+    def dispathFlingEvent(self,  start_event: MotionEvent, end_event: MotionEvent, velocityX, velocityY) -> bool:
         """
         dispath swipe event.
         if you want to take any action when swipe event occured, please override this method and implements action.
@@ -210,7 +210,7 @@ class AbsApp(metaclass=ABCMeta):
         --------
         GestureDetector
         """
-        pass
+        return False
 
     def dispathLongPressEvent(self, event: MotionEvent):
         """

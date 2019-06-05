@@ -73,11 +73,13 @@ class SimpleApplication(AbsApp, InputEventListener, OnTouchEventListener, Gestur
                 self.display.turnOn(fade)
 
     def onInputEvent(self, e: MotionEvent):
-        # dispatch touch event to all views
-        self.dispatchTouchEvent(e)
-
         # determin gesture
-        self._gestureDetector.onTouchEvent(e)
+        handle = self._gestureDetector.onTouchEvent(e)
+
+        # dispatch touch event to all views
+        if handle is False:
+            self.dispatchTouchEvent(e)
+
 
     def onTouch(self, view, e: MotionEvent):
         # handling touch events
@@ -89,6 +91,7 @@ class SimpleApplication(AbsApp, InputEventListener, OnTouchEventListener, Gestur
     def onFling(self, e1: MotionEvent,  e2: MotionEvent, x, y):
         # handling swipe event
         print('*** swipe ***')
+        return False
 
 
 
