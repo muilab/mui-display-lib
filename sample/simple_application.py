@@ -24,6 +24,10 @@ class SimpleApplication(AbsApp, InputEventListener, OnTouchEventListener, Gestur
         # you can choice LED brightness(1 - 100)
         self.display.setDuty(100)
 
+        # clear and turn on display
+        self.display.clearDisplay()
+        self.display.turnOn(0)
+
         # connect to mui touchpanel(and set InputEventListener)
         self.input = InputHandler(self)
 

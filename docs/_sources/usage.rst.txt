@@ -149,14 +149,21 @@ single UI appliation
 
     class SimpleApplication(AbsApp, InputEventListener, OnTouchEventListener, GestureListener):
 
-        def __init__(self, parameter_list):
+        def __init__(self):
             super().__init__(None)
+
+            # set counter to count up touch
+            self.counter = 0
 
             # connect to mui display
             self.display = Display()
 
             # you can choice LED brightness(1 - 100)
             self.display.setDuty(100)
+
+            # clear and turn on display
+            self.display.clearDisplay()
+            self.display.turnOn(0)
 
             # connect to mui touchpanel(and set InputEventListener)
             self.input = InputHandler(self)
@@ -169,7 +176,7 @@ single UI appliation
             text.setSize(0, 0, 100, 32) # set position and size (x, y, width, height)
             self.addView(text) # add view to this application
             self.setView(text, 'text') # set view with reference key. when you'd like to access this view, you can get this view via self.getView('key')
-            self.addOnTouchViewListener(self) # set callback method(onTouch()) to catch touch event. 
+            text.addOnTouchViewListener(self) # set callback method(onTouch()) to catch touch event. 
 
 
         def mainLoop(self):
@@ -211,7 +218,10 @@ single UI appliation
 
         def onTouch(self, view, e: MotionEvent):
             # handling touch events
-            pass
+            self.counter += 1
+            text = self.getView("text")
+            text.setText("touch %d" % self.counter)
+            self.updateUI()
 
         def onFling(self, e1: MotionEvent,  e2: MotionEvent, x, y):
             # handling swipe event

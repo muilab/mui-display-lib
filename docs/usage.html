@@ -298,14 +298,21 @@
 
 <span class="k">class</span> <span class="nc">SimpleApplication</span><span class="p">(</span><span class="n">AbsApp</span><span class="p">,</span> <span class="n">InputEventListener</span><span class="p">,</span> <span class="n">OnTouchEventListener</span><span class="p">,</span> <span class="n">GestureListener</span><span class="p">):</span>
 
-    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">parameter_list</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="kc">None</span><span class="p">)</span>
+
+        <span class="c1"># set counter to count up touch</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">counter</span> <span class="o">=</span> <span class="mi">0</span>
 
         <span class="c1"># connect to mui display</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">display</span> <span class="o">=</span> <span class="n">Display</span><span class="p">()</span>
 
         <span class="c1"># you can choice LED brightness(1 - 100)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">display</span><span class="o">.</span><span class="n">setDuty</span><span class="p">(</span><span class="mi">100</span><span class="p">)</span>
+
+        <span class="c1"># clear and turn on display</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">display</span><span class="o">.</span><span class="n">clearDisplay</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">display</span><span class="o">.</span><span class="n">turnOn</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
 
         <span class="c1"># connect to mui touchpanel(and set InputEventListener)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">input</span> <span class="o">=</span> <span class="n">InputHandler</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
@@ -318,7 +325,7 @@
         <span class="n">text</span><span class="o">.</span><span class="n">setSize</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="mi">32</span><span class="p">)</span> <span class="c1"># set position and size (x, y, width, height)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">addView</span><span class="p">(</span><span class="n">text</span><span class="p">)</span> <span class="c1"># add view to this application</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">setView</span><span class="p">(</span><span class="n">text</span><span class="p">,</span> <span class="s1">&#39;text&#39;</span><span class="p">)</span> <span class="c1"># set view with reference key. when you&#39;d like to access this view, you can get this view via self.getView(&#39;key&#39;)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">addOnTouchViewListener</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="c1"># set callback method(onTouch()) to catch touch event.</span>
+        <span class="n">text</span><span class="o">.</span><span class="n">addOnTouchViewListener</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="c1"># set callback method(onTouch()) to catch touch event.</span>
 
 
     <span class="k">def</span> <span class="nf">mainLoop</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
@@ -360,7 +367,10 @@
 
     <span class="k">def</span> <span class="nf">onTouch</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">view</span><span class="p">,</span> <span class="n">e</span><span class="p">:</span> <span class="n">MotionEvent</span><span class="p">):</span>
         <span class="c1"># handling touch events</span>
-        <span class="k">pass</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">counter</span> <span class="o">+=</span> <span class="mi">1</span>
+        <span class="n">text</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">getView</span><span class="p">(</span><span class="s2">&quot;text&quot;</span><span class="p">)</span>
+        <span class="n">text</span><span class="o">.</span><span class="n">setText</span><span class="p">(</span><span class="s2">&quot;touch </span><span class="si">%d</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">counter</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">updateUI</span><span class="p">()</span>
 
     <span class="k">def</span> <span class="nf">onFling</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">e1</span><span class="p">:</span> <span class="n">MotionEvent</span><span class="p">,</span>  <span class="n">e2</span><span class="p">:</span> <span class="n">MotionEvent</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span>
         <span class="c1"># handling swipe event</span>

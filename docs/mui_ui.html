@@ -161,46 +161,42 @@
 <span id="mui-ui-app-message-module"></span><h2>mui_ui.app_message module<a class="headerlink" href="#module-mui_ui.app_message" title="Permalink to this headline">¶</a></h2>
 <dl class="class">
 <dt id="mui_ui.app_message.Message">
-<em class="property">class </em><code class="descclassname">mui_ui.app_message.</code><code class="descname">Message</code><span class="sig-paren">(</span><em>appEventListener: application.AppEventListener</em><span class="sig-paren">)</span><a class="headerlink" href="#mui_ui.app_message.Message" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-prename descclassname">mui_ui.app_message.</code><code class="sig-name descname">Message</code><span class="sig-paren">(</span><em class="sig-param">appEventListener: application.AppEventListener</em><span class="sig-paren">)</span><a class="headerlink" href="#mui_ui.app_message.Message" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">application.AbsApp</span></code>, <code class="xref py py-class docutils literal notranslate"><span class="pre">parts.OnTouchEventListener</span></code></p>
 <dl class="method">
 <dt id="mui_ui.app_message.Message.onTouch">
-<code class="descname">onTouch</code><span class="sig-paren">(</span><em>view</em>, <em>e</em><span class="sig-paren">)</span><a class="headerlink" href="#mui_ui.app_message.Message.onTouch" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">onTouch</code><span class="sig-paren">(</span><em class="sig-param">view</em>, <em class="sig-param">e</em><span class="sig-paren">)</span><a class="headerlink" href="#mui_ui.app_message.Message.onTouch" title="Permalink to this definition">¶</a></dt>
 <dd><p>callback method to be invoked when a touched target view.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
-<li><strong>view</strong> (<a class="reference internal" href="#mui_ui.parts.AbsParts" title="mui_ui.parts.AbsParts"><em>AbsParts</em></a>) – target view instance</li>
-<li><strong>e</strong> (<em>Motionevent</em>) – motion event</li>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>view</strong> (<a class="reference internal" href="#mui_ui.parts.AbsParts" title="mui_ui.parts.AbsParts"><em>AbsParts</em></a>) – target view instance</p></li>
+<li><p><strong>e</strong> (<em>Motionevent</em>) – motion event</p></li>
 </ul>
-</td>
-</tr>
-</tbody>
-</table>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="method">
 <dt id="mui_ui.app_message.Message.setMessage">
-<code class="descname">setMessage</code><span class="sig-paren">(</span><em>msg: str</em><span class="sig-paren">)</span><a class="headerlink" href="#mui_ui.app_message.Message.setMessage" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">setMessage</code><span class="sig-paren">(</span><em class="sig-param">msg: str</em><span class="sig-paren">)</span><a class="headerlink" href="#mui_ui.app_message.Message.setMessage" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="method">
 <dt id="mui_ui.app_message.Message.showMessage">
-<code class="descname">showMessage</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mui_ui.app_message.Message.showMessage" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">showMessage</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mui_ui.app_message.Message.showMessage" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="method">
 <dt id="mui_ui.app_message.Message.startTask">
-<code class="descname">startTask</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mui_ui.app_message.Message.startTask" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">startTask</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mui_ui.app_message.Message.startTask" title="Permalink to this definition">¶</a></dt>
 <dd><p>if application has a task to start when application become front of UI(such as API call for get weather information),
 please start here that tasks.</p>
 </dd></dl>
 
 <dl class="method">
 <dt id="mui_ui.app_message.Message.stopTask">
-<code class="descname">stopTask</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mui_ui.app_message.Message.stopTask" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">stopTask</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mui_ui.app_message.Message.stopTask" title="Permalink to this definition">¶</a></dt>
 <dd><p>if application has a task what running background,
 please stop all tasks here.</p>
 </dd></dl>
@@ -212,18 +208,18 @@ please stop all tasks here.</p>
 <span id="mui-ui-application-module"></span><h2>mui_ui.application module<a class="headerlink" href="#module-mui_ui.application" title="Permalink to this headline">¶</a></h2>
 <dl class="class">
 <dt id="mui_ui.application.AbsApp">
-<em class="property">class </em><code class="descclassname">mui_ui.application.</code><code class="descname">AbsApp</code><span class="sig-paren">(</span><em>appEventListener: mui_ui.application.AppEventListener</em><span class="sig-paren">)</span><a class="headerlink" href="#mui_ui.application.AbsApp" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-prename descclassname">mui_ui.application.</code><code class="sig-name descname">AbsApp</code><span class="sig-paren">(</span><em class="sig-param">appEventListener: mui_ui.application.AppEventListener</em><span class="sig-paren">)</span><a class="headerlink" href="#mui_ui.application.AbsApp" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
 <p>AbsApp is convinience abstract class for you create custom Applications.</p>
 <p class="rubric">Examples</p>
 <p>please see sample.py</p>
 <div class="admonition seealso">
-<p class="first admonition-title">See also</p>
-<p class="last"><a class="reference internal" href="#mui_ui.application.AppEventListener" title="mui_ui.application.AppEventListener"><code class="xref py py-class docutils literal notranslate"><span class="pre">AppEventListener</span></code></a></p>
+<p class="admonition-title">See also</p>
+<p><a class="reference internal" href="#mui_ui.application.AppEventListener" title="mui_ui.application.AppEventListener"><code class="xref py py-class docutils literal notranslate"><span class="pre">AppEventListener</span></code></a></p>
 </div>
 <dl class="method">
 <dt id="mui_ui.application.AbsApp.addView">
-<code class="descname">addView</code><span class="sig-paren">(</span><em>v: parts.AbsParts</em><span class="sig-paren">)</span><a class="headerlink" href="#mui_ui.application.AbsApp.addView" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">addView</code><span class="sig-paren">(</span><em class="sig-param">v: parts.AbsParts</em><span class="sig-paren">)</span><a class="headerlink" href="#mui_ui.application.AbsApp.addView" title="Permalink to this definition">¶</a></dt>
 <dd><p>add view to this application.
 application get Matrix from all views when called getUI().</p>
 <p class="rubric">Notes</p>
@@ -232,276 +228,236 @@ application get Matrix from all views when called getUI().</p>
 
 <dl class="method">
 <dt id="mui_ui.application.AbsApp.changeDuty">
-<code class="descname">changeDuty</code><span class="sig-paren">(</span><em>duty</em><span class="sig-paren">)</span><a class="headerlink" href="#mui_ui.application.AbsApp.changeDuty" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">changeDuty</code><span class="sig-paren">(</span><em class="sig-param">duty</em><span class="sig-paren">)</span><a class="headerlink" href="#mui_ui.application.AbsApp.changeDuty" title="Permalink to this definition">¶</a></dt>
 <dd><p>change display brightness level</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>duty</strong> (<em>int</em>) – brightness level(1 - 100)</td>
-</tr>
-</tbody>
-</table>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>duty</strong> (<em>int</em>) – brightness level(1 - 100)</p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="method">
 <dt id="mui_ui.application.AbsApp.close">
-<code class="descname">close</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mui_ui.application.AbsApp.close" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">close</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mui_ui.application.AbsApp.close" title="Permalink to this definition">¶</a></dt>
 <dd><p>close this application</p>
 </dd></dl>
 
 <dl class="method">
 <dt id="mui_ui.application.AbsApp.dispatchScrollEvent">
-<code class="descname">dispatchScrollEvent</code><span class="sig-paren">(</span><em>start_event: input.MotionEvent</em>, <em>end_event: input.MotionEvent</em>, <em>scrollX</em>, <em>scrollY</em><span class="sig-paren">)</span><a class="headerlink" href="#mui_ui.application.AbsApp.dispatchScrollEvent" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">dispatchScrollEvent</code><span class="sig-paren">(</span><em class="sig-param">start_event: input.MotionEvent</em>, <em class="sig-param">end_event: input.MotionEvent</em>, <em class="sig-param">scrollX</em>, <em class="sig-param">scrollY</em><span class="sig-paren">)</span><a class="headerlink" href="#mui_ui.application.AbsApp.dispatchScrollEvent" title="Permalink to this definition">¶</a></dt>
 <dd><p>dispath scroll event</p>
 </dd></dl>
 
 <dl class="method">
 <dt id="mui_ui.application.AbsApp.dispatchTouchEvent">
-<code class="descname">dispatchTouchEvent</code><span class="sig-paren">(</span><em>e: input.MotionEvent</em><span class="sig-paren">)</span> &#x2192; bool<a class="headerlink" href="#mui_ui.application.AbsApp.dispatchTouchEvent" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">dispatchTouchEvent</code><span class="sig-paren">(</span><em class="sig-param">e: input.MotionEvent</em><span class="sig-paren">)</span> &#x2192; bool<a class="headerlink" href="#mui_ui.application.AbsApp.dispatchTouchEvent" title="Permalink to this definition">¶</a></dt>
 <dd><p>dispath touch event to views on this application.
 when any view handle touch event, no longer dispath touch event to bottom views.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>e</strong> (<a class="reference internal" href="#mui_ui.input.MotionEvent" title="mui_ui.input.MotionEvent"><em>MotionEvent</em></a>) – </td>
-</tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">True means any view handled touch event.</td>
-</tr>
-<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">bool</td>
-</tr>
-</tbody>
-</table>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>e</strong> (<a class="reference internal" href="#mui_ui.input.MotionEvent" title="mui_ui.input.MotionEvent"><em>MotionEvent</em></a>) – </p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>True means any view handled touch event.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>bool</p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="method">
 <dt id="mui_ui.application.AbsApp.dispathFlingEvent">
-<code class="descname">dispathFlingEvent</code><span class="sig-paren">(</span><em>start_event: input.MotionEvent</em>, <em>end_event: input.MotionEvent</em>, <em>velocityX</em>, <em>velocityY</em><span class="sig-paren">)</span><a class="headerlink" href="#mui_ui.application.AbsApp.dispathFlingEvent" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">dispathFlingEvent</code><span class="sig-paren">(</span><em class="sig-param">start_event: input.MotionEvent</em>, <em class="sig-param">end_event: input.MotionEvent</em>, <em class="sig-param">velocityX</em>, <em class="sig-param">velocityY</em><span class="sig-paren">)</span><a class="headerlink" href="#mui_ui.application.AbsApp.dispathFlingEvent" title="Permalink to this definition">¶</a></dt>
 <dd><p>dispath swipe event.
 if you want to take any action when swipe event occured, please override this method and implements action.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
-<li><strong>start_event</strong> (<a class="reference internal" href="#mui_ui.input.MotionEvent" title="mui_ui.input.MotionEvent"><em>MotionEvent</em></a>) – touch event information which start fling action</li>
-<li><strong>end_event</strong> (<a class="reference internal" href="#mui_ui.input.MotionEvent" title="mui_ui.input.MotionEvent"><em>MotionEvent</em></a>) – touch event information which end fling action</li>
-<li><strong>velocityX</strong> (<em>int</em>) – velocity of x direction</li>
-<li><strong>velocityY</strong> (<em>int</em>) – velocity of y direction</li>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>start_event</strong> (<a class="reference internal" href="#mui_ui.input.MotionEvent" title="mui_ui.input.MotionEvent"><em>MotionEvent</em></a>) – touch event information which start fling action</p></li>
+<li><p><strong>end_event</strong> (<a class="reference internal" href="#mui_ui.input.MotionEvent" title="mui_ui.input.MotionEvent"><em>MotionEvent</em></a>) – touch event information which end fling action</p></li>
+<li><p><strong>velocityX</strong> (<em>int</em>) – velocity of x direction</p></li>
+<li><p><strong>velocityY</strong> (<em>int</em>) – velocity of y direction</p></li>
 </ul>
-</td>
-</tr>
-</tbody>
-</table>
+</dd>
+</dl>
 <div class="admonition seealso">
-<p class="first admonition-title">See also</p>
-<p class="last"><code class="xref py py-meth docutils literal notranslate"><span class="pre">GestureDetector()</span></code></p>
+<p class="admonition-title">See also</p>
+<p><code class="xref py py-meth docutils literal notranslate"><span class="pre">GestureDetector()</span></code></p>
 </div>
 </dd></dl>
 
 <dl class="method">
 <dt id="mui_ui.application.AbsApp.dispathLongPressEvent">
-<code class="descname">dispathLongPressEvent</code><span class="sig-paren">(</span><em>event: input.MotionEvent</em><span class="sig-paren">)</span><a class="headerlink" href="#mui_ui.application.AbsApp.dispathLongPressEvent" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">dispathLongPressEvent</code><span class="sig-paren">(</span><em class="sig-param">event: input.MotionEvent</em><span class="sig-paren">)</span><a class="headerlink" href="#mui_ui.application.AbsApp.dispathLongPressEvent" title="Permalink to this definition">¶</a></dt>
 <dd><p>dispath long press event.
 if you want to take any action when long press event occured, please override this method and implements action.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>event</strong> (<a class="reference internal" href="#mui_ui.input.MotionEvent" title="mui_ui.input.MotionEvent"><em>MotionEvent</em></a>) – touch event information.</td>
-</tr>
-</tbody>
-</table>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>event</strong> (<a class="reference internal" href="#mui_ui.input.MotionEvent" title="mui_ui.input.MotionEvent"><em>MotionEvent</em></a>) – touch event information.</p>
+</dd>
+</dl>
 <div class="admonition seealso">
-<p class="first admonition-title">See also</p>
-<p class="last"><code class="xref py py-meth docutils literal notranslate"><span class="pre">GestureDetector()</span></code></p>
+<p class="admonition-title">See also</p>
+<p><code class="xref py py-meth docutils literal notranslate"><span class="pre">GestureDetector()</span></code></p>
 </div>
 </dd></dl>
 
 <dl class="method">
 <dt id="mui_ui.application.AbsApp.getUI">
-<code class="descname">getUI</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; mui_ui.matrix.Matrix<a class="headerlink" href="#mui_ui.application.AbsApp.getUI" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">getUI</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; mui_ui.matrix.Matrix<a class="headerlink" href="#mui_ui.application.AbsApp.getUI" title="Permalink to this definition">¶</a></dt>
 <dd><p>get UI layout matrix data</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><strong>Matrix</strong></td>
-</tr>
-<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">layout matrix data</td>
-</tr>
-</tbody>
-</table>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p><strong>Matrix</strong></p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>layout matrix data</p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="method">
 <dt id="mui_ui.application.AbsApp.getView">
-<code class="descname">getView</code><span class="sig-paren">(</span><em>name: str</em><span class="sig-paren">)</span> &#x2192; parts.AbsParts<a class="headerlink" href="#mui_ui.application.AbsApp.getView" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">getView</code><span class="sig-paren">(</span><em class="sig-param">name: str</em><span class="sig-paren">)</span> &#x2192; parts.AbsParts<a class="headerlink" href="#mui_ui.application.AbsApp.getView" title="Permalink to this definition">¶</a></dt>
 <dd><p>this method is convinience for view reference. you can get view by name which set via setView().</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>name</strong> (<em>str</em>) – id of target view</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">target view</td>
-</tr>
-<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference internal" href="#mui_ui.parts.AbsParts" title="mui_ui.parts.AbsParts">AbsParts</a></td>
-</tr>
-</tbody>
-</table>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>name</strong> (<em>str</em>) – id of target view</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>target view</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference internal" href="#mui_ui.parts.AbsParts" title="mui_ui.parts.AbsParts">AbsParts</a></p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="method">
 <dt id="mui_ui.application.AbsApp.onTurnOffDisplay">
-<code class="descname">onTurnOffDisplay</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; bool<a class="headerlink" href="#mui_ui.application.AbsApp.onTurnOffDisplay" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">onTurnOffDisplay</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; bool<a class="headerlink" href="#mui_ui.application.AbsApp.onTurnOffDisplay" title="Permalink to this definition">¶</a></dt>
 <dd><p>this method to be invoked by DisplayManager before DisplayManager call onDissmiss().
 please return True or False which you want to turn off display or not.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><ul class="simple">
-<li><strong>True</strong> (<em>bool</em>) – allow turn off display</li>
-<li><strong>False</strong> (<em>bool</em>) – don’t allow turn off, when application is running some operation and you do not like turn off</li>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p><ul class="simple">
+<li><p><strong>True</strong> (<em>bool</em>) – allow turn off display</p></li>
+<li><p><strong>False</strong> (<em>bool</em>) – don’t allow turn off, when application is running some operation and you do not like turn off</p></li>
 </ul>
-</td>
-</tr>
-</tbody>
-</table>
+</p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="method">
 <dt id="mui_ui.application.AbsApp.setNextApp">
-<code class="descname">setNextApp</code><span class="sig-paren">(</span><em>app</em><span class="sig-paren">)</span><a class="headerlink" href="#mui_ui.application.AbsApp.setNextApp" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">setNextApp</code><span class="sig-paren">(</span><em class="sig-param">app</em><span class="sig-paren">)</span><a class="headerlink" href="#mui_ui.application.AbsApp.setNextApp" title="Permalink to this definition">¶</a></dt>
 <dd><p>change to next application</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>app</strong> (<a class="reference internal" href="#mui_ui.application.AbsApp" title="mui_ui.application.AbsApp"><em>AbsApp</em></a>) – next application</td>
-</tr>
-</tbody>
-</table>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>app</strong> (<a class="reference internal" href="#mui_ui.application.AbsApp" title="mui_ui.application.AbsApp"><em>AbsApp</em></a>) – next application</p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="method">
 <dt id="mui_ui.application.AbsApp.setView">
-<code class="descname">setView</code><span class="sig-paren">(</span><em>v: parts.AbsParts</em>, <em>name: str</em><span class="sig-paren">)</span><a class="headerlink" href="#mui_ui.application.AbsApp.setView" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">setView</code><span class="sig-paren">(</span><em class="sig-param">v: parts.AbsParts</em>, <em class="sig-param">name: str</em><span class="sig-paren">)</span><a class="headerlink" href="#mui_ui.application.AbsApp.setView" title="Permalink to this definition">¶</a></dt>
 <dd><p>this method is convinience for view reference. when access to any view on this application, please get from getView().</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
-<li><strong>v</strong> (<a class="reference internal" href="#mui_ui.parts.AbsParts" title="mui_ui.parts.AbsParts"><em>AbsParts</em></a>) – target view</li>
-<li><strong>name</strong> (<em>str</em>) – id of target view</li>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>v</strong> (<a class="reference internal" href="#mui_ui.parts.AbsParts" title="mui_ui.parts.AbsParts"><em>AbsParts</em></a>) – target view</p></li>
+<li><p><strong>name</strong> (<em>str</em>) – id of target view</p></li>
 </ul>
-</td>
-</tr>
-</tbody>
-</table>
+</dd>
+</dl>
 <div class="admonition seealso">
-<p class="first admonition-title">See also</p>
-<p class="last"><a class="reference internal" href="#mui_ui.application.AbsApp.getView" title="mui_ui.application.AbsApp.getView"><code class="xref py py-meth docutils literal notranslate"><span class="pre">getView()</span></code></a></p>
+<p class="admonition-title">See also</p>
+<p><a class="reference internal" href="#mui_ui.application.AbsApp.getView" title="mui_ui.application.AbsApp.getView"><code class="xref py py-meth docutils literal notranslate"><span class="pre">getView()</span></code></a></p>
 </div>
 </dd></dl>
 
 <dl class="method">
 <dt id="mui_ui.application.AbsApp.startTask">
-<code class="descname">startTask</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mui_ui.application.AbsApp.startTask" title="Permalink to this definition">¶</a></dt>
+<em class="property">abstract </em><code class="sig-name descname">startTask</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mui_ui.application.AbsApp.startTask" title="Permalink to this definition">¶</a></dt>
 <dd><p>if application has a task to start when application become front of UI(such as API call for get weather information),
 please start here that tasks.</p>
 </dd></dl>
 
 <dl class="method">
 <dt id="mui_ui.application.AbsApp.stopTask">
-<code class="descname">stopTask</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mui_ui.application.AbsApp.stopTask" title="Permalink to this definition">¶</a></dt>
+<em class="property">abstract </em><code class="sig-name descname">stopTask</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mui_ui.application.AbsApp.stopTask" title="Permalink to this definition">¶</a></dt>
 <dd><p>if application has a task what running background,
 please stop all tasks here.</p>
 </dd></dl>
 
 <dl class="method">
 <dt id="mui_ui.application.AbsApp.updateRequest">
-<code class="descname">updateRequest</code><span class="sig-paren">(</span><em>fade</em><span class="sig-paren">)</span><a class="headerlink" href="#mui_ui.application.AbsApp.updateRequest" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">updateRequest</code><span class="sig-paren">(</span><em class="sig-param">fade</em><span class="sig-paren">)</span><a class="headerlink" href="#mui_ui.application.AbsApp.updateRequest" title="Permalink to this definition">¶</a></dt>
 <dd><p>update UI request</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>fade</strong> (<em>int</em>) – fade in/out effect for update</td>
-</tr>
-</tbody>
-</table>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>fade</strong> (<em>int</em>) – fade in/out effect for update</p>
+</dd>
+</dl>
 </dd></dl>
 
 </dd></dl>
 
 <dl class="class">
 <dt id="mui_ui.application.AppEventListener">
-<em class="property">class </em><code class="descclassname">mui_ui.application.</code><code class="descname">AppEventListener</code><a class="headerlink" href="#mui_ui.application.AppEventListener" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-prename descclassname">mui_ui.application.</code><code class="sig-name descname">AppEventListener</code><a class="headerlink" href="#mui_ui.application.AppEventListener" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
 <p>callback for application events.</p>
 <p>please set to application class that inherit AbsApp and implements callback methods for handling application events.</p>
 <dl class="method">
 <dt id="mui_ui.application.AppEventListener.onChangeDuty">
-<code class="descname">onChangeDuty</code><span class="sig-paren">(</span><em>duty</em><span class="sig-paren">)</span><a class="headerlink" href="#mui_ui.application.AppEventListener.onChangeDuty" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">onChangeDuty</code><span class="sig-paren">(</span><em class="sig-param">duty</em><span class="sig-paren">)</span><a class="headerlink" href="#mui_ui.application.AppEventListener.onChangeDuty" title="Permalink to this definition">¶</a></dt>
 <dd><p>change UI brightness request</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>duty</strong> (<em>int</em>) – brightness level (1 - 100)</td>
-</tr>
-</tbody>
-</table>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>duty</strong> (<em>int</em>) – brightness level (1 - 100)</p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="method">
 <dt id="mui_ui.application.AppEventListener.onCloseApp">
-<code class="descname">onCloseApp</code><span class="sig-paren">(</span><em>app</em><span class="sig-paren">)</span><a class="headerlink" href="#mui_ui.application.AppEventListener.onCloseApp" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">onCloseApp</code><span class="sig-paren">(</span><em class="sig-param">app</em><span class="sig-paren">)</span><a class="headerlink" href="#mui_ui.application.AppEventListener.onCloseApp" title="Permalink to this definition">¶</a></dt>
 <dd><p>close application request</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>app</strong> (<a class="reference internal" href="#mui_ui.application.AbsApp" title="mui_ui.application.AbsApp"><em>AbsApp</em></a>) – close target application</td>
-</tr>
-</tbody>
-</table>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>app</strong> (<a class="reference internal" href="#mui_ui.application.AbsApp" title="mui_ui.application.AbsApp"><em>AbsApp</em></a>) – close target application</p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="method">
 <dt id="mui_ui.application.AppEventListener.requestUpdateDisplay">
-<code class="descname">requestUpdateDisplay</code><span class="sig-paren">(</span><em>app</em>, <em>fade</em><span class="sig-paren">)</span><a class="headerlink" href="#mui_ui.application.AppEventListener.requestUpdateDisplay" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">requestUpdateDisplay</code><span class="sig-paren">(</span><em class="sig-param">app</em>, <em class="sig-param">fade</em><span class="sig-paren">)</span><a class="headerlink" href="#mui_ui.application.AppEventListener.requestUpdateDisplay" title="Permalink to this definition">¶</a></dt>
 <dd><p>update UI request from application</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
-<li><strong>app</strong> (<a class="reference internal" href="#mui_ui.application.AbsApp" title="mui_ui.application.AbsApp"><em>AbsApp</em></a>) – application what request update UI</li>
-<li><strong>fade</strong> (<em>int</em>) – fade in/out level (0 - 4 : 0 is do not fade in/out)</li>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>app</strong> (<a class="reference internal" href="#mui_ui.application.AbsApp" title="mui_ui.application.AbsApp"><em>AbsApp</em></a>) – application what request update UI</p></li>
+<li><p><strong>fade</strong> (<em>int</em>) – fade in/out level (0 - 4 : 0 is do not fade in/out)</p></li>
 </ul>
-</td>
-</tr>
-</tbody>
-</table>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="method">
 <dt id="mui_ui.application.AppEventListener.setNextApp">
-<code class="descname">setNextApp</code><span class="sig-paren">(</span><em>app</em><span class="sig-paren">)</span><a class="headerlink" href="#mui_ui.application.AppEventListener.setNextApp" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">setNextApp</code><span class="sig-paren">(</span><em class="sig-param">app</em><span class="sig-paren">)</span><a class="headerlink" href="#mui_ui.application.AppEventListener.setNextApp" title="Permalink to this definition">¶</a></dt>
 <dd><p>change application request</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>app</strong> (<a class="reference internal" href="#mui_ui.application.AbsApp" title="mui_ui.application.AbsApp"><em>AbsApp</em></a>) – next application</td>
-</tr>
-</tbody>
-</table>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>app</strong> (<a class="reference internal" href="#mui_ui.application.AbsApp" title="mui_ui.application.AbsApp"><em>AbsApp</em></a>) – next application</p>
+</dd>
+</dl>
 </dd></dl>
 
 </dd></dl>
@@ -511,23 +467,23 @@ please stop all tasks here.</p>
 <span id="mui-ui-autoscroll-text-module"></span><h2>mui_ui.autoscroll_text module<a class="headerlink" href="#module-mui_ui.autoscroll_text" title="Permalink to this headline">¶</a></h2>
 <dl class="class">
 <dt id="mui_ui.autoscroll_text.AutoScrollText">
-<em class="property">class </em><code class="descclassname">mui_ui.autoscroll_text.</code><code class="descname">AutoScrollText</code><span class="sig-paren">(</span><em>text: str = None</em>, <em>border: text.Border = &lt;Border.NONE: 0&gt;</em>, <em>name='auto scroll textview'</em><span class="sig-paren">)</span><a class="headerlink" href="#mui_ui.autoscroll_text.AutoScrollText" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-prename descclassname">mui_ui.autoscroll_text.</code><code class="sig-name descname">AutoScrollText</code><span class="sig-paren">(</span><em class="sig-param">text: str = None</em>, <em class="sig-param">border: text.Border = &lt;Border.NONE: 0&gt;</em>, <em class="sig-param">name='auto scroll textview'</em><span class="sig-paren">)</span><a class="headerlink" href="#mui_ui.autoscroll_text.AutoScrollText" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">text.Text</span></code></p>
 <p>AutoScroll Text</p>
 <p>this class inherit Text view.
 if text length is too long according to view size, when text is full on view area, start auto scroll and show left text.</p>
 <div class="admonition seealso">
-<p class="first admonition-title">See also</p>
-<p class="last"><code class="xref py py-class docutils literal notranslate"><span class="pre">Text</span></code>, <code class="xref py py-class docutils literal notranslate"><span class="pre">TypeWriterEventListener</span></code></p>
+<p class="admonition-title">See also</p>
+<p><code class="xref py py-class docutils literal notranslate"><span class="pre">Text</span></code>, <code class="xref py py-class docutils literal notranslate"><span class="pre">TypeWriterEventListener</span></code></p>
 </div>
 <dl class="method">
 <dt id="mui_ui.autoscroll_text.AutoScrollText.addText">
-<code class="descname">addText</code><span class="sig-paren">(</span><em>text: str</em><span class="sig-paren">)</span><a class="headerlink" href="#mui_ui.autoscroll_text.AutoScrollText.addText" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">addText</code><span class="sig-paren">(</span><em class="sig-param">text: str</em><span class="sig-paren">)</span><a class="headerlink" href="#mui_ui.autoscroll_text.AutoScrollText.addText" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="method">
 <dt id="mui_ui.autoscroll_text.AutoScrollText.setText">
-<code class="descname">setText</code><span class="sig-paren">(</span><em>text: str</em>, <em>textAlignment: text.TextAlignment = None</em><span class="sig-paren">)</span><a class="headerlink" href="#mui_ui.autoscroll_text.AutoScrollText.setText" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">setText</code><span class="sig-paren">(</span><em class="sig-param">text: str</em>, <em class="sig-param">textAlignment: text.TextAlignment = None</em><span class="sig-paren">)</span><a class="headerlink" href="#mui_ui.autoscroll_text.AutoScrollText.setText" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 </dd></dl>
@@ -537,7 +493,7 @@ if text length is too long according to view size, when text is full on view are
 <span id="mui-ui-clock-module"></span><h2>mui_ui.clock module<a class="headerlink" href="#module-mui_ui.clock" title="Permalink to this headline">¶</a></h2>
 <dl class="class">
 <dt id="mui_ui.clock.DigitalClock">
-<em class="property">class </em><code class="descclassname">mui_ui.clock.</code><code class="descname">DigitalClock</code><span class="sig-paren">(</span><em>name='digital clock'</em>, <em>timezone: datetime.timezone = None</em><span class="sig-paren">)</span><a class="headerlink" href="#mui_ui.clock.DigitalClock" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-prename descclassname">mui_ui.clock.</code><code class="sig-name descname">DigitalClock</code><span class="sig-paren">(</span><em class="sig-param">name='digital clock'</em>, <em class="sig-param">timezone: datetime.timezone = None</em><span class="sig-paren">)</span><a class="headerlink" href="#mui_ui.clock.DigitalClock" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">widget.Widget</span></code></p>
 <p>Digital Clock Widget
 please use as a part of your application.</p>
@@ -555,37 +511,33 @@ clock.startTick()</p>
 clock.stopTick()</p>
 <dl class="method">
 <dt id="mui_ui.clock.DigitalClock.setPos">
-<code class="descname">setPos</code><span class="sig-paren">(</span><em>x</em>, <em>y</em><span class="sig-paren">)</span><a class="headerlink" href="#mui_ui.clock.DigitalClock.setPos" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">setPos</code><span class="sig-paren">(</span><em class="sig-param">x</em>, <em class="sig-param">y</em><span class="sig-paren">)</span><a class="headerlink" href="#mui_ui.clock.DigitalClock.setPos" title="Permalink to this definition">¶</a></dt>
 <dd><p>set view position</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
-<li><strong>x</strong> (<em>int</em>) – x position</li>
-<li><strong>y</strong> (<em>int</em>) – y position</li>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>x</strong> (<em>int</em>) – x position</p></li>
+<li><p><strong>y</strong> (<em>int</em>) – y position</p></li>
 </ul>
-</td>
-</tr>
-</tbody>
-</table>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="method">
 <dt id="mui_ui.clock.DigitalClock.startTick">
-<code class="descname">startTick</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mui_ui.clock.DigitalClock.startTick" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">startTick</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mui_ui.clock.DigitalClock.startTick" title="Permalink to this definition">¶</a></dt>
 <dd><p>start clock update</p>
 </dd></dl>
 
 <dl class="method">
 <dt id="mui_ui.clock.DigitalClock.stopTick">
-<code class="descname">stopTick</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mui_ui.clock.DigitalClock.stopTick" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">stopTick</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mui_ui.clock.DigitalClock.stopTick" title="Permalink to this definition">¶</a></dt>
 <dd><p>stop clock update</p>
 </dd></dl>
 
 <dl class="method">
 <dt id="mui_ui.clock.DigitalClock.updateClock">
-<code class="descname">updateClock</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mui_ui.clock.DigitalClock.updateClock" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">updateClock</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mui_ui.clock.DigitalClock.updateClock" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 </dd></dl>
@@ -595,90 +547,88 @@ clock.stopTick()</p>
 <span id="mui-ui-dialog-module"></span><h2>mui_ui.dialog module<a class="headerlink" href="#module-mui_ui.dialog" title="Permalink to this headline">¶</a></h2>
 <dl class="class">
 <dt id="mui_ui.dialog.Dialog">
-<em class="property">class </em><code class="descclassname">mui_ui.dialog.</code><code class="descname">Dialog</code><span class="sig-paren">(</span><em>name='dialog'</em>, <em>message: str = ''</em>, <em>pos_text: str = 'yes'</em>, <em>nega_text: str = 'no'</em>, <em>listener: mui_ui.dialog.DialogListener = None</em><span class="sig-paren">)</span><a class="headerlink" href="#mui_ui.dialog.Dialog" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-prename descclassname">mui_ui.dialog.</code><code class="sig-name descname">Dialog</code><span class="sig-paren">(</span><em class="sig-param">name='dialog'</em>, <em class="sig-param">message: str = ''</em>, <em class="sig-param">pos_text: str = 'yes'</em>, <em class="sig-param">nega_text: str = 'no'</em>, <em class="sig-param">listener: mui_ui.dialog.DialogListener = None</em><span class="sig-paren">)</span><a class="headerlink" href="#mui_ui.dialog.Dialog" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">widget.Widget</span></code></p>
 <p>Simple confirmation dialog widget.</p>
 <p class="rubric">Examples</p>
 <p>from mui_ui import AbsApp, AppEventListener, Dialog, DialogListener</p>
 <p>class App(AbsApp, DialogListener, OnUpdateRequestListener):</p>
 <blockquote>
-<div><dl class="docutils">
-<dt>def __init__(self, appEventListener: AppEventListener):</dt>
-<dd><p class="first">super().__init__(appEventListener)</p>
+<div><dl>
+<dt>def __init__(self, appEventListener: AppEventListener):</dt><dd><p>super().__init__(appEventListener)</p>
 <p># create dialog(on application class)
 dialog = Dialog(</p>
 <blockquote>
-<div>message=’dialog message’,
+<div><p>message=’dialog message’,
 pos_text=’positive selection button text’,
 nega_text=’negative selection button text’,
-listener=self)</div></blockquote>
+listener=self)</p>
+</div></blockquote>
 <p>dialog.visible = False # first state of dialog
 self.addView(dialog)
 self.setView(dialog, ‘dialog’)</p>
-<p class="last"># open dialog
+<p># open dialog
 dialog.visible = True
 self.updateRequest(2) # with fede-in/out</p>
 </dd>
-<dt>def onPositive(self):</dt>
-<dd><p class="first"># user selected positive button</p>
-<p class="last"># close dialog
+<dt>def onPositive(self):</dt><dd><p># user selected positive button</p>
+<p># close dialog
 self.getView(‘dialog’).visible = False
 self.updateRequest(2)</p>
 </dd>
-<dt>def onNegative(self):</dt>
-<dd><p class="first"># user selected negative button</p>
-<p class="last"># close dialog
+<dt>def onNegative(self):</dt><dd><p># user selected negative button</p>
+<p># close dialog
 self.getView(‘dialog’).visible = False
 self.updateRequest(2)</p>
 </dd>
 </dl>
 </div></blockquote>
 <div class="admonition seealso">
-<p class="first admonition-title">See also</p>
-<p class="last"><a class="reference internal" href="#mui_ui.dialog.DialogListener" title="mui_ui.dialog.DialogListener"><code class="xref py py-class docutils literal notranslate"><span class="pre">DialogListener</span></code></a></p>
+<p class="admonition-title">See also</p>
+<p><a class="reference internal" href="#mui_ui.dialog.DialogListener" title="mui_ui.dialog.DialogListener"><code class="xref py py-class docutils literal notranslate"><span class="pre">DialogListener</span></code></a></p>
 </div>
 <dl class="method">
 <dt id="mui_ui.dialog.Dialog.addEventListener">
-<code class="descname">addEventListener</code><span class="sig-paren">(</span><em>listener: mui_ui.dialog.DialogListener</em><span class="sig-paren">)</span><a class="headerlink" href="#mui_ui.dialog.Dialog.addEventListener" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">addEventListener</code><span class="sig-paren">(</span><em class="sig-param">listener: mui_ui.dialog.DialogListener</em><span class="sig-paren">)</span><a class="headerlink" href="#mui_ui.dialog.Dialog.addEventListener" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="method">
 <dt id="mui_ui.dialog.Dialog.dispatchTouchEvent">
-<code class="descname">dispatchTouchEvent</code><span class="sig-paren">(</span><em>e: input.MotionEvent</em><span class="sig-paren">)</span><a class="headerlink" href="#mui_ui.dialog.Dialog.dispatchTouchEvent" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">dispatchTouchEvent</code><span class="sig-paren">(</span><em class="sig-param">e: input.MotionEvent</em><span class="sig-paren">)</span><a class="headerlink" href="#mui_ui.dialog.Dialog.dispatchTouchEvent" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="method">
 <dt id="mui_ui.dialog.Dialog.setMessage">
-<code class="descname">setMessage</code><span class="sig-paren">(</span><em>message: str</em><span class="sig-paren">)</span><a class="headerlink" href="#mui_ui.dialog.Dialog.setMessage" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">setMessage</code><span class="sig-paren">(</span><em class="sig-param">message: str</em><span class="sig-paren">)</span><a class="headerlink" href="#mui_ui.dialog.Dialog.setMessage" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="method">
 <dt id="mui_ui.dialog.Dialog.setNeagativeText">
-<code class="descname">setNeagativeText</code><span class="sig-paren">(</span><em>nega_text: str</em><span class="sig-paren">)</span><a class="headerlink" href="#mui_ui.dialog.Dialog.setNeagativeText" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">setNeagativeText</code><span class="sig-paren">(</span><em class="sig-param">nega_text: str</em><span class="sig-paren">)</span><a class="headerlink" href="#mui_ui.dialog.Dialog.setNeagativeText" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="method">
 <dt id="mui_ui.dialog.Dialog.setPositiveText">
-<code class="descname">setPositiveText</code><span class="sig-paren">(</span><em>pos_text: str</em><span class="sig-paren">)</span><a class="headerlink" href="#mui_ui.dialog.Dialog.setPositiveText" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">setPositiveText</code><span class="sig-paren">(</span><em class="sig-param">pos_text: str</em><span class="sig-paren">)</span><a class="headerlink" href="#mui_ui.dialog.Dialog.setPositiveText" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 </dd></dl>
 
 <dl class="class">
 <dt id="mui_ui.dialog.DialogListener">
-<em class="property">class </em><code class="descclassname">mui_ui.dialog.</code><code class="descname">DialogListener</code><a class="headerlink" href="#mui_ui.dialog.DialogListener" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-prename descclassname">mui_ui.dialog.</code><code class="sig-name descname">DialogListener</code><a class="headerlink" href="#mui_ui.dialog.DialogListener" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
 <p>Interface definition class for a callback to be invoked when touch dialog buttons.
 If you want to receive user selection, please override onPositive and onNegative method.</p>
 <dl class="method">
 <dt id="mui_ui.dialog.DialogListener.onNegative">
-<code class="descname">onNegative</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mui_ui.dialog.DialogListener.onNegative" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">onNegative</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mui_ui.dialog.DialogListener.onNegative" title="Permalink to this definition">¶</a></dt>
 <dd><p>callback to be invoked when user selected negative button.</p>
 </dd></dl>
 
 <dl class="method">
 <dt id="mui_ui.dialog.DialogListener.onPositive">
-<code class="descname">onPositive</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mui_ui.dialog.DialogListener.onPositive" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">onPositive</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mui_ui.dialog.DialogListener.onPositive" title="Permalink to this definition">¶</a></dt>
 <dd><p>callback to be invoked when user selected positive button.</p>
 </dd></dl>
 
@@ -687,127 +637,121 @@ If you want to receive user selection, please override onPositive and onNegative
 </div>
 <div class="section" id="module-mui_ui.display">
 <span id="mui-ui-display-module"></span><h2>mui_ui.display module<a class="headerlink" href="#module-mui_ui.display" title="Permalink to this headline">¶</a></h2>
+<dl class="data">
+<dt id="mui_ui.display.ACK">
+<code class="sig-prename descclassname">mui_ui.display.</code><code class="sig-name descname">ACK</code><em class="property"> = 6</em><a class="headerlink" href="#mui_ui.display.ACK" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
 <dl class="class">
 <dt id="mui_ui.display.Display">
-<em class="property">class </em><code class="descclassname">mui_ui.display.</code><code class="descname">Display</code><span class="sig-paren">(</span><em>device_name='/dev/ttyS0'</em>, <em>debug=False</em><span class="sig-paren">)</span><a class="headerlink" href="#mui_ui.display.Display" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-prename descclassname">mui_ui.display.</code><code class="sig-name descname">Display</code><span class="sig-paren">(</span><em class="sig-param">device_name='/dev/ttyS0'</em>, <em class="sig-param">debug=False</em><span class="sig-paren">)</span><a class="headerlink" href="#mui_ui.display.Display" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
 <p>mui Display API class</p>
 <dl class="method">
 <dt id="mui_ui.display.Display.clearDisplay">
-<code class="descname">clearDisplay</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mui_ui.display.Display.clearDisplay" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">clearDisplay</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mui_ui.display.Display.clearDisplay" title="Permalink to this definition">¶</a></dt>
 <dd><p>clear display.</p>
 </dd></dl>
 
 <dl class="method">
 <dt id="mui_ui.display.Display.getMuiID">
-<code class="descname">getMuiID</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mui_ui.display.Display.getMuiID" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">getMuiID</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mui_ui.display.Display.getMuiID" title="Permalink to this definition">¶</a></dt>
 <dd><p>get mui ID.</p>
 </dd></dl>
 
 <dl class="method">
 <dt id="mui_ui.display.Display.getPanelStatus">
-<code class="descname">getPanelStatus</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mui_ui.display.Display.getPanelStatus" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">getPanelStatus</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mui_ui.display.Display.getPanelStatus" title="Permalink to this definition">¶</a></dt>
 <dd><p>get display status(include error).</p>
 </dd></dl>
 
 <dl class="method">
 <dt id="mui_ui.display.Display.getVersion">
-<code class="descname">getVersion</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mui_ui.display.Display.getVersion" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">getVersion</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mui_ui.display.Display.getVersion" title="Permalink to this definition">¶</a></dt>
 <dd><p>get firmware version</p>
 </dd></dl>
 
 <dl class="method">
 <dt id="mui_ui.display.Display.refreshDisplay">
-<code class="descname">refreshDisplay</code><span class="sig-paren">(</span><em>fade=0</em>, <em>duty=100</em><span class="sig-paren">)</span><a class="headerlink" href="#mui_ui.display.Display.refreshDisplay" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">refreshDisplay</code><span class="sig-paren">(</span><em class="sig-param">fade=0</em>, <em class="sig-param">duty=100</em><span class="sig-paren">)</span><a class="headerlink" href="#mui_ui.display.Display.refreshDisplay" title="Permalink to this definition">¶</a></dt>
 <dd><p>update display by set layout data via setLayout() and updateLayout().</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
-<li><strong>fade</strong> (<em>deprecated. please use turnOn</em><em>(</em><em>) </em><em>and turnOff</em><em>(</em><em>)</em><em></em>) – </li>
-<li><strong>duty</strong> (<em>deprecated. please use setDuty</em><em>(</em><em>)</em><em></em>) – </li>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>fade</strong> (<em>deprecated. please use turnOn</em><em>(</em><em>) </em><em>and turnOff</em><em>(</em><em>)</em><em></em>) – </p></li>
+<li><p><strong>duty</strong> (<em>deprecated. please use setDuty</em><em>(</em><em>)</em><em></em>) – </p></li>
 </ul>
-</td>
-</tr>
-</tbody>
-</table>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="method">
 <dt id="mui_ui.display.Display.setDuty">
-<code class="descname">setDuty</code><span class="sig-paren">(</span><em>duty</em><span class="sig-paren">)</span><a class="headerlink" href="#mui_ui.display.Display.setDuty" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">setDuty</code><span class="sig-paren">(</span><em class="sig-param">duty</em><span class="sig-paren">)</span><a class="headerlink" href="#mui_ui.display.Display.setDuty" title="Permalink to this definition">¶</a></dt>
 <dd><p>change display brightness</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>duty</strong> (<em>int</em>) – display brightness level(1 - 100)</td>
-</tr>
-</tbody>
-</table>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>duty</strong> (<em>int</em>) – display brightness level(1 - 100)</p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="method">
 <dt id="mui_ui.display.Display.setLayout">
-<code class="descname">setLayout</code><span class="sig-paren">(</span><em>matrixInfo</em><span class="sig-paren">)</span><a class="headerlink" href="#mui_ui.display.Display.setLayout" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">setLayout</code><span class="sig-paren">(</span><em class="sig-param">matrixInfo</em><span class="sig-paren">)</span><a class="headerlink" href="#mui_ui.display.Display.setLayout" title="Permalink to this definition">¶</a></dt>
 <dd><p>set layout for draw display. this API do not update display but update internal data of this class.
 please mind do not update display until call updateLayout() and refreshDisplay().</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>matrixInfo</strong> (<a class="reference internal" href="#mui_ui.matrix.Matrix" title="mui_ui.matrix.Matrix"><em>Matrix</em></a>) – ui layout data</td>
-</tr>
-</tbody>
-</table>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>matrixInfo</strong> (<a class="reference internal" href="#mui_ui.matrix.Matrix" title="mui_ui.matrix.Matrix"><em>Matrix</em></a>) – ui layout data</p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="method">
 <dt id="mui_ui.display.Display.toString">
-<code class="descname">toString</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mui_ui.display.Display.toString" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">toString</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mui_ui.display.Display.toString" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="method">
 <dt id="mui_ui.display.Display.turnOff">
-<code class="descname">turnOff</code><span class="sig-paren">(</span><em>fade</em><span class="sig-paren">)</span><a class="headerlink" href="#mui_ui.display.Display.turnOff" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">turnOff</code><span class="sig-paren">(</span><em class="sig-param">fade</em><span class="sig-paren">)</span><a class="headerlink" href="#mui_ui.display.Display.turnOff" title="Permalink to this definition">¶</a></dt>
 <dd><p>turn off display</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>fade</strong> (<em>int</em>) – set fade-out effect level(0 - 4 : 0 is do not fade-out)</td>
-</tr>
-</tbody>
-</table>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>fade</strong> (<em>int</em>) – set fade-out effect level(0 - 4 : 0 is do not fade-out)</p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="method">
 <dt id="mui_ui.display.Display.turnOn">
-<code class="descname">turnOn</code><span class="sig-paren">(</span><em>fade</em><span class="sig-paren">)</span><a class="headerlink" href="#mui_ui.display.Display.turnOn" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">turnOn</code><span class="sig-paren">(</span><em class="sig-param">fade</em><span class="sig-paren">)</span><a class="headerlink" href="#mui_ui.display.Display.turnOn" title="Permalink to this definition">¶</a></dt>
 <dd><p>turn on display</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>fade</strong> (<em>int</em>) – set fade-in effect level(0 - 4 : 0 is do not fade-in)</td>
-</tr>
-</tbody>
-</table>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>fade</strong> (<em>int</em>) – set fade-in effect level(0 - 4 : 0 is do not fade-in)</p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="method">
 <dt id="mui_ui.display.Display.updateLayout">
-<code class="descname">updateLayout</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mui_ui.display.Display.updateLayout" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">updateLayout</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mui_ui.display.Display.updateLayout" title="Permalink to this definition">¶</a></dt>
 <dd><p>update layout for draw display. this API send layout data to display.
 you have to call refreshDisplay() after this API for update.</p>
 </dd></dl>
 
 </dd></dl>
 
+<dl class="data">
+<dt id="mui_ui.display.NACK">
+<code class="sig-prename descclassname">mui_ui.display.</code><code class="sig-name descname">NACK</code><em class="property"> = 21</em><a class="headerlink" href="#mui_ui.display.NACK" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
 <dl class="function">
 <dt id="mui_ui.display.reset_display">
-<code class="descclassname">mui_ui.display.</code><code class="descname">reset_display</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mui_ui.display.reset_display" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname">mui_ui.display.</code><code class="sig-name descname">reset_display</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mui_ui.display.reset_display" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 </div>
@@ -815,16 +759,16 @@ you have to call refreshDisplay() after this API for update.</p>
 <span id="mui-ui-display-manager-module"></span><h2>mui_ui.display_manager module<a class="headerlink" href="#module-mui_ui.display_manager" title="Permalink to this headline">¶</a></h2>
 <dl class="class">
 <dt id="mui_ui.display_manager.DisplayEventListener">
-<em class="property">class </em><code class="descclassname">mui_ui.display_manager.</code><code class="descname">DisplayEventListener</code><a class="headerlink" href="#mui_ui.display_manager.DisplayEventListener" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-prename descclassname">mui_ui.display_manager.</code><code class="sig-name descname">DisplayEventListener</code><a class="headerlink" href="#mui_ui.display_manager.DisplayEventListener" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
 <dl class="method">
 <dt id="mui_ui.display_manager.DisplayEventListener.onDismiss">
-<code class="descname">onDismiss</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mui_ui.display_manager.DisplayEventListener.onDismiss" title="Permalink to this definition">¶</a></dt>
+<em class="property">abstract </em><code class="sig-name descname">onDismiss</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mui_ui.display_manager.DisplayEventListener.onDismiss" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="method">
 <dt id="mui_ui.display_manager.DisplayEventListener.onDismissTime">
-<code class="descname">onDismissTime</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; bool<a class="headerlink" href="#mui_ui.display_manager.DisplayEventListener.onDismissTime" title="Permalink to this definition">¶</a></dt>
+<em class="property">abstract </em><code class="sig-name descname">onDismissTime</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; bool<a class="headerlink" href="#mui_ui.display_manager.DisplayEventListener.onDismissTime" title="Permalink to this definition">¶</a></dt>
 <dd><p>you have to implemet this method and return True if display can turn off.
 If return False, display manager start check timer again.</p>
 </dd></dl>
@@ -833,36 +777,36 @@ If return False, display manager start check timer again.</p>
 
 <dl class="class">
 <dt id="mui_ui.display_manager.DisplayManager">
-<em class="property">class </em><code class="descclassname">mui_ui.display_manager.</code><code class="descname">DisplayManager</code><span class="sig-paren">(</span><em>listener: mui_ui.display_manager.DisplayEventListener</em>, <em>time_to_dismiss: float = 15</em><span class="sig-paren">)</span><a class="headerlink" href="#mui_ui.display_manager.DisplayManager" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-prename descclassname">mui_ui.display_manager.</code><code class="sig-name descname">DisplayManager</code><span class="sig-paren">(</span><em class="sig-param">listener: mui_ui.display_manager.DisplayEventListener</em>, <em class="sig-param">time_to_dismiss: float = 15</em><span class="sig-paren">)</span><a class="headerlink" href="#mui_ui.display_manager.DisplayManager" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
 <p>DisplayManager class is manage display state(on/off) and notify time for turn off display.</p>
 <p>At default setting, you will recevie callback(DisplayEventListener.onDissmissTime())
 after 15 seconds from called startDismissTimer().</p>
 <p>If you return True to onDismissTime(), DisplayManager call DisplayEventListener.onDismiss(), so please instruct Display class to turn off.
 If you return False when onDismissTime(), this class restart timer and call callback after 15 seconds.</p>
-<dl class="classmethod">
+<dl class="method">
 <dt id="mui_ui.display_manager.DisplayManager.get_instance">
-<em class="property">classmethod </em><code class="descname">get_instance</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mui_ui.display_manager.DisplayManager.get_instance" title="Permalink to this definition">¶</a></dt>
+<em class="property">classmethod </em><code class="sig-name descname">get_instance</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mui_ui.display_manager.DisplayManager.get_instance" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
-<dl class="attribute">
+<dl class="method">
 <dt id="mui_ui.display_manager.DisplayManager.on">
-<code class="descname">on</code><a class="headerlink" href="#mui_ui.display_manager.DisplayManager.on" title="Permalink to this definition">¶</a></dt>
+<em class="property">property </em><code class="sig-name descname">on</code><a class="headerlink" href="#mui_ui.display_manager.DisplayManager.on" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="method">
 <dt id="mui_ui.display_manager.DisplayManager.setEventListener">
-<code class="descname">setEventListener</code><span class="sig-paren">(</span><em>listener: mui_ui.display_manager.DisplayEventListener</em><span class="sig-paren">)</span><a class="headerlink" href="#mui_ui.display_manager.DisplayManager.setEventListener" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">setEventListener</code><span class="sig-paren">(</span><em class="sig-param">listener: mui_ui.display_manager.DisplayEventListener</em><span class="sig-paren">)</span><a class="headerlink" href="#mui_ui.display_manager.DisplayManager.setEventListener" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="method">
 <dt id="mui_ui.display_manager.DisplayManager.startDismissTimer">
-<code class="descname">startDismissTimer</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mui_ui.display_manager.DisplayManager.startDismissTimer" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">startDismissTimer</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mui_ui.display_manager.DisplayManager.startDismissTimer" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
-<dl class="attribute">
+<dl class="method">
 <dt id="mui_ui.display_manager.DisplayManager.time_to_dismiss">
-<code class="descname">time_to_dismiss</code><a class="headerlink" href="#mui_ui.display_manager.DisplayManager.time_to_dismiss" title="Permalink to this definition">¶</a></dt>
+<em class="property">property </em><code class="sig-name descname">time_to_dismiss</code><a class="headerlink" href="#mui_ui.display_manager.DisplayManager.time_to_dismiss" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 </dd></dl>
@@ -872,30 +816,28 @@ If you return False when onDismissTime(), this class restart timer and call call
 <span id="mui-ui-gesturedetector-module"></span><h2>mui_ui.gesturedetector module<a class="headerlink" href="#module-mui_ui.gesturedetector" title="Permalink to this headline">¶</a></h2>
 <dl class="class">
 <dt id="mui_ui.gesturedetector.GestureDetector">
-<em class="property">class </em><code class="descclassname">mui_ui.gesturedetector.</code><code class="descname">GestureDetector</code><span class="sig-paren">(</span><em>listener: mui_ui.gesturedetector.GestureListener</em>, <em>longpress_timeout=3</em><span class="sig-paren">)</span><a class="headerlink" href="#mui_ui.gesturedetector.GestureDetector" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-prename descclassname">mui_ui.gesturedetector.</code><code class="sig-name descname">GestureDetector</code><span class="sig-paren">(</span><em class="sig-param">listener: mui_ui.gesturedetector.GestureListener</em>, <em class="sig-param">longpress_timeout=3</em><span class="sig-paren">)</span><a class="headerlink" href="#mui_ui.gesturedetector.GestureDetector" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
 <p>GestureDetector can determin touch gestures like swipe, scroll, long press.
 When occure these gesture event, call callback method of GestureListener.</p>
 <p>USAGE:</p>
-<dl class="docutils">
-<dt>class App(InputEventListener, GestureListener):</dt>
-<dd><dl class="first last docutils">
-<dt>def __init__(self):</dt>
-<dd><p class="first"># create input event handler
+<dl>
+<dt>class App(InputEventListener, GestureListener):</dt><dd><dl>
+<dt>def __init__(self):</dt><dd><p># create input event handler
 self._input = InputHandler(self)</p>
-<p class="last"># create gesture detector
+<p># create gesture detector
 self._gesturedetector = GestureDetector(self)</p>
 </dd>
-<dt>def mainLoop(self):</dt>
-<dd># start capture touch event
-self._input.startEventLoop()</dd>
-<dt>def onInputEvent(self, e: MotionEvnet):</dt>
-<dd># pass motion event data to gesture detector
-self._gesturedetector.onTouchEvent(e)</dd>
-<dt>def onFling(self, e1: MotionEvent,  e2: MotionEvent, scrollX, scrollY):</dt>
-<dd># handling swipe event</dd>
-<dt>def onLongPress(self e: MotionEvent):</dt>
-<dd># handling long press event</dd>
+<dt>def mainLoop(self):</dt><dd><p># start capture touch event
+self._input.startEventLoop()</p>
+</dd>
+<dt>def onInputEvent(self, e: MotionEvnet):</dt><dd><p># pass motion event data to gesture detector
+self._gesturedetector.onTouchEvent(e)</p>
+</dd>
+<dt>def onFling(self, e1: MotionEvent,  e2: MotionEvent, scrollX, scrollY):</dt><dd><p># handling swipe event</p>
+</dd>
+<dt>def onLongPress(self e: MotionEvent):</dt><dd><p># handling long press event</p>
+</dd>
 </dl>
 </dd>
 </dl>
@@ -904,101 +846,100 @@ app = App()
 app.mainLoop()</p>
 <dl class="method">
 <dt id="mui_ui.gesturedetector.GestureDetector.onTouchEvent">
-<code class="descname">onTouchEvent</code><span class="sig-paren">(</span><em>e: input.MotionEvent</em><span class="sig-paren">)</span><a class="headerlink" href="#mui_ui.gesturedetector.GestureDetector.onTouchEvent" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">onTouchEvent</code><span class="sig-paren">(</span><em class="sig-param">e: input.MotionEvent</em><span class="sig-paren">)</span><a class="headerlink" href="#mui_ui.gesturedetector.GestureDetector.onTouchEvent" title="Permalink to this definition">¶</a></dt>
 <dd><p>please pass MotionEvent to this method. when determin gesture, fire target event via GestureListener.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>e</strong> (<a class="reference internal" href="#mui_ui.input.MotionEvent" title="mui_ui.input.MotionEvent"><em>MotionEvent</em></a>) – motion event data that you can get from InputHandler class.</td>
-</tr>
-</tbody>
-</table>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>e</strong> (<a class="reference internal" href="#mui_ui.input.MotionEvent" title="mui_ui.input.MotionEvent"><em>MotionEvent</em></a>) – motion event data that you can get from InputHandler class.</p>
+</dd>
+</dl>
 </dd></dl>
 
 </dd></dl>
 
 <dl class="class">
 <dt id="mui_ui.gesturedetector.GestureListener">
-<em class="property">class </em><code class="descclassname">mui_ui.gesturedetector.</code><code class="descname">GestureListener</code><a class="headerlink" href="#mui_ui.gesturedetector.GestureListener" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-prename descclassname">mui_ui.gesturedetector.</code><code class="sig-name descname">GestureListener</code><a class="headerlink" href="#mui_ui.gesturedetector.GestureListener" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
 <dl class="method">
 <dt id="mui_ui.gesturedetector.GestureListener.onFling">
-<code class="descname">onFling</code><span class="sig-paren">(</span><em>e1: input.MotionEvent</em>, <em>e2: input.MotionEvent</em>, <em>velocityX</em>, <em>velocityY</em><span class="sig-paren">)</span><a class="headerlink" href="#mui_ui.gesturedetector.GestureListener.onFling" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">onFling</code><span class="sig-paren">(</span><em class="sig-param">e1: input.MotionEvent</em>, <em class="sig-param">e2: input.MotionEvent</em>, <em class="sig-param">velocityX</em>, <em class="sig-param">velocityY</em><span class="sig-paren">)</span><a class="headerlink" href="#mui_ui.gesturedetector.GestureListener.onFling" title="Permalink to this definition">¶</a></dt>
 <dd><p>this method invoked when swipe event occured.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
-<li><strong>e1</strong> (<a class="reference internal" href="#mui_ui.input.MotionEvent" title="mui_ui.input.MotionEvent"><em>MotionEvent</em></a>) – start position of swipe event</li>
-<li><strong>e2</strong> (<a class="reference internal" href="#mui_ui.input.MotionEvent" title="mui_ui.input.MotionEvent"><em>MotionEvent</em></a>) – end position of swipe event</li>
-<li><strong>velocityX</strong> (<em>int</em>) – distance between e1.x and e2.x</li>
-<li><strong>velocityY</strong> (<em>int</em>) – distance between e1.y and e2.y</li>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>e1</strong> (<a class="reference internal" href="#mui_ui.input.MotionEvent" title="mui_ui.input.MotionEvent"><em>MotionEvent</em></a>) – start position of swipe event</p></li>
+<li><p><strong>e2</strong> (<a class="reference internal" href="#mui_ui.input.MotionEvent" title="mui_ui.input.MotionEvent"><em>MotionEvent</em></a>) – end position of swipe event</p></li>
+<li><p><strong>velocityX</strong> (<em>int</em>) – distance between e1.x and e2.x</p></li>
+<li><p><strong>velocityY</strong> (<em>int</em>) – distance between e1.y and e2.y</p></li>
 </ul>
-</td>
-</tr>
-</tbody>
-</table>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="method">
 <dt id="mui_ui.gesturedetector.GestureListener.onLongPress">
-<code class="descname">onLongPress</code><span class="sig-paren">(</span><em>e: input.MotionEvent</em><span class="sig-paren">)</span><a class="headerlink" href="#mui_ui.gesturedetector.GestureListener.onLongPress" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">onLongPress</code><span class="sig-paren">(</span><em class="sig-param">e: input.MotionEvent</em><span class="sig-paren">)</span><a class="headerlink" href="#mui_ui.gesturedetector.GestureListener.onLongPress" title="Permalink to this definition">¶</a></dt>
 <dd><p>this method invoked when long press event occured.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>e</strong> (<a class="reference internal" href="#mui_ui.input.MotionEvent" title="mui_ui.input.MotionEvent"><em>MotionEvent</em></a>) – event data of started long press</td>
-</tr>
-</tbody>
-</table>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>e</strong> (<a class="reference internal" href="#mui_ui.input.MotionEvent" title="mui_ui.input.MotionEvent"><em>MotionEvent</em></a>) – event data of started long press</p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="method">
 <dt id="mui_ui.gesturedetector.GestureListener.onScroll">
-<code class="descname">onScroll</code><span class="sig-paren">(</span><em>e1: input.MotionEvent</em>, <em>e2: input.MotionEvent</em>, <em>scrollX</em>, <em>scrollY</em><span class="sig-paren">)</span><a class="headerlink" href="#mui_ui.gesturedetector.GestureListener.onScroll" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">onScroll</code><span class="sig-paren">(</span><em class="sig-param">e1: input.MotionEvent</em>, <em class="sig-param">e2: input.MotionEvent</em>, <em class="sig-param">scrollX</em>, <em class="sig-param">scrollY</em><span class="sig-paren">)</span><a class="headerlink" href="#mui_ui.gesturedetector.GestureListener.onScroll" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 </dd></dl>
+
+<dl class="data">
+<dt id="mui_ui.gesturedetector.LONG_PRESS_TIMEOUT">
+<code class="sig-prename descclassname">mui_ui.gesturedetector.</code><code class="sig-name descname">LONG_PRESS_TIMEOUT</code><em class="property"> = 3</em><a class="headerlink" href="#mui_ui.gesturedetector.LONG_PRESS_TIMEOUT" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="data">
+<dt id="mui_ui.gesturedetector.MINIMUM_FLING_VELOCITY">
+<code class="sig-prename descclassname">mui_ui.gesturedetector.</code><code class="sig-name descname">MINIMUM_FLING_VELOCITY</code><em class="property"> = 50</em><a class="headerlink" href="#mui_ui.gesturedetector.MINIMUM_FLING_VELOCITY" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="data">
+<dt id="mui_ui.gesturedetector.SLOP_SQUARE">
+<code class="sig-prename descclassname">mui_ui.gesturedetector.</code><code class="sig-name descname">SLOP_SQUARE</code><em class="property"> = 64</em><a class="headerlink" href="#mui_ui.gesturedetector.SLOP_SQUARE" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
 
 </div>
 <div class="section" id="module-mui_ui.image">
 <span id="mui-ui-image-module"></span><h2>mui_ui.image module<a class="headerlink" href="#module-mui_ui.image" title="Permalink to this headline">¶</a></h2>
 <dl class="class">
 <dt id="mui_ui.image.Image">
-<em class="property">class </em><code class="descclassname">mui_ui.image.</code><code class="descname">Image</code><span class="sig-paren">(</span><em>img: str = None</em>, <em>name='imageview'</em><span class="sig-paren">)</span><a class="headerlink" href="#mui_ui.image.Image" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-prename descclassname">mui_ui.image.</code><code class="sig-name descname">Image</code><span class="sig-paren">(</span><em class="sig-param">img: str = None</em>, <em class="sig-param">name='imageview'</em><span class="sig-paren">)</span><a class="headerlink" href="#mui_ui.image.Image" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">parts.AbsParts</span></code></p>
 <p>Image View</p>
 <p>this view load selected image and convert to Matrix for mui UI drawing.
 a pixel which color is BLACK be drawn as LED ON, the other color pixel is does not draw.</p>
 <dl class="attribute">
 <dt id="mui_ui.image.Image.offset_x">
-<code class="descname">offset_x</code><a class="headerlink" href="#mui_ui.image.Image.offset_x" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">offset_x</code><a class="headerlink" href="#mui_ui.image.Image.offset_x" title="Permalink to this definition">¶</a></dt>
 <dd><p>image drawing start position from left side.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">int</td>
-</tr>
-</tbody>
-</table>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="attribute">
 <dt id="mui_ui.image.Image.offset_y">
-<code class="descname">offset_y</code><a class="headerlink" href="#mui_ui.image.Image.offset_y" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">offset_y</code><a class="headerlink" href="#mui_ui.image.Image.offset_y" title="Permalink to this definition">¶</a></dt>
 <dd><p>image drawing start position from top side.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">int</td>
-</tr>
-</tbody>
-</table>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
 </dd></dl>
 
 <p class="rubric">Notes</p>
@@ -1036,37 +977,37 @@ image.deleteImage()
 updateDisplay()</p>
 <dl class="method">
 <dt id="mui_ui.image.Image.deleteImage">
-<code class="descname">deleteImage</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mui_ui.image.Image.deleteImage" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">deleteImage</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mui_ui.image.Image.deleteImage" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="method">
 <dt id="mui_ui.image.Image.getMatrix">
-<code class="descname">getMatrix</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mui_ui.image.Image.getMatrix" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">getMatrix</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mui_ui.image.Image.getMatrix" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
-<dl class="attribute">
+<dl class="method">
 <dt>
-<code class="descname">offset_x</code></dt>
+<em class="property">property </em><code class="sig-name descname">offset_x</code></dt>
 <dd></dd></dl>
 
-<dl class="attribute">
+<dl class="method">
 <dt>
-<code class="descname">offset_y</code></dt>
+<em class="property">property </em><code class="sig-name descname">offset_y</code></dt>
 <dd></dd></dl>
 
 <dl class="method">
 <dt id="mui_ui.image.Image.setImage">
-<code class="descname">setImage</code><span class="sig-paren">(</span><em>img: str</em><span class="sig-paren">)</span><a class="headerlink" href="#mui_ui.image.Image.setImage" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">setImage</code><span class="sig-paren">(</span><em class="sig-param">img: str</em><span class="sig-paren">)</span><a class="headerlink" href="#mui_ui.image.Image.setImage" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="method">
 <dt id="mui_ui.image.Image.setImageData">
-<code class="descname">setImageData</code><span class="sig-paren">(</span><em>imgData: mui_ui.matrix.Matrix</em><span class="sig-paren">)</span><a class="headerlink" href="#mui_ui.image.Image.setImageData" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">setImageData</code><span class="sig-paren">(</span><em class="sig-param">imgData: mui_ui.matrix.Matrix</em><span class="sig-paren">)</span><a class="headerlink" href="#mui_ui.image.Image.setImageData" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="method">
 <dt id="mui_ui.image.Image.setPos">
-<code class="descname">setPos</code><span class="sig-paren">(</span><em>x</em>, <em>y</em><span class="sig-paren">)</span><a class="headerlink" href="#mui_ui.image.Image.setPos" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">setPos</code><span class="sig-paren">(</span><em class="sig-param">x</em>, <em class="sig-param">y</em><span class="sig-paren">)</span><a class="headerlink" href="#mui_ui.image.Image.setPos" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 </dd></dl>
@@ -1074,46 +1015,72 @@ updateDisplay()</p>
 </div>
 <div class="section" id="module-mui_ui.input">
 <span id="mui-ui-input-module"></span><h2>mui_ui.input module<a class="headerlink" href="#module-mui_ui.input" title="Permalink to this headline">¶</a></h2>
+<dl class="data">
+<dt id="mui_ui.input.ABS_X">
+<code class="sig-prename descclassname">mui_ui.input.</code><code class="sig-name descname">ABS_X</code><em class="property"> = 0</em><a class="headerlink" href="#mui_ui.input.ABS_X" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="data">
+<dt id="mui_ui.input.ABS_Y">
+<code class="sig-prename descclassname">mui_ui.input.</code><code class="sig-name descname">ABS_Y</code><em class="property"> = 1</em><a class="headerlink" href="#mui_ui.input.ABS_Y" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="data">
+<dt id="mui_ui.input.BTN_TOUCH">
+<code class="sig-prename descclassname">mui_ui.input.</code><code class="sig-name descname">BTN_TOUCH</code><em class="property"> = 330</em><a class="headerlink" href="#mui_ui.input.BTN_TOUCH" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="data">
+<dt id="mui_ui.input.EV_ABS">
+<code class="sig-prename descclassname">mui_ui.input.</code><code class="sig-name descname">EV_ABS</code><em class="property"> = 3</em><a class="headerlink" href="#mui_ui.input.EV_ABS" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="data">
+<dt id="mui_ui.input.EV_KEY">
+<code class="sig-prename descclassname">mui_ui.input.</code><code class="sig-name descname">EV_KEY</code><em class="property"> = 1</em><a class="headerlink" href="#mui_ui.input.EV_KEY" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="data">
+<dt id="mui_ui.input.EV_SYN">
+<code class="sig-prename descclassname">mui_ui.input.</code><code class="sig-name descname">EV_SYN</code><em class="property"> = 0</em><a class="headerlink" href="#mui_ui.input.EV_SYN" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
 <dl class="class">
 <dt id="mui_ui.input.InputEventListener">
-<em class="property">class </em><code class="descclassname">mui_ui.input.</code><code class="descname">InputEventListener</code><a class="headerlink" href="#mui_ui.input.InputEventListener" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-prename descclassname">mui_ui.input.</code><code class="sig-name descname">InputEventListener</code><a class="headerlink" href="#mui_ui.input.InputEventListener" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
 <p>Interface definition class for a callback to be invoked when a touch event will occur.
 If you want to receive touch event, please override onInputEvent method.</p>
 <dl class="method">
 <dt id="mui_ui.input.InputEventListener.onInputEvent">
-<code class="descname">onInputEvent</code><span class="sig-paren">(</span><em>e: mui_ui.input.MotionEvent</em><span class="sig-paren">)</span><a class="headerlink" href="#mui_ui.input.InputEventListener.onInputEvent" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">onInputEvent</code><span class="sig-paren">(</span><em class="sig-param">e: mui_ui.input.MotionEvent</em><span class="sig-paren">)</span><a class="headerlink" href="#mui_ui.input.InputEventListener.onInputEvent" title="Permalink to this definition">¶</a></dt>
 <dd><p>touch event callback</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>e</strong> (<a class="reference internal" href="#mui_ui.input.MotionEvent" title="mui_ui.input.MotionEvent"><em>MotionEvent</em></a>) – </td>
-</tr>
-</tbody>
-</table>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>e</strong> (<a class="reference internal" href="#mui_ui.input.MotionEvent" title="mui_ui.input.MotionEvent"><em>MotionEvent</em></a>) – </p>
+</dd>
+</dl>
 </dd></dl>
 
 </dd></dl>
 
 <dl class="class">
 <dt id="mui_ui.input.InputHandler">
-<em class="property">class </em><code class="descclassname">mui_ui.input.</code><code class="descname">InputHandler</code><span class="sig-paren">(</span><em>listener: mui_ui.input.InputEventListener</em>, <em>target_device='Atmel maXTouch Touchscreen'</em><span class="sig-paren">)</span><a class="headerlink" href="#mui_ui.input.InputHandler" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-prename descclassname">mui_ui.input.</code><code class="sig-name descname">InputHandler</code><span class="sig-paren">(</span><em class="sig-param">listener: mui_ui.input.InputEventListener</em>, <em class="sig-param">target_device='Atmel maXTouch Touchscreen'</em><span class="sig-paren">)</span><a class="headerlink" href="#mui_ui.input.InputHandler" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
 <p>InputHandler is handling touch event.</p>
 <p class="rubric">Examples</p>
 <p>from mui_ui import InputHandler, InputEventListener</p>
-<dl class="docutils">
-<dt>class App(InputEventListener):</dt>
-<dd><dl class="first last docutils">
-<dt>def __init__(self):</dt>
-<dd># create input event handler
-self._input = InputHandler(self)</dd>
-<dt>def mainLoop(self):</dt>
-<dd># start capture touch event
-self._input.startEventLoop()</dd>
-<dt>def onInputEvent(self, e: MotionEvnet):</dt>
-<dd># handling motion event. for instance, pass to UI(dispatchTouchEvent())</dd>
+<dl class="simple">
+<dt>class App(InputEventListener):</dt><dd><dl class="simple">
+<dt>def __init__(self):</dt><dd><p># create input event handler
+self._input = InputHandler(self)</p>
+</dd>
+<dt>def mainLoop(self):</dt><dd><p># start capture touch event
+self._input.startEventLoop()</p>
+</dd>
+<dt>def onInputEvent(self, e: MotionEvnet):</dt><dd><p># handling motion event. for instance, pass to UI(dispatchTouchEvent())</p>
+</dd>
 </dl>
 </dd>
 </dl>
@@ -1121,140 +1088,155 @@ self._input.startEventLoop()</dd>
 app = App()
 app.mainLoop()</p>
 <div class="admonition seealso">
-<p class="first admonition-title">See also</p>
-<p class="last"><a class="reference internal" href="#mui_ui.input.InputEventListener" title="mui_ui.input.InputEventListener"><code class="xref py py-class docutils literal notranslate"><span class="pre">InputEventListener</span></code></a>, <a class="reference internal" href="#mui_ui.input.MotionEvent" title="mui_ui.input.MotionEvent"><code class="xref py py-class docutils literal notranslate"><span class="pre">MotionEvent</span></code></a></p>
+<p class="admonition-title">See also</p>
+<p><a class="reference internal" href="#mui_ui.input.InputEventListener" title="mui_ui.input.InputEventListener"><code class="xref py py-class docutils literal notranslate"><span class="pre">InputEventListener</span></code></a>, <a class="reference internal" href="#mui_ui.input.MotionEvent" title="mui_ui.input.MotionEvent"><code class="xref py py-class docutils literal notranslate"><span class="pre">MotionEvent</span></code></a></p>
 </div>
 <dl class="method">
 <dt id="mui_ui.input.InputHandler.eventLoop">
-<code class="descname">eventLoop</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mui_ui.input.InputHandler.eventLoop" title="Permalink to this definition">¶</a></dt>
+<em class="property">async </em><code class="sig-name descname">eventLoop</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mui_ui.input.InputHandler.eventLoop" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="method">
 <dt id="mui_ui.input.InputHandler.handleInputEvent">
-<code class="descname">handleInputEvent</code><span class="sig-paren">(</span><em>e: mui_ui.input.MotionEvent</em><span class="sig-paren">)</span><a class="headerlink" href="#mui_ui.input.InputHandler.handleInputEvent" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">handleInputEvent</code><span class="sig-paren">(</span><em class="sig-param">e: mui_ui.input.MotionEvent</em><span class="sig-paren">)</span><a class="headerlink" href="#mui_ui.input.InputHandler.handleInputEvent" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="method">
 <dt id="mui_ui.input.InputHandler.startEventLoop">
-<code class="descname">startEventLoop</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mui_ui.input.InputHandler.startEventLoop" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">startEventLoop</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mui_ui.input.InputHandler.startEventLoop" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 </dd></dl>
 
 <dl class="class">
 <dt id="mui_ui.input.MotionEvent">
-<em class="property">class </em><code class="descclassname">mui_ui.input.</code><code class="descname">MotionEvent</code><a class="headerlink" href="#mui_ui.input.MotionEvent" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-prename descclassname">mui_ui.input.</code><code class="sig-name descname">MotionEvent</code><a class="headerlink" href="#mui_ui.input.MotionEvent" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
 <p>Touch event class</p>
 <dl class="attribute">
 <dt id="mui_ui.input.MotionEvent.timestamp">
-<code class="descname">timestamp</code><a class="headerlink" href="#mui_ui.input.MotionEvent.timestamp" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">timestamp</code><a class="headerlink" href="#mui_ui.input.MotionEvent.timestamp" title="Permalink to this definition">¶</a></dt>
 <dd><p>timestamp</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">float</td>
-</tr>
-</tbody>
-</table>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="attribute">
 <dt id="mui_ui.input.MotionEvent.action">
-<code class="descname">action</code><a class="headerlink" href="#mui_ui.input.MotionEvent.action" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">action</code><a class="headerlink" href="#mui_ui.input.MotionEvent.action" title="Permalink to this definition">¶</a></dt>
 <dd><p>touch action type. VALUE_UP or VALUE_DOWN or VALUE_MOVE</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">int</td>
-</tr>
-</tbody>
-</table>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="attribute">
 <dt id="mui_ui.input.MotionEvent.x">
-<code class="descname">x</code><a class="headerlink" href="#mui_ui.input.MotionEvent.x" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">x</code><a class="headerlink" href="#mui_ui.input.MotionEvent.x" title="Permalink to this definition">¶</a></dt>
 <dd><p>touch x position</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">int</td>
-</tr>
-</tbody>
-</table>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="attribute">
 <dt id="mui_ui.input.MotionEvent.y">
-<code class="descname">y</code><a class="headerlink" href="#mui_ui.input.MotionEvent.y" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">y</code><a class="headerlink" href="#mui_ui.input.MotionEvent.y" title="Permalink to this definition">¶</a></dt>
 <dd><p>touch y position</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">int</td>
-</tr>
-</tbody>
-</table>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
 </dd></dl>
 
-<dl class="attribute">
+<dl class="method">
 <dt>
-<code class="descname">action</code></dt>
+<em class="property">property </em><code class="sig-name descname">action</code></dt>
 <dd></dd></dl>
 
 <dl class="method">
 <dt id="mui_ui.input.MotionEvent.copy">
-<code class="descname">copy</code><span class="sig-paren">(</span><em>e: mui_ui.input.MotionEvent</em><span class="sig-paren">)</span><a class="headerlink" href="#mui_ui.input.MotionEvent.copy" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">copy</code><span class="sig-paren">(</span><em class="sig-param">e: mui_ui.input.MotionEvent</em><span class="sig-paren">)</span><a class="headerlink" href="#mui_ui.input.MotionEvent.copy" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
-<dl class="attribute">
+<dl class="method">
 <dt>
-<code class="descname">timestamp</code></dt>
+<em class="property">property </em><code class="sig-name descname">timestamp</code></dt>
 <dd></dd></dl>
 
-<dl class="attribute">
+<dl class="method">
 <dt>
-<code class="descname">x</code></dt>
+<em class="property">property </em><code class="sig-name descname">x</code></dt>
 <dd></dd></dl>
 
-<dl class="attribute">
+<dl class="method">
 <dt>
-<code class="descname">y</code></dt>
+<em class="property">property </em><code class="sig-name descname">y</code></dt>
 <dd></dd></dl>
 
 </dd></dl>
+
+<dl class="data">
+<dt id="mui_ui.input.SYN_REPORT">
+<code class="sig-prename descclassname">mui_ui.input.</code><code class="sig-name descname">SYN_REPORT</code><em class="property"> = 0</em><a class="headerlink" href="#mui_ui.input.SYN_REPORT" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
 
 <dl class="class">
 <dt id="mui_ui.input.TestInputEventListener">
-<em class="property">class </em><code class="descclassname">mui_ui.input.</code><code class="descname">TestInputEventListener</code><a class="headerlink" href="#mui_ui.input.TestInputEventListener" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-prename descclassname">mui_ui.input.</code><code class="sig-name descname">TestInputEventListener</code><a class="headerlink" href="#mui_ui.input.TestInputEventListener" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#mui_ui.input.InputEventListener" title="mui_ui.input.InputEventListener"><code class="xref py py-class docutils literal notranslate"><span class="pre">mui_ui.input.InputEventListener</span></code></a></p>
 <dl class="method">
 <dt id="mui_ui.input.TestInputEventListener.onInputEvent">
-<code class="descname">onInputEvent</code><span class="sig-paren">(</span><em>e: mui_ui.input.MotionEvent</em><span class="sig-paren">)</span><a class="headerlink" href="#mui_ui.input.TestInputEventListener.onInputEvent" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">onInputEvent</code><span class="sig-paren">(</span><em class="sig-param">e: mui_ui.input.MotionEvent</em><span class="sig-paren">)</span><a class="headerlink" href="#mui_ui.input.TestInputEventListener.onInputEvent" title="Permalink to this definition">¶</a></dt>
 <dd><p>touch event callback</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>e</strong> (<a class="reference internal" href="#mui_ui.input.MotionEvent" title="mui_ui.input.MotionEvent"><em>MotionEvent</em></a>) – </td>
-</tr>
-</tbody>
-</table>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>e</strong> (<a class="reference internal" href="#mui_ui.input.MotionEvent" title="mui_ui.input.MotionEvent"><em>MotionEvent</em></a>) – </p>
+</dd>
+</dl>
 </dd></dl>
 
 </dd></dl>
+
+<dl class="data">
+<dt id="mui_ui.input.VALUE_DOWN">
+<code class="sig-prename descclassname">mui_ui.input.</code><code class="sig-name descname">VALUE_DOWN</code><em class="property"> = 1</em><a class="headerlink" href="#mui_ui.input.VALUE_DOWN" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="data">
+<dt id="mui_ui.input.VALUE_MOVE">
+<code class="sig-prename descclassname">mui_ui.input.</code><code class="sig-name descname">VALUE_MOVE</code><em class="property"> = 2</em><a class="headerlink" href="#mui_ui.input.VALUE_MOVE" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="data">
+<dt id="mui_ui.input.VALUE_UP">
+<code class="sig-prename descclassname">mui_ui.input.</code><code class="sig-name descname">VALUE_UP</code><em class="property"> = 0</em><a class="headerlink" href="#mui_ui.input.VALUE_UP" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
 
 </div>
 <div class="section" id="module-mui_ui.keyboard">
 <span id="mui-ui-keyboard-module"></span><h2>mui_ui.keyboard module<a class="headerlink" href="#module-mui_ui.keyboard" title="Permalink to this headline">¶</a></h2>
+<dl class="data">
+<dt id="mui_ui.keyboard.ALPHABET_LOWER">
+<code class="sig-prename descclassname">mui_ui.keyboard.</code><code class="sig-name descname">ALPHABET_LOWER</code><em class="property"> = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z']</em><a class="headerlink" href="#mui_ui.keyboard.ALPHABET_LOWER" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="data">
+<dt id="mui_ui.keyboard.ALPHABET_UPPER">
+<code class="sig-prename descclassname">mui_ui.keyboard.</code><code class="sig-name descname">ALPHABET_UPPER</code><em class="property"> = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z']</em><a class="headerlink" href="#mui_ui.keyboard.ALPHABET_UPPER" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
 <dl class="class">
 <dt id="mui_ui.keyboard.Keyboard">
-<em class="property">class </em><code class="descclassname">mui_ui.keyboard.</code><code class="descname">Keyboard</code><span class="sig-paren">(</span><em>name='keyboard'</em>, <em>listener: mui_ui.keyboard.KeyboardListener = None</em><span class="sig-paren">)</span><a class="headerlink" href="#mui_ui.keyboard.Keyboard" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-prename descclassname">mui_ui.keyboard.</code><code class="sig-name descname">Keyboard</code><span class="sig-paren">(</span><em class="sig-param">name='keyboard'</em>, <em class="sig-param">listener: mui_ui.keyboard.KeyboardListener = None</em><span class="sig-paren">)</span><a class="headerlink" href="#mui_ui.keyboard.Keyboard" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">widget.Widget</span></code></p>
 <p>Keyboard widget
 if you want to use keyboard on mui, please add this widget to application.</p>
@@ -1264,178 +1246,192 @@ if you want to use keyboard on mui, please add this widget to application.</p>
 <p>from mui_ui import AbsApp, AppEventListener, Text, Keyboard, KeyboardListener</p>
 <p>class App(AbsApp, KeyboardListener, OnTouchEventListener, OnUpdateRequestListener):</p>
 <blockquote>
-<div><dl class="docutils">
-<dt>def __init__(self, appEventListener: AppEventListener):</dt>
-<dd><p class="first">super().__init__(appEventListener)
+<div><dl>
+<dt>def __init__(self, appEventListener: AppEventListener):</dt><dd><p>super().__init__(appEventListener)
 # create keyboard
 keyboard = Keyboard(listener=self)
 keyboard.setPos(0, 11) # set position x : 0, y : 11
 keyboard.addOnUpdateViewListener(self) # add update view listener</p>
-<p class="last"># create text view
+<p># create text view
 input_text = Text(‘’)
 input_text.setSize(0, 0, 100, 11) # set to above keyboard
 self.addView(input_text)
 self.setView(input_text, ‘input_text)</p>
 </dd>
-<dt>def onUpdateView(self, view):</dt>
-<dd># update request
-self.updateRequest(0)</dd>
-<dt>def onInput(self, char):</dt>
-<dd><p class="first"># this method is callback of KeyboardListener
-# if user touch character on keyboard, invoked this method.
-self.getView(‘input_text’).addText(char)</p>
-<p class="last"># update UI
+<dt>def onUpdateView(self, view):</dt><dd><p># update request
 self.updateRequest(0)</p>
 </dd>
-<dt>def onDelete(self):</dt>
-<dd><p class="first"># this method is callback of KeyboardListener
+<dt>def onInput(self, char):</dt><dd><p># this method is callback of KeyboardListener
+# if user touch character on keyboard, invoked this method.
+self.getView(‘input_text’).addText(char)</p>
+<p># update UI
+self.updateRequest(0)</p>
+</dd>
+<dt>def onDelete(self):</dt><dd><p># this method is callback of KeyboardListener
 # if user touch [del] button on keyboard, invoked this method.</p>
 <p>self.getView(‘input_text’).deleteLastChar()</p>
-<p class="last"># update UI
+<p># update UI
 self.updateRequest(0)</p>
 </dd>
 </dl>
 </div></blockquote>
 <div class="admonition seealso">
-<p class="first admonition-title">See also</p>
-<p class="last"><a class="reference internal" href="#mui_ui.keyboard.KeyboardListener" title="mui_ui.keyboard.KeyboardListener"><code class="xref py py-class docutils literal notranslate"><span class="pre">KeyboardListener</span></code></a></p>
+<p class="admonition-title">See also</p>
+<p><a class="reference internal" href="#mui_ui.keyboard.KeyboardListener" title="mui_ui.keyboard.KeyboardListener"><code class="xref py py-class docutils literal notranslate"><span class="pre">KeyboardListener</span></code></a></p>
 </div>
 <dl class="method">
 <dt id="mui_ui.keyboard.Keyboard.addEventListener">
-<code class="descname">addEventListener</code><span class="sig-paren">(</span><em>listener: mui_ui.keyboard.KeyboardListener</em><span class="sig-paren">)</span><a class="headerlink" href="#mui_ui.keyboard.Keyboard.addEventListener" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">addEventListener</code><span class="sig-paren">(</span><em class="sig-param">listener: mui_ui.keyboard.KeyboardListener</em><span class="sig-paren">)</span><a class="headerlink" href="#mui_ui.keyboard.Keyboard.addEventListener" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="method">
 <dt id="mui_ui.keyboard.Keyboard.dispatchTouchEvent">
-<code class="descname">dispatchTouchEvent</code><span class="sig-paren">(</span><em>e: input.MotionEvent</em><span class="sig-paren">)</span><a class="headerlink" href="#mui_ui.keyboard.Keyboard.dispatchTouchEvent" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">dispatchTouchEvent</code><span class="sig-paren">(</span><em class="sig-param">e: input.MotionEvent</em><span class="sig-paren">)</span><a class="headerlink" href="#mui_ui.keyboard.Keyboard.dispatchTouchEvent" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="method">
 <dt id="mui_ui.keyboard.Keyboard.setPos">
-<code class="descname">setPos</code><span class="sig-paren">(</span><em>x</em>, <em>y</em><span class="sig-paren">)</span><a class="headerlink" href="#mui_ui.keyboard.Keyboard.setPos" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">setPos</code><span class="sig-paren">(</span><em class="sig-param">x</em>, <em class="sig-param">y</em><span class="sig-paren">)</span><a class="headerlink" href="#mui_ui.keyboard.Keyboard.setPos" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 </dd></dl>
 
 <dl class="class">
 <dt id="mui_ui.keyboard.KeyboardListener">
-<em class="property">class </em><code class="descclassname">mui_ui.keyboard.</code><code class="descname">KeyboardListener</code><a class="headerlink" href="#mui_ui.keyboard.KeyboardListener" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-prename descclassname">mui_ui.keyboard.</code><code class="sig-name descname">KeyboardListener</code><a class="headerlink" href="#mui_ui.keyboard.KeyboardListener" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
 <p>keyboard event callback.
 please set this class to Keyboard instance and implement method for handling keyboard events.</p>
 <dl class="method">
 <dt id="mui_ui.keyboard.KeyboardListener.onBack">
-<code class="descname">onBack</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mui_ui.keyboard.KeyboardListener.onBack" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">onBack</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mui_ui.keyboard.KeyboardListener.onBack" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="method">
 <dt id="mui_ui.keyboard.KeyboardListener.onDelete">
-<code class="descname">onDelete</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mui_ui.keyboard.KeyboardListener.onDelete" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">onDelete</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mui_ui.keyboard.KeyboardListener.onDelete" title="Permalink to this definition">¶</a></dt>
 <dd><p>this method invoked when user touch [del] button</p>
 </dd></dl>
 
 <dl class="method">
 <dt id="mui_ui.keyboard.KeyboardListener.onForward">
-<code class="descname">onForward</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mui_ui.keyboard.KeyboardListener.onForward" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">onForward</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mui_ui.keyboard.KeyboardListener.onForward" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="method">
 <dt id="mui_ui.keyboard.KeyboardListener.onInput">
-<code class="descname">onInput</code><span class="sig-paren">(</span><em>char: str</em><span class="sig-paren">)</span><a class="headerlink" href="#mui_ui.keyboard.KeyboardListener.onInput" title="Permalink to this definition">¶</a></dt>
-<dd><table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>char</strong> (<em>str</em>) – user touched character</td>
-</tr>
-</tbody>
-</table>
+<code class="sig-name descname">onInput</code><span class="sig-paren">(</span><em class="sig-param">char: str</em><span class="sig-paren">)</span><a class="headerlink" href="#mui_ui.keyboard.KeyboardListener.onInput" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>char</strong> (<em>str</em>) – user touched character</p>
+</dd>
+</dl>
 </dd></dl>
 
 </dd></dl>
+
+<dl class="data">
+<dt id="mui_ui.keyboard.MODE_ALPHABET">
+<code class="sig-prename descclassname">mui_ui.keyboard.</code><code class="sig-name descname">MODE_ALPHABET</code><em class="property"> = 1</em><a class="headerlink" href="#mui_ui.keyboard.MODE_ALPHABET" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="data">
+<dt id="mui_ui.keyboard.MODE_ALPHABET_UPPER">
+<code class="sig-prename descclassname">mui_ui.keyboard.</code><code class="sig-name descname">MODE_ALPHABET_UPPER</code><em class="property"> = 2</em><a class="headerlink" href="#mui_ui.keyboard.MODE_ALPHABET_UPPER" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="data">
+<dt id="mui_ui.keyboard.MODE_NUMRIC">
+<code class="sig-prename descclassname">mui_ui.keyboard.</code><code class="sig-name descname">MODE_NUMRIC</code><em class="property"> = 0</em><a class="headerlink" href="#mui_ui.keyboard.MODE_NUMRIC" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="data">
+<dt id="mui_ui.keyboard.NUMERIC_LIST">
+<code class="sig-prename descclassname">mui_ui.keyboard.</code><code class="sig-name descname">NUMERIC_LIST</code><em class="property"> = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '0', ' ', '!', '&#64;', '#', '$', '%', '^', '&amp;', '*', '(', ')', &quot;'&quot;, '&quot;', '=', '_', '`', ':', ';', '?', '~', '|', '.', ',', '/', '\\', '+', '-', '[', ']', '{', '}', '&lt;', '&gt;']</em><a class="headerlink" href="#mui_ui.keyboard.NUMERIC_LIST" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="data">
+<dt id="mui_ui.keyboard.dir">
+<code class="sig-prename descclassname">mui_ui.keyboard.</code><code class="sig-name descname">dir</code><em class="property"> = '/home/pi/mui/project/mui_ui/mui_ui'</em><a class="headerlink" href="#mui_ui.keyboard.dir" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
 
 </div>
 <div class="section" id="module-mui_ui.matrix">
 <span id="mui-ui-matrix-module"></span><h2>mui_ui.matrix module<a class="headerlink" href="#module-mui_ui.matrix" title="Permalink to this headline">¶</a></h2>
 <dl class="class">
 <dt id="mui_ui.matrix.Matrix">
-<em class="property">class </em><code class="descclassname">mui_ui.matrix.</code><code class="descname">Matrix</code><a class="headerlink" href="#mui_ui.matrix.Matrix" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-prename descclassname">mui_ui.matrix.</code><code class="sig-name descname">Matrix</code><a class="headerlink" href="#mui_ui.matrix.Matrix" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
 <dl class="method">
 <dt id="mui_ui.matrix.Matrix.copy">
-<code class="descname">copy</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mui_ui.matrix.Matrix.copy" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">copy</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mui_ui.matrix.Matrix.copy" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="attribute">
 <dt id="mui_ui.matrix.Matrix.height">
-<code class="descname">height</code><a class="headerlink" href="#mui_ui.matrix.Matrix.height" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">height</code><a class="headerlink" href="#mui_ui.matrix.Matrix.height" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="attribute">
 <dt id="mui_ui.matrix.Matrix.matrix">
-<code class="descname">matrix</code><a class="headerlink" href="#mui_ui.matrix.Matrix.matrix" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">matrix</code><a class="headerlink" href="#mui_ui.matrix.Matrix.matrix" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="method">
 <dt id="mui_ui.matrix.Matrix.merge">
-<code class="descname">merge</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mui_ui.matrix.Matrix.merge" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">merge</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mui_ui.matrix.Matrix.merge" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="attribute">
 <dt id="mui_ui.matrix.Matrix.startX">
-<code class="descname">startX</code><a class="headerlink" href="#mui_ui.matrix.Matrix.startX" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">startX</code><a class="headerlink" href="#mui_ui.matrix.Matrix.startX" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="attribute">
 <dt id="mui_ui.matrix.Matrix.startY">
-<code class="descname">startY</code><a class="headerlink" href="#mui_ui.matrix.Matrix.startY" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">startY</code><a class="headerlink" href="#mui_ui.matrix.Matrix.startY" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="attribute">
 <dt id="mui_ui.matrix.Matrix.width">
-<code class="descname">width</code><a class="headerlink" href="#mui_ui.matrix.Matrix.width" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">width</code><a class="headerlink" href="#mui_ui.matrix.Matrix.width" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 </dd></dl>
-
-<dl class="function">
-<dt id="mui_ui.matrix.check_diff_range">
-<code class="descclassname">mui_ui.matrix.</code><code class="descname">check_diff_range</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mui_ui.matrix.check_diff_range" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
 
 </div>
 <div class="section" id="module-mui_ui.muifont">
 <span id="mui-ui-muifont-module"></span><h2>mui_ui.muifont module<a class="headerlink" href="#module-mui_ui.muifont" title="Permalink to this headline">¶</a></h2>
 <dl class="class">
 <dt id="mui_ui.muifont.FontPos">
-<em class="property">class </em><code class="descclassname">mui_ui.muifont.</code><code class="descname">FontPos</code><span class="sig-paren">(</span><em>s1</em>, <em>s2</em>, <em>s3</em><span class="sig-paren">)</span><a class="headerlink" href="#mui_ui.muifont.FontPos" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-prename descclassname">mui_ui.muifont.</code><code class="sig-name descname">FontPos</code><span class="sig-paren">(</span><em class="sig-param">s1</em>, <em class="sig-param">s2</em>, <em class="sig-param">s3</em><span class="sig-paren">)</span><a class="headerlink" href="#mui_ui.muifont.FontPos" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
 <p>font position class</p>
-<dl class="attribute">
+<dl class="method">
 <dt id="mui_ui.muifont.FontPos.col">
-<code class="descname">col</code><a class="headerlink" href="#mui_ui.muifont.FontPos.col" title="Permalink to this definition">¶</a></dt>
+<em class="property">property </em><code class="sig-name descname">col</code><a class="headerlink" href="#mui_ui.muifont.FontPos.col" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
-<dl class="attribute">
+<dl class="method">
 <dt id="mui_ui.muifont.FontPos.height">
-<code class="descname">height</code><a class="headerlink" href="#mui_ui.muifont.FontPos.height" title="Permalink to this definition">¶</a></dt>
+<em class="property">property </em><code class="sig-name descname">height</code><a class="headerlink" href="#mui_ui.muifont.FontPos.height" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
-<dl class="attribute">
+<dl class="method">
 <dt id="mui_ui.muifont.FontPos.row">
-<code class="descname">row</code><a class="headerlink" href="#mui_ui.muifont.FontPos.row" title="Permalink to this definition">¶</a></dt>
+<em class="property">property </em><code class="sig-name descname">row</code><a class="headerlink" href="#mui_ui.muifont.FontPos.row" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
-<dl class="attribute">
+<dl class="method">
 <dt id="mui_ui.muifont.FontPos.width">
-<code class="descname">width</code><a class="headerlink" href="#mui_ui.muifont.FontPos.width" title="Permalink to this definition">¶</a></dt>
+<em class="property">property </em><code class="sig-name descname">width</code><a class="headerlink" href="#mui_ui.muifont.FontPos.width" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 </dd></dl>
 
 <dl class="class">
 <dt id="mui_ui.muifont.MuiFont">
-<em class="property">class </em><code class="descclassname">mui_ui.muifont.</code><code class="descname">MuiFont</code><a class="headerlink" href="#mui_ui.muifont.MuiFont" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-prename descclassname">mui_ui.muifont.</code><code class="sig-name descname">MuiFont</code><a class="headerlink" href="#mui_ui.muifont.MuiFont" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
 <p>font class for mui</p>
 <p>mui has a original Bitmap font. when you use Text view, automatically used this font.</p>
@@ -1443,225 +1439,220 @@ please set this class to Keyboard instance and implement method for handling key
 <p>mui font supports ASCII and Japanese(第二水準の漢字まで), at this moment.</p>
 <dl class="method">
 <dt id="mui_ui.muifont.MuiFont.getText">
-<code class="descname">getText</code><span class="sig-paren">(</span><em>s</em><span class="sig-paren">)</span><a class="headerlink" href="#mui_ui.muifont.MuiFont.getText" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">getText</code><span class="sig-paren">(</span><em class="sig-param">s</em><span class="sig-paren">)</span><a class="headerlink" href="#mui_ui.muifont.MuiFont.getText" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
-<dl class="classmethod">
+<dl class="method">
 <dt id="mui_ui.muifont.MuiFont.get_instance">
-<em class="property">classmethod </em><code class="descname">get_instance</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mui_ui.muifont.MuiFont.get_instance" title="Permalink to this definition">¶</a></dt>
+<em class="property">classmethod </em><code class="sig-name descname">get_instance</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mui_ui.muifont.MuiFont.get_instance" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 </dd></dl>
+
+<dl class="data">
+<dt id="mui_ui.muifont.fontFile">
+<code class="sig-prename descclassname">mui_ui.muifont.</code><code class="sig-name descname">fontFile</code><em class="property"> = '/home/pi/mui/project/mui_ui/mui_ui/assets/mui_gothic_01.png'</em><a class="headerlink" href="#mui_ui.muifont.fontFile" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="data">
+<dt id="mui_ui.muifont.fontInfoFile">
+<code class="sig-prename descclassname">mui_ui.muifont.</code><code class="sig-name descname">fontInfoFile</code><em class="property"> = '/home/pi/mui/project/mui_ui/mui_ui/assets/sjis_unicode_convert_table.csv'</em><a class="headerlink" href="#mui_ui.muifont.fontInfoFile" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="data">
+<dt id="mui_ui.muifont.name">
+<code class="sig-prename descclassname">mui_ui.muifont.</code><code class="sig-name descname">name</code><em class="property"> = '/home/pi/mui/project/mui_ui/mui_ui'</em><a class="headerlink" href="#mui_ui.muifont.name" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="data">
+<dt id="mui_ui.muifont.pJ">
+<code class="sig-prename descclassname">mui_ui.muifont.</code><code class="sig-name descname">pJ</code><em class="property"> = '/home/pi/mui/project/mui_ui/mui_ui/./assets/sjis_unicode_convert_table.csv'</em><a class="headerlink" href="#mui_ui.muifont.pJ" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
 
 </div>
 <div class="section" id="module-mui_ui.parts">
 <span id="mui-ui-parts-module"></span><h2>mui_ui.parts module<a class="headerlink" href="#module-mui_ui.parts" title="Permalink to this headline">¶</a></h2>
 <dl class="class">
 <dt id="mui_ui.parts.AbsParts">
-<em class="property">class </em><code class="descclassname">mui_ui.parts.</code><code class="descname">AbsParts</code><span class="sig-paren">(</span><em>name=None</em><span class="sig-paren">)</span><a class="headerlink" href="#mui_ui.parts.AbsParts" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-prename descclassname">mui_ui.parts.</code><code class="sig-name descname">AbsParts</code><span class="sig-paren">(</span><em class="sig-param">name=None</em><span class="sig-paren">)</span><a class="headerlink" href="#mui_ui.parts.AbsParts" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
 <p>AbsParts class is abstract and base class of All Views(such as Text, Image, Widget).
 if you want to implement original custom view, please inherit this class.</p>
 <dl class="attribute">
 <dt id="mui_ui.parts.AbsParts.name">
-<code class="descname">name</code><a class="headerlink" href="#mui_ui.parts.AbsParts.name" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">name</code><a class="headerlink" href="#mui_ui.parts.AbsParts.name" title="Permalink to this definition">¶</a></dt>
 <dd><p>name of view. use for identify of view</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">str</td>
-</tr>
-</tbody>
-</table>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="attribute">
 <dt id="mui_ui.parts.AbsParts.visible">
-<code class="descname">visible</code><a class="headerlink" href="#mui_ui.parts.AbsParts.visible" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">visible</code><a class="headerlink" href="#mui_ui.parts.AbsParts.visible" title="Permalink to this definition">¶</a></dt>
 <dd><p>visibility of view. when set this property to False, the view does not draw on UI.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">boolean</td>
-</tr>
-</tbody>
-</table>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>boolean</p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="attribute">
 <dt id="mui_ui.parts.AbsParts.x">
-<code class="descname">x</code><a class="headerlink" href="#mui_ui.parts.AbsParts.x" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">x</code><a class="headerlink" href="#mui_ui.parts.AbsParts.x" title="Permalink to this definition">¶</a></dt>
 <dd><p>x position of view.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">int</td>
-</tr>
-</tbody>
-</table>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="attribute">
 <dt id="mui_ui.parts.AbsParts.y">
-<code class="descname">y</code><a class="headerlink" href="#mui_ui.parts.AbsParts.y" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">y</code><a class="headerlink" href="#mui_ui.parts.AbsParts.y" title="Permalink to this definition">¶</a></dt>
 <dd><p>y position of view.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">int</td>
-</tr>
-</tbody>
-</table>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="attribute">
 <dt id="mui_ui.parts.AbsParts.width">
-<code class="descname">width</code><a class="headerlink" href="#mui_ui.parts.AbsParts.width" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">width</code><a class="headerlink" href="#mui_ui.parts.AbsParts.width" title="Permalink to this definition">¶</a></dt>
 <dd><p>width of view.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">int</td>
-</tr>
-</tbody>
-</table>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="attribute">
 <dt id="mui_ui.parts.AbsParts.height">
-<code class="descname">height</code><a class="headerlink" href="#mui_ui.parts.AbsParts.height" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">height</code><a class="headerlink" href="#mui_ui.parts.AbsParts.height" title="Permalink to this definition">¶</a></dt>
 <dd><p>height of view.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">int</td>
-</tr>
-</tbody>
-</table>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="method">
 <dt id="mui_ui.parts.AbsParts.addOnTouchViewListener">
-<code class="descname">addOnTouchViewListener</code><span class="sig-paren">(</span><em>listener: mui_ui.parts.OnTouchEventListener</em><span class="sig-paren">)</span><a class="headerlink" href="#mui_ui.parts.AbsParts.addOnTouchViewListener" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">addOnTouchViewListener</code><span class="sig-paren">(</span><em class="sig-param">listener: mui_ui.parts.OnTouchEventListener</em><span class="sig-paren">)</span><a class="headerlink" href="#mui_ui.parts.AbsParts.addOnTouchViewListener" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="method">
 <dt id="mui_ui.parts.AbsParts.addOnUpdateViewListener">
-<code class="descname">addOnUpdateViewListener</code><span class="sig-paren">(</span><em>listener: mui_ui.parts.OnUpdateRequestListener</em><span class="sig-paren">)</span><a class="headerlink" href="#mui_ui.parts.AbsParts.addOnUpdateViewListener" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">addOnUpdateViewListener</code><span class="sig-paren">(</span><em class="sig-param">listener: mui_ui.parts.OnUpdateRequestListener</em><span class="sig-paren">)</span><a class="headerlink" href="#mui_ui.parts.AbsParts.addOnUpdateViewListener" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="method">
 <dt id="mui_ui.parts.AbsParts.dispatchTouchEvent">
-<code class="descname">dispatchTouchEvent</code><span class="sig-paren">(</span><em>e</em><span class="sig-paren">)</span><a class="headerlink" href="#mui_ui.parts.AbsParts.dispatchTouchEvent" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">dispatchTouchEvent</code><span class="sig-paren">(</span><em class="sig-param">e</em><span class="sig-paren">)</span><a class="headerlink" href="#mui_ui.parts.AbsParts.dispatchTouchEvent" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="method">
 <dt id="mui_ui.parts.AbsParts.getMatrix">
-<code class="descname">getMatrix</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mui_ui.parts.AbsParts.getMatrix" title="Permalink to this definition">¶</a></dt>
+<em class="property">abstract </em><code class="sig-name descname">getMatrix</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mui_ui.parts.AbsParts.getMatrix" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
-<dl class="attribute">
+<dl class="method">
 <dt>
-<code class="descname">height</code></dt>
+<em class="property">property </em><code class="sig-name descname">height</code></dt>
 <dd></dd></dl>
 
 <dl class="method">
 <dt id="mui_ui.parts.AbsParts.hitTest">
-<code class="descname">hitTest</code><span class="sig-paren">(</span><em>x</em>, <em>y</em><span class="sig-paren">)</span><a class="headerlink" href="#mui_ui.parts.AbsParts.hitTest" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">hitTest</code><span class="sig-paren">(</span><em class="sig-param">x</em>, <em class="sig-param">y</em><span class="sig-paren">)</span><a class="headerlink" href="#mui_ui.parts.AbsParts.hitTest" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
-<dl class="attribute">
+<dl class="method">
 <dt>
-<code class="descname">name</code></dt>
+<em class="property">property </em><code class="sig-name descname">name</code></dt>
 <dd></dd></dl>
 
 <dl class="method">
 <dt id="mui_ui.parts.AbsParts.onTouch">
-<code class="descname">onTouch</code><span class="sig-paren">(</span><em>e</em><span class="sig-paren">)</span><a class="headerlink" href="#mui_ui.parts.AbsParts.onTouch" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">onTouch</code><span class="sig-paren">(</span><em class="sig-param">e</em><span class="sig-paren">)</span><a class="headerlink" href="#mui_ui.parts.AbsParts.onTouch" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="method">
 <dt id="mui_ui.parts.AbsParts.setSize">
-<code class="descname">setSize</code><span class="sig-paren">(</span><em>x</em>, <em>y</em>, <em>width</em>, <em>height</em><span class="sig-paren">)</span><a class="headerlink" href="#mui_ui.parts.AbsParts.setSize" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">setSize</code><span class="sig-paren">(</span><em class="sig-param">x</em>, <em class="sig-param">y</em>, <em class="sig-param">width</em>, <em class="sig-param">height</em><span class="sig-paren">)</span><a class="headerlink" href="#mui_ui.parts.AbsParts.setSize" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="method">
 <dt id="mui_ui.parts.AbsParts.updateRequest">
-<code class="descname">updateRequest</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mui_ui.parts.AbsParts.updateRequest" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">updateRequest</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mui_ui.parts.AbsParts.updateRequest" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
-<dl class="attribute">
+<dl class="method">
 <dt>
-<code class="descname">visible</code></dt>
+<em class="property">property </em><code class="sig-name descname">visible</code></dt>
 <dd></dd></dl>
 
-<dl class="attribute">
+<dl class="method">
 <dt>
-<code class="descname">width</code></dt>
+<em class="property">property </em><code class="sig-name descname">width</code></dt>
 <dd></dd></dl>
 
-<dl class="attribute">
+<dl class="method">
 <dt>
-<code class="descname">x</code></dt>
+<em class="property">property </em><code class="sig-name descname">x</code></dt>
 <dd></dd></dl>
 
-<dl class="attribute">
+<dl class="method">
 <dt>
-<code class="descname">y</code></dt>
+<em class="property">property </em><code class="sig-name descname">y</code></dt>
 <dd></dd></dl>
 
 </dd></dl>
 
 <dl class="class">
 <dt id="mui_ui.parts.OnTouchEventListener">
-<em class="property">class </em><code class="descclassname">mui_ui.parts.</code><code class="descname">OnTouchEventListener</code><a class="headerlink" href="#mui_ui.parts.OnTouchEventListener" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-prename descclassname">mui_ui.parts.</code><code class="sig-name descname">OnTouchEventListener</code><a class="headerlink" href="#mui_ui.parts.OnTouchEventListener" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
 <p>touch event callback.
 please set this class to touchable view and implement method for handling touch evnet.</p>
 <dl class="method">
 <dt id="mui_ui.parts.OnTouchEventListener.onTouch">
-<code class="descname">onTouch</code><span class="sig-paren">(</span><em>view</em>, <em>e</em><span class="sig-paren">)</span><a class="headerlink" href="#mui_ui.parts.OnTouchEventListener.onTouch" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">onTouch</code><span class="sig-paren">(</span><em class="sig-param">view</em>, <em class="sig-param">e</em><span class="sig-paren">)</span><a class="headerlink" href="#mui_ui.parts.OnTouchEventListener.onTouch" title="Permalink to this definition">¶</a></dt>
 <dd><p>callback method to be invoked when a touched target view.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
-<li><strong>view</strong> (<a class="reference internal" href="#mui_ui.parts.AbsParts" title="mui_ui.parts.AbsParts"><em>AbsParts</em></a>) – target view instance</li>
-<li><strong>e</strong> (<em>Motionevent</em>) – motion event</li>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>view</strong> (<a class="reference internal" href="#mui_ui.parts.AbsParts" title="mui_ui.parts.AbsParts"><em>AbsParts</em></a>) – target view instance</p></li>
+<li><p><strong>e</strong> (<em>Motionevent</em>) – motion event</p></li>
 </ul>
-</td>
-</tr>
-</tbody>
-</table>
+</dd>
+</dl>
 </dd></dl>
 
 </dd></dl>
 
 <dl class="class">
 <dt id="mui_ui.parts.OnUpdateRequestListener">
-<em class="property">class </em><code class="descclassname">mui_ui.parts.</code><code class="descname">OnUpdateRequestListener</code><a class="headerlink" href="#mui_ui.parts.OnUpdateRequestListener" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-prename descclassname">mui_ui.parts.</code><code class="sig-name descname">OnUpdateRequestListener</code><a class="headerlink" href="#mui_ui.parts.OnUpdateRequestListener" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
 <p>update request callback.
 please set this class to need update view and implement method for update UI.</p>
 <dl class="method">
 <dt id="mui_ui.parts.OnUpdateRequestListener.onUpdateView">
-<code class="descname">onUpdateView</code><span class="sig-paren">(</span><em>view</em><span class="sig-paren">)</span><a class="headerlink" href="#mui_ui.parts.OnUpdateRequestListener.onUpdateView" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">onUpdateView</code><span class="sig-paren">(</span><em class="sig-param">view</em><span class="sig-paren">)</span><a class="headerlink" href="#mui_ui.parts.OnUpdateRequestListener.onUpdateView" title="Permalink to this definition">¶</a></dt>
 <dd><p>callback method to be invoked when need UI update by contents change on view.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>view</strong> (<a class="reference internal" href="#mui_ui.parts.AbsParts" title="mui_ui.parts.AbsParts"><em>AbsParts</em></a>) – update requested view</td>
-</tr>
-</tbody>
-</table>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>view</strong> (<a class="reference internal" href="#mui_ui.parts.AbsParts" title="mui_ui.parts.AbsParts"><em>AbsParts</em></a>) – update requested view</p>
+</dd>
+</dl>
 </dd></dl>
 
 </dd></dl>
@@ -1671,126 +1662,130 @@ please set this class to need update view and implement method for update UI.</p
 <span id="mui-ui-slider-module"></span><h2>mui_ui.slider module<a class="headerlink" href="#module-mui_ui.slider" title="Permalink to this headline">¶</a></h2>
 <dl class="class">
 <dt id="mui_ui.slider.Slider">
-<em class="property">class </em><code class="descclassname">mui_ui.slider.</code><code class="descname">Slider</code><span class="sig-paren">(</span><em>width</em>, <em>maxVal</em>, <em>name='slider'</em><span class="sig-paren">)</span><a class="headerlink" href="#mui_ui.slider.Slider" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-prename descclassname">mui_ui.slider.</code><code class="sig-name descname">Slider</code><span class="sig-paren">(</span><em class="sig-param">width</em>, <em class="sig-param">maxVal</em>, <em class="sig-param">name='slider'</em><span class="sig-paren">)</span><a class="headerlink" href="#mui_ui.slider.Slider" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">widget.Widget</span></code></p>
 <p>Slider is widget for user select value between 0 and maxVal(that you applied).</p>
 <p class="rubric">Examples</p>
 <p>from mui_ui import AbsApp, AppEventListener, Text, Slider, SliderEventListener</p>
 <p>class App(AbsApp, SliderEventListener, OnTouchEventListener, OnUpdateRequestListener):</p>
 <blockquote>
-<div><dl class="docutils">
-<dt>def __init__(self, appEventListener: AppEventListener):</dt>
-<dd><p class="first">super().__init__(appEventListener)
+<div><dl>
+<dt>def __init__(self, appEventListener: AppEventListener):</dt><dd><p>super().__init__(appEventListener)
 # create slider. set width and max value to 100.
 slider = Slider(width=50, maxVal=100)
 slider.setPos(0, 11) # set position x : 0, y : 11
 slider.addOnUpdateViewListener(self) # add update view listener
 slider.setValue(50) # set initial value
 slider.addEventListener(self) # set callback for change value</p>
-<p class="last"># create text view
+<p># create text view
 input_text = Text(‘’)
 input_text.setSize(0, 0, 100, 11)
 self.addView(input_text)
 self.setView(input_text, ‘input_text)</p>
 </dd>
-<dt>def onUpdateView(self, view):</dt>
-<dd># update request
-self.updateRequest(0)</dd>
-<dt>def onSliderValueChanged(self, slider, prevVal, newVal):</dt>
-<dd><p class="first"># this method is callback of SliderEventListener
+<dt>def onUpdateView(self, view):</dt><dd><p># update request
+self.updateRequest(0)</p>
+</dd>
+<dt>def onSliderValueChanged(self, slider, prevVal, newVal):</dt><dd><p># this method is callback of SliderEventListener
 # if user touch or slide thumb control on slider, invoked this method.</p>
 <p>self.getView(‘input_text’).setText(str(newVal))</p>
-<p class="last"># update UI
+<p># update UI
 self.updateRequest(0)</p>
 </dd>
 </dl>
 </div></blockquote>
 <div class="admonition seealso">
-<p class="first admonition-title">See also</p>
-<p class="last"><a class="reference internal" href="#mui_ui.slider.SliderEventListener" title="mui_ui.slider.SliderEventListener"><code class="xref py py-class docutils literal notranslate"><span class="pre">SliderEventListener</span></code></a></p>
+<p class="admonition-title">See also</p>
+<p><a class="reference internal" href="#mui_ui.slider.SliderEventListener" title="mui_ui.slider.SliderEventListener"><code class="xref py py-class docutils literal notranslate"><span class="pre">SliderEventListener</span></code></a></p>
 </div>
 <dl class="method">
 <dt id="mui_ui.slider.Slider.addEventListener">
-<code class="descname">addEventListener</code><span class="sig-paren">(</span><em>listener: mui_ui.slider.SliderEventListener</em><span class="sig-paren">)</span><a class="headerlink" href="#mui_ui.slider.Slider.addEventListener" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">addEventListener</code><span class="sig-paren">(</span><em class="sig-param">listener: mui_ui.slider.SliderEventListener</em><span class="sig-paren">)</span><a class="headerlink" href="#mui_ui.slider.Slider.addEventListener" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="method">
 <dt id="mui_ui.slider.Slider.dispatchTouchEvent">
-<code class="descname">dispatchTouchEvent</code><span class="sig-paren">(</span><em>e: input.MotionEvent</em><span class="sig-paren">)</span><a class="headerlink" href="#mui_ui.slider.Slider.dispatchTouchEvent" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">dispatchTouchEvent</code><span class="sig-paren">(</span><em class="sig-param">e: input.MotionEvent</em><span class="sig-paren">)</span><a class="headerlink" href="#mui_ui.slider.Slider.dispatchTouchEvent" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="method">
 <dt id="mui_ui.slider.Slider.getValue">
-<code class="descname">getValue</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mui_ui.slider.Slider.getValue" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">getValue</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mui_ui.slider.Slider.getValue" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="method">
 <dt id="mui_ui.slider.Slider.setPos">
-<code class="descname">setPos</code><span class="sig-paren">(</span><em>x</em>, <em>y</em><span class="sig-paren">)</span><a class="headerlink" href="#mui_ui.slider.Slider.setPos" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">setPos</code><span class="sig-paren">(</span><em class="sig-param">x</em>, <em class="sig-param">y</em><span class="sig-paren">)</span><a class="headerlink" href="#mui_ui.slider.Slider.setPos" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="method">
 <dt id="mui_ui.slider.Slider.setValue">
-<code class="descname">setValue</code><span class="sig-paren">(</span><em>value</em><span class="sig-paren">)</span><a class="headerlink" href="#mui_ui.slider.Slider.setValue" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">setValue</code><span class="sig-paren">(</span><em class="sig-param">value</em><span class="sig-paren">)</span><a class="headerlink" href="#mui_ui.slider.Slider.setValue" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 </dd></dl>
 
 <dl class="class">
 <dt id="mui_ui.slider.SliderEventListener">
-<em class="property">class </em><code class="descclassname">mui_ui.slider.</code><code class="descname">SliderEventListener</code><a class="headerlink" href="#mui_ui.slider.SliderEventListener" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-prename descclassname">mui_ui.slider.</code><code class="sig-name descname">SliderEventListener</code><a class="headerlink" href="#mui_ui.slider.SliderEventListener" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
 <p>slider event callback.
 please set this class to Slider instance and implement method for handling change slider value.</p>
 <dl class="method">
 <dt id="mui_ui.slider.SliderEventListener.onSliderValueChanged">
-<code class="descname">onSliderValueChanged</code><span class="sig-paren">(</span><em>slider</em>, <em>prevVal</em>, <em>newVal</em><span class="sig-paren">)</span><a class="headerlink" href="#mui_ui.slider.SliderEventListener.onSliderValueChanged" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">onSliderValueChanged</code><span class="sig-paren">(</span><em class="sig-param">slider</em>, <em class="sig-param">prevVal</em>, <em class="sig-param">newVal</em><span class="sig-paren">)</span><a class="headerlink" href="#mui_ui.slider.SliderEventListener.onSliderValueChanged" title="Permalink to this definition">¶</a></dt>
 <dd><p>callback method when invoked user touch or slide thumb control on Slider.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
-<li><strong>slider</strong> (<a class="reference internal" href="#mui_ui.slider.Slider" title="mui_ui.slider.Slider"><em>Slider</em></a>) – Slider which changed value</li>
-<li><strong>prevVal</strong> (<em>int</em>) – value before change</li>
-<li><strong>newVal</strong> (<em>int</em>) – value after change</li>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>slider</strong> (<a class="reference internal" href="#mui_ui.slider.Slider" title="mui_ui.slider.Slider"><em>Slider</em></a>) – Slider which changed value</p></li>
+<li><p><strong>prevVal</strong> (<em>int</em>) – value before change</p></li>
+<li><p><strong>newVal</strong> (<em>int</em>) – value after change</p></li>
 </ul>
-</td>
-</tr>
-</tbody>
-</table>
+</dd>
+</dl>
 </dd></dl>
 
 </dd></dl>
+
+<dl class="data">
+<dt id="mui_ui.slider.dir">
+<code class="sig-prename descclassname">mui_ui.slider.</code><code class="sig-name descname">dir</code><em class="property"> = '/home/pi/mui/project/mui_ui/mui_ui'</em><a class="headerlink" href="#mui_ui.slider.dir" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
 
 </div>
 <div class="section" id="module-mui_ui.text">
 <span id="mui-ui-text-module"></span><h2>mui_ui.text module<a class="headerlink" href="#module-mui_ui.text" title="Permalink to this headline">¶</a></h2>
 <dl class="class">
 <dt id="mui_ui.text.Border">
-<em class="property">class </em><code class="descclassname">mui_ui.text.</code><code class="descname">Border</code><a class="headerlink" href="#mui_ui.text.Border" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-prename descclassname">mui_ui.text.</code><code class="sig-name descname">Border</code><a class="headerlink" href="#mui_ui.text.Border" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">enum.Enum</span></code></p>
 <p>An enumeration.</p>
 <dl class="attribute">
 <dt id="mui_ui.text.Border.AROUND">
-<code class="descname">AROUND</code><em class="property"> = 2</em><a class="headerlink" href="#mui_ui.text.Border.AROUND" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">AROUND</code><em class="property"> = 2</em><a class="headerlink" href="#mui_ui.text.Border.AROUND" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="attribute">
 <dt id="mui_ui.text.Border.BOTTOM">
-<code class="descname">BOTTOM</code><em class="property"> = 1</em><a class="headerlink" href="#mui_ui.text.Border.BOTTOM" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">BOTTOM</code><em class="property"> = 1</em><a class="headerlink" href="#mui_ui.text.Border.BOTTOM" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="attribute">
 <dt id="mui_ui.text.Border.NONE">
-<code class="descname">NONE</code><em class="property"> = 0</em><a class="headerlink" href="#mui_ui.text.Border.NONE" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">NONE</code><em class="property"> = 0</em><a class="headerlink" href="#mui_ui.text.Border.NONE" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 </dd></dl>
 
+<dl class="data">
+<dt id="mui_ui.text.LINE_OFFSET">
+<code class="sig-prename descclassname">mui_ui.text.</code><code class="sig-name descname">LINE_OFFSET</code><em class="property"> = 11</em><a class="headerlink" href="#mui_ui.text.LINE_OFFSET" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
 <dl class="class">
 <dt id="mui_ui.text.Text">
-<em class="property">class </em><code class="descclassname">mui_ui.text.</code><code class="descname">Text</code><span class="sig-paren">(</span><em>text: str = None</em>, <em>border: mui_ui.text.Border = &lt;Border.NONE: 0&gt;</em>, <em>name='textview'</em><span class="sig-paren">)</span><a class="headerlink" href="#mui_ui.text.Text" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-prename descclassname">mui_ui.text.</code><code class="sig-name descname">Text</code><span class="sig-paren">(</span><em class="sig-param">text: str = None</em>, <em class="sig-param">border: mui_ui.text.Border = &lt;Border.NONE: 0&gt;</em>, <em class="sig-param">name='textview'</em><span class="sig-paren">)</span><a class="headerlink" href="#mui_ui.text.Text" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">parts.AbsParts</span></code></p>
 <p>Text View</p>
 <p>this view convert text to Matrix data for mui UI drawing.
@@ -1839,72 +1834,72 @@ add 4 dot both width and height when use Border.AROUND</p>
 Because addText() is load matrix data of added text only, so it faster than use setText().</p>
 <p>text to be line fold automatically if it will over view area. but does not consider about hyphenation.</p>
 <div class="admonition seealso">
-<p class="first admonition-title">See also</p>
-<p class="last"><a class="reference internal" href="#mui_ui.text.Border" title="mui_ui.text.Border"><code class="xref py py-class docutils literal notranslate"><span class="pre">Border</span></code></a>, <a class="reference internal" href="#mui_ui.text.TextAlignment" title="mui_ui.text.TextAlignment"><code class="xref py py-class docutils literal notranslate"><span class="pre">TextAlignment</span></code></a>, <code class="xref py py-class docutils literal notranslate"><span class="pre">MuiFont</span></code></p>
+<p class="admonition-title">See also</p>
+<p><a class="reference internal" href="#mui_ui.text.Border" title="mui_ui.text.Border"><code class="xref py py-class docutils literal notranslate"><span class="pre">Border</span></code></a>, <a class="reference internal" href="#mui_ui.text.TextAlignment" title="mui_ui.text.TextAlignment"><code class="xref py py-class docutils literal notranslate"><span class="pre">TextAlignment</span></code></a>, <code class="xref py py-class docutils literal notranslate"><span class="pre">MuiFont</span></code></p>
 </div>
 <dl class="method">
 <dt id="mui_ui.text.Text.addText">
-<code class="descname">addText</code><span class="sig-paren">(</span><em>text: str</em><span class="sig-paren">)</span><a class="headerlink" href="#mui_ui.text.Text.addText" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">addText</code><span class="sig-paren">(</span><em class="sig-param">text: str</em><span class="sig-paren">)</span><a class="headerlink" href="#mui_ui.text.Text.addText" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="method">
 <dt id="mui_ui.text.Text.deleteLastChar">
-<code class="descname">deleteLastChar</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mui_ui.text.Text.deleteLastChar" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">deleteLastChar</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mui_ui.text.Text.deleteLastChar" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="method">
 <dt id="mui_ui.text.Text.getMatrix">
-<code class="descname">getMatrix</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mui_ui.text.Text.getMatrix" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">getMatrix</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mui_ui.text.Text.getMatrix" title="Permalink to this definition">¶</a></dt>
 <dd><p>Return Matrix data for display draw</p>
 </dd></dl>
 
 <dl class="method">
 <dt id="mui_ui.text.Text.getTextHeight">
-<code class="descname">getTextHeight</code><span class="sig-paren">(</span><em>font</em>, <em>text</em><span class="sig-paren">)</span><a class="headerlink" href="#mui_ui.text.Text.getTextHeight" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">getTextHeight</code><span class="sig-paren">(</span><em class="sig-param">font</em>, <em class="sig-param">text</em><span class="sig-paren">)</span><a class="headerlink" href="#mui_ui.text.Text.getTextHeight" title="Permalink to this definition">¶</a></dt>
 <dd><p>calcurate text height</p>
 </dd></dl>
 
 <dl class="method">
 <dt id="mui_ui.text.Text.getTextWidth">
-<code class="descname">getTextWidth</code><span class="sig-paren">(</span><em>font</em>, <em>text</em><span class="sig-paren">)</span><a class="headerlink" href="#mui_ui.text.Text.getTextWidth" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">getTextWidth</code><span class="sig-paren">(</span><em class="sig-param">font</em>, <em class="sig-param">text</em><span class="sig-paren">)</span><a class="headerlink" href="#mui_ui.text.Text.getTextWidth" title="Permalink to this definition">¶</a></dt>
 <dd><p>calcurate text width</p>
 </dd></dl>
 
 <dl class="method">
 <dt id="mui_ui.text.Text.setBorder">
-<code class="descname">setBorder</code><span class="sig-paren">(</span><em>border: mui_ui.text.Border</em><span class="sig-paren">)</span><a class="headerlink" href="#mui_ui.text.Text.setBorder" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">setBorder</code><span class="sig-paren">(</span><em class="sig-param">border: mui_ui.text.Border</em><span class="sig-paren">)</span><a class="headerlink" href="#mui_ui.text.Text.setBorder" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="method">
 <dt id="mui_ui.text.Text.setText">
-<code class="descname">setText</code><span class="sig-paren">(</span><em>text: str</em>, <em>textAlignment: mui_ui.text.TextAlignment = None</em><span class="sig-paren">)</span><a class="headerlink" href="#mui_ui.text.Text.setText" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">setText</code><span class="sig-paren">(</span><em class="sig-param">text: str</em>, <em class="sig-param">textAlignment: mui_ui.text.TextAlignment = None</em><span class="sig-paren">)</span><a class="headerlink" href="#mui_ui.text.Text.setText" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="method">
 <dt id="mui_ui.text.Text.setTextAlignment">
-<code class="descname">setTextAlignment</code><span class="sig-paren">(</span><em>textAlignment: mui_ui.text.TextAlignment</em><span class="sig-paren">)</span><a class="headerlink" href="#mui_ui.text.Text.setTextAlignment" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">setTextAlignment</code><span class="sig-paren">(</span><em class="sig-param">textAlignment: mui_ui.text.TextAlignment</em><span class="sig-paren">)</span><a class="headerlink" href="#mui_ui.text.Text.setTextAlignment" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 </dd></dl>
 
 <dl class="class">
 <dt id="mui_ui.text.TextAlignment">
-<em class="property">class </em><code class="descclassname">mui_ui.text.</code><code class="descname">TextAlignment</code><a class="headerlink" href="#mui_ui.text.TextAlignment" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-prename descclassname">mui_ui.text.</code><code class="sig-name descname">TextAlignment</code><a class="headerlink" href="#mui_ui.text.TextAlignment" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">enum.Enum</span></code></p>
 <p>An enumeration.</p>
 <dl class="attribute">
 <dt id="mui_ui.text.TextAlignment.CENTER">
-<code class="descname">CENTER</code><em class="property"> = 1</em><a class="headerlink" href="#mui_ui.text.TextAlignment.CENTER" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">CENTER</code><em class="property"> = 1</em><a class="headerlink" href="#mui_ui.text.TextAlignment.CENTER" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="attribute">
 <dt id="mui_ui.text.TextAlignment.LEFT">
-<code class="descname">LEFT</code><em class="property"> = 0</em><a class="headerlink" href="#mui_ui.text.TextAlignment.LEFT" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">LEFT</code><em class="property"> = 0</em><a class="headerlink" href="#mui_ui.text.TextAlignment.LEFT" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="attribute">
 <dt id="mui_ui.text.TextAlignment.RIGHT">
-<code class="descname">RIGHT</code><em class="property"> = 2</em><a class="headerlink" href="#mui_ui.text.TextAlignment.RIGHT" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">RIGHT</code><em class="property"> = 2</em><a class="headerlink" href="#mui_ui.text.TextAlignment.RIGHT" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 </dd></dl>
@@ -1914,24 +1909,24 @@ Because addText() is load matrix data of added text only, so it faster than use 
 <span id="mui-ui-typewriter-text-module"></span><h2>mui_ui.typewriter_text module<a class="headerlink" href="#module-mui_ui.typewriter_text" title="Permalink to this headline">¶</a></h2>
 <dl class="class">
 <dt id="mui_ui.typewriter_text.TypeWriterEventListener">
-<em class="property">class </em><code class="descclassname">mui_ui.typewriter_text.</code><code class="descname">TypeWriterEventListener</code><a class="headerlink" href="#mui_ui.typewriter_text.TypeWriterEventListener" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-prename descclassname">mui_ui.typewriter_text.</code><code class="sig-name descname">TypeWriterEventListener</code><a class="headerlink" href="#mui_ui.typewriter_text.TypeWriterEventListener" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
 <p>callback for TypeWirterText view events</p>
 <dl class="method">
 <dt id="mui_ui.typewriter_text.TypeWriterEventListener.onScrollFinished">
-<code class="descname">onScrollFinished</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mui_ui.typewriter_text.TypeWriterEventListener.onScrollFinished" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">onScrollFinished</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mui_ui.typewriter_text.TypeWriterEventListener.onScrollFinished" title="Permalink to this definition">¶</a></dt>
 <dd><p>callback to be invoked when finish scroll text.</p>
 </dd></dl>
 
 <dl class="method">
 <dt id="mui_ui.typewriter_text.TypeWriterEventListener.onScrollStart">
-<code class="descname">onScrollStart</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mui_ui.typewriter_text.TypeWriterEventListener.onScrollStart" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">onScrollStart</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mui_ui.typewriter_text.TypeWriterEventListener.onScrollStart" title="Permalink to this definition">¶</a></dt>
 <dd><p>callback to be invoked when start scroll text.</p>
 </dd></dl>
 
 <dl class="method">
 <dt id="mui_ui.typewriter_text.TypeWriterEventListener.onTypeFinished">
-<code class="descname">onTypeFinished</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mui_ui.typewriter_text.TypeWriterEventListener.onTypeFinished" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">onTypeFinished</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mui_ui.typewriter_text.TypeWriterEventListener.onTypeFinished" title="Permalink to this definition">¶</a></dt>
 <dd><p>callback to be invoked when finished text type effect.</p>
 </dd></dl>
 
@@ -1939,33 +1934,33 @@ Because addText() is load matrix data of added text only, so it faster than use 
 
 <dl class="class">
 <dt id="mui_ui.typewriter_text.TypeWriterText">
-<em class="property">class </em><code class="descclassname">mui_ui.typewriter_text.</code><code class="descname">TypeWriterText</code><span class="sig-paren">(</span><em>text: str = None</em>, <em>border: text.Border = &lt;Border.NONE: 0&gt;</em>, <em>name='typewriter textview'</em><span class="sig-paren">)</span><a class="headerlink" href="#mui_ui.typewriter_text.TypeWriterText" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-prename descclassname">mui_ui.typewriter_text.</code><code class="sig-name descname">TypeWriterText</code><span class="sig-paren">(</span><em class="sig-param">text: str = None</em>, <em class="sig-param">border: text.Border = &lt;Border.NONE: 0&gt;</em>, <em class="sig-param">name='typewriter textview'</em><span class="sig-paren">)</span><a class="headerlink" href="#mui_ui.typewriter_text.TypeWriterText" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">text.Text</span></code></p>
 <p>TypeWriter Text</p>
 <p>this class inherit Text view and add effect like a TypeWriter for UI drawing.
 if text length is too long according to view size, when text is full on view area, start auto scroll and show left text.</p>
 <div class="admonition seealso">
-<p class="first admonition-title">See also</p>
-<p class="last"><code class="xref py py-class docutils literal notranslate"><span class="pre">Text</span></code>, <a class="reference internal" href="#mui_ui.typewriter_text.TypeWriterEventListener" title="mui_ui.typewriter_text.TypeWriterEventListener"><code class="xref py py-class docutils literal notranslate"><span class="pre">TypeWriterEventListener</span></code></a></p>
+<p class="admonition-title">See also</p>
+<p><code class="xref py py-class docutils literal notranslate"><span class="pre">Text</span></code>, <a class="reference internal" href="#mui_ui.typewriter_text.TypeWriterEventListener" title="mui_ui.typewriter_text.TypeWriterEventListener"><code class="xref py py-class docutils literal notranslate"><span class="pre">TypeWriterEventListener</span></code></a></p>
 </div>
 <dl class="method">
 <dt id="mui_ui.typewriter_text.TypeWriterText.addTypeWriterEvent">
-<code class="descname">addTypeWriterEvent</code><span class="sig-paren">(</span><em>l: mui_ui.typewriter_text.TypeWriterEventListener</em><span class="sig-paren">)</span><a class="headerlink" href="#mui_ui.typewriter_text.TypeWriterText.addTypeWriterEvent" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">addTypeWriterEvent</code><span class="sig-paren">(</span><em class="sig-param">l: mui_ui.typewriter_text.TypeWriterEventListener</em><span class="sig-paren">)</span><a class="headerlink" href="#mui_ui.typewriter_text.TypeWriterText.addTypeWriterEvent" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="method">
 <dt id="mui_ui.typewriter_text.TypeWriterText.setText">
-<code class="descname">setText</code><span class="sig-paren">(</span><em>text: str</em>, <em>textAlignment: text.TextAlignment = None</em><span class="sig-paren">)</span><a class="headerlink" href="#mui_ui.typewriter_text.TypeWriterText.setText" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">setText</code><span class="sig-paren">(</span><em class="sig-param">text: str</em>, <em class="sig-param">textAlignment: text.TextAlignment = None</em><span class="sig-paren">)</span><a class="headerlink" href="#mui_ui.typewriter_text.TypeWriterText.setText" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="method">
 <dt id="mui_ui.typewriter_text.TypeWriterText.startTypewriter">
-<code class="descname">startTypewriter</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mui_ui.typewriter_text.TypeWriterText.startTypewriter" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">startTypewriter</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mui_ui.typewriter_text.TypeWriterText.startTypewriter" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="method">
 <dt id="mui_ui.typewriter_text.TypeWriterText.stopTypewriter">
-<code class="descname">stopTypewriter</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mui_ui.typewriter_text.TypeWriterText.stopTypewriter" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">stopTypewriter</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mui_ui.typewriter_text.TypeWriterText.stopTypewriter" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 </dd></dl>
@@ -1975,33 +1970,33 @@ if text length is too long according to view size, when text is full on view are
 <span id="mui-ui-widget-module"></span><h2>mui_ui.widget module<a class="headerlink" href="#module-mui_ui.widget" title="Permalink to this headline">¶</a></h2>
 <dl class="class">
 <dt id="mui_ui.widget.Widget">
-<em class="property">class </em><code class="descclassname">mui_ui.widget.</code><code class="descname">Widget</code><span class="sig-paren">(</span><em>width=0</em>, <em>height=0</em>, <em>name='widget'</em><span class="sig-paren">)</span><a class="headerlink" href="#mui_ui.widget.Widget" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-prename descclassname">mui_ui.widget.</code><code class="sig-name descname">Widget</code><span class="sig-paren">(</span><em class="sig-param">width=0</em>, <em class="sig-param">height=0</em>, <em class="sig-param">name='widget'</em><span class="sig-paren">)</span><a class="headerlink" href="#mui_ui.widget.Widget" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">parts.AbsParts</span></code></p>
 <p>Widget is multi parts(view) holder.
 If you’d like to treat multi parts as one view, please add to widget</p>
 <dl class="method">
 <dt id="mui_ui.widget.Widget.addParts">
-<code class="descname">addParts</code><span class="sig-paren">(</span><em>parts: parts.AbsParts</em><span class="sig-paren">)</span><a class="headerlink" href="#mui_ui.widget.Widget.addParts" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">addParts</code><span class="sig-paren">(</span><em class="sig-param">parts: parts.AbsParts</em><span class="sig-paren">)</span><a class="headerlink" href="#mui_ui.widget.Widget.addParts" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="method">
 <dt id="mui_ui.widget.Widget.dispatchTouchEvent">
-<code class="descname">dispatchTouchEvent</code><span class="sig-paren">(</span><em>e</em><span class="sig-paren">)</span><a class="headerlink" href="#mui_ui.widget.Widget.dispatchTouchEvent" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">dispatchTouchEvent</code><span class="sig-paren">(</span><em class="sig-param">e</em><span class="sig-paren">)</span><a class="headerlink" href="#mui_ui.widget.Widget.dispatchTouchEvent" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="method">
 <dt id="mui_ui.widget.Widget.getMatrix">
-<code class="descname">getMatrix</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mui_ui.widget.Widget.getMatrix" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">getMatrix</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mui_ui.widget.Widget.getMatrix" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="method">
 <dt id="mui_ui.widget.Widget.setPos">
-<code class="descname">setPos</code><span class="sig-paren">(</span><em>x</em>, <em>y</em><span class="sig-paren">)</span><a class="headerlink" href="#mui_ui.widget.Widget.setPos" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">setPos</code><span class="sig-paren">(</span><em class="sig-param">x</em>, <em class="sig-param">y</em><span class="sig-paren">)</span><a class="headerlink" href="#mui_ui.widget.Widget.setPos" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="method">
 <dt id="mui_ui.widget.Widget.setSize">
-<code class="descname">setSize</code><span class="sig-paren">(</span><em>x</em>, <em>y</em>, <em>width</em>, <em>height</em><span class="sig-paren">)</span><a class="headerlink" href="#mui_ui.widget.Widget.setSize" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">setSize</code><span class="sig-paren">(</span><em class="sig-param">x</em>, <em class="sig-param">y</em>, <em class="sig-param">width</em>, <em class="sig-param">height</em><span class="sig-paren">)</span><a class="headerlink" href="#mui_ui.widget.Widget.setSize" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 </dd></dl>
@@ -2011,57 +2006,53 @@ If you’d like to treat multi parts as one view, please add to widget</p>
 <span id="mui-ui-wifi-utility-module"></span><h2>mui_ui.wifi_utility module<a class="headerlink" href="#module-mui_ui.wifi_utility" title="Permalink to this headline">¶</a></h2>
 <dl class="class">
 <dt id="mui_ui.wifi_utility.MuiNetworkUtil">
-<em class="property">class </em><code class="descclassname">mui_ui.wifi_utility.</code><code class="descname">MuiNetworkUtil</code><a class="headerlink" href="#mui_ui.wifi_utility.MuiNetworkUtil" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-prename descclassname">mui_ui.wifi_utility.</code><code class="sig-name descname">MuiNetworkUtil</code><a class="headerlink" href="#mui_ui.wifi_utility.MuiNetworkUtil" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
 <p>net work utility class</p>
 <dl class="method">
 <dt id="mui_ui.wifi_utility.MuiNetworkUtil.check_internet_access">
-<code class="descname">check_internet_access</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mui_ui.wifi_utility.MuiNetworkUtil.check_internet_access" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">check_internet_access</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mui_ui.wifi_utility.MuiNetworkUtil.check_internet_access" title="Permalink to this definition">¶</a></dt>
 <dd><p>check internet access via Ping
 Pingでインターネット接続を確認する</p>
 </dd></dl>
 
 <dl class="method">
 <dt id="mui_ui.wifi_utility.MuiNetworkUtil.get_ip_address">
-<code class="descname">get_ip_address</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mui_ui.wifi_utility.MuiNetworkUtil.get_ip_address" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">get_ip_address</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mui_ui.wifi_utility.MuiNetworkUtil.get_ip_address" title="Permalink to this definition">¶</a></dt>
 <dd><p>get current IP address of Wi-Fi module
 Wi-Fiモジュールの現在のIPアドレスを取得する</p>
 </dd></dl>
 
 <dl class="method">
 <dt id="mui_ui.wifi_utility.MuiNetworkUtil.get_wifi_rssi">
-<code class="descname">get_wifi_rssi</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mui_ui.wifi_utility.MuiNetworkUtil.get_wifi_rssi" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">get_wifi_rssi</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mui_ui.wifi_utility.MuiNetworkUtil.get_wifi_rssi" title="Permalink to this definition">¶</a></dt>
 <dd><p>get current connected access posint rssi of Wi-Fi module
 Wi-Fiモジュールが接続しているアクセスポイントの電波強度(rssi)を取得する</p>
 </dd></dl>
 
 <dl class="method">
 <dt id="mui_ui.wifi_utility.MuiNetworkUtil.get_wifi_ssid">
-<code class="descname">get_wifi_ssid</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mui_ui.wifi_utility.MuiNetworkUtil.get_wifi_ssid" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">get_wifi_ssid</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mui_ui.wifi_utility.MuiNetworkUtil.get_wifi_ssid" title="Permalink to this definition">¶</a></dt>
 <dd><p>get current connected access point ssid of Wi-Fi module
 Wi-Fiモジュールが接続しているアクセスポイントのSSIDを取得する</p>
 </dd></dl>
 
 <dl class="method">
 <dt id="mui_ui.wifi_utility.MuiNetworkUtil.set_new_wpa_config">
-<code class="descname">set_new_wpa_config</code><span class="sig-paren">(</span><em>key: str</em>, <em>value: str</em>, <em>file_path: str = '/etc/wpa_supplicant/wpa_supplicant.conf'</em><span class="sig-paren">)</span><a class="headerlink" href="#mui_ui.wifi_utility.MuiNetworkUtil.set_new_wpa_config" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">set_new_wpa_config</code><span class="sig-paren">(</span><em class="sig-param">key: str</em>, <em class="sig-param">value: str</em>, <em class="sig-param">file_path: str = '/etc/wpa_supplicant/wpa_supplicant.conf'</em><span class="sig-paren">)</span><a class="headerlink" href="#mui_ui.wifi_utility.MuiNetworkUtil.set_new_wpa_config" title="Permalink to this definition">¶</a></dt>
 <dd><p>re-write target key of wpa_supplicant.conf
 if you want to delete target key line, please set None to value.</p>
 <p>wpa_supplicant.confの指定キーを更新する.
 valueにNoneを設定することで指定キー行を削除できる</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
-<li><strong>key</strong> (<em>str</em>) – target key</li>
-<li><strong>value</strong> (<em>str</em>) – value</li>
-<li><strong>file_path</strong> (<em>str</em>) – path of wpa_supplicant.conf</li>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>key</strong> (<em>str</em>) – target key</p></li>
+<li><p><strong>value</strong> (<em>str</em>) – value</p></li>
+<li><p><strong>file_path</strong> (<em>str</em>) – path of wpa_supplicant.conf</p></li>
 </ul>
-</td>
-</tr>
-</tbody>
-</table>
+</dd>
+</dl>
 </dd></dl>
 
 </dd></dl>
@@ -2069,6 +2060,16 @@ valueにNoneを設定することで指定キー行を削除できる</p>
 </div>
 <div class="section" id="module-mui_ui">
 <span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-mui_ui" title="Permalink to this headline">¶</a></h2>
+<dl class="data">
+<dt id="mui_ui.DISPLAY_HEIGHT">
+<code class="sig-prename descclassname">mui_ui.</code><code class="sig-name descname">DISPLAY_HEIGHT</code><em class="property"> = 32</em><a class="headerlink" href="#mui_ui.DISPLAY_HEIGHT" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="data">
+<dt id="mui_ui.DISPLAY_WIDTH">
+<code class="sig-prename descclassname">mui_ui.</code><code class="sig-name descname">DISPLAY_WIDTH</code><em class="property"> = 200</em><a class="headerlink" href="#mui_ui.DISPLAY_WIDTH" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
 </div>
 </div>
 
