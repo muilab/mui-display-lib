@@ -1,0 +1,6 @@
+crc8
+pyserial
+evdev
+RPi.GPIO
+Cython
+numpy
