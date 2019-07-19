@@ -13,7 +13,7 @@ from threading import Lock
 mutex = Lock()
 
 from mui_ui import Display, MuiFont, Text, Image, Widget, Border, AbsApp, Message, DigitalClock
-from mui_ui import TextAlignment, MotionEvent, InputEventListener, InputHandler, OnTouchEventListener, AppEventListener, OnUpdateRequestListener  
+from mui_ui import TextAlignment, MotionEvent, InputEvent, InputEventListener, InputHandler, OnTouchEventListener, AppEventListener, OnUpdateRequestListener  
 from mui_ui import GestureListener, GestureDetector
 from mui_ui import Keyboard, KeyboardListener
 from mui_ui import DisplayManager, DisplayEventListener

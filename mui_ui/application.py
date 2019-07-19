@@ -9,9 +9,9 @@ import time
 try:
     from matrix import Matrix
     from parts import AbsParts
-    from input import MotionEvent
+    from input import MotionEvent, InputEvent
 except ImportError:
-    from . import Matrix, AbsParts, MotionEvent
+    from . import Matrix, AbsParts, MotionEvent, InputEvent
 
 
 class AppEventListener(object):
@@ -28,9 +28,35 @@ class AppEventListener(object):
         Parameters
         ----------
         app : AbsApp
-            application what request update UI
+            application which request update UI
         fade : int
             fade in/out level (0 - 4 : 0 is do not fade in/out)
+        """
+        raise NotImplementedError
+
+    def requestTurnOffDisplay(self, app, fade):
+        """
+        turn off display request from application
+
+        Parameters
+        ----------
+        app : AbsApp
+            application which request turn off display
+        fade : int
+            fade out level (0 - 4 : 0 is do not fade out)
+        """
+        raise NotImplementedError
+
+    def requestTurnOnDisplay(self, app, fade):
+        """
+        turn on display request from application
+
+        Parameters
+        ----------
+        app : AbsApp
+            application which request turn on display
+        fade : int
+            fade in level (0 - 4 : 0 is do not fade in)
         """
         raise NotImplementedError
 
@@ -161,6 +187,13 @@ class AbsApp(metaclass=ABCMeta):
         """
         raise NotImplementedError
 
+    def onTurnOnDisplay(self):
+        """
+        this method to be invoked by MainApplication class when the display turn on.
+        if you want any actions when turn on display(refresh display data etc.), please override this method.
+        """
+        pass
+
     def dispatchTouchEvent(self, e: MotionEvent) -> bool:
         """
         dispath touch event to views on this application.
@@ -183,6 +216,17 @@ class AbsApp(metaclass=ABCMeta):
                     return True
 
         return False
+
+    def dispatchKeyEvent(self, e: InputEvent):
+        """
+        dispath key event to views on this application.
+
+        Parameters
+        ----------
+        e : InputEvent
+
+        """
+        pass
 
     def dispatchScrollEvent(self, start_event: MotionEvent, end_event: MotionEvent, scrollX, scrollY) -> bool:
         """
