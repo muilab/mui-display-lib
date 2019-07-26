@@ -224,7 +224,7 @@ class WiFiSetting(AbsApp, OnTouchEventListener, OnUpdateRequestListener, Keyboar
         if panelShowWiFi.visible is True:
             self.close()
 
-    def dispathLongPressEvent(self, e):
+    def dispatchLongPressEvent(self, e):
         pass    
 
     def onTurnOffDisplay(self):

@@ -148,7 +148,7 @@ class DummyWeatherApp(AbsApp):
 
         return True
 
-    def dispathLongPressEvent(self, e):
+    def dispatchLongPressEvent(self, e):
         pass    
 
     def onTurnOffDisplay(self):
@@ -226,7 +226,7 @@ class DummyThermoApp(AbsApp):
 
         return True
 
-    def dispathLongPressEvent(self, e):
+    def dispatchLongPressEvent(self, e):
         pass    
 
     def onTurnOffDisplay(self):
@@ -340,7 +340,7 @@ class HomeApp(AbsApp, OnUpdateRequestListener, OnTouchEventListener):
     def dispatchFlingEvent(self, e1, e2, x, y):
         return False
 
-    def dispathLongPressEvent(self, e):
+    def dispatchLongPressEvent(self, e):
         pass    
 
     def onTurnOffDisplay(self):
@@ -444,7 +444,7 @@ class MuiMain(InputEventListener, GestureListener, AppEventListener, DisplayEven
         # pass to gesture detector
         handle = self.gesture_detector.onTouchEvent(e)
 
-        # dispath touch event to current application
+        # dispatch touch event to current application
         if handle is False:
             self.app.dispatchTouchEvent(e)
 
@@ -505,7 +505,7 @@ class MuiMain(InputEventListener, GestureListener, AppEventListener, DisplayEven
 
     def onLongPress(self, e: MotionEvent):
         # long press event occured, pass to current application
-        self.app.dispathLongPressEvent(e)
+        self.app.dispatchLongPressEvent(e)
 
 
 

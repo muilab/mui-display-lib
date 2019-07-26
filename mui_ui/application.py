@@ -196,8 +196,8 @@ class AbsApp(metaclass=ABCMeta):
 
     def dispatchTouchEvent(self, e: MotionEvent) -> bool:
         """
-        dispath touch event to views on this application.
-        when any view handle touch event, no longer dispath touch event to bottom views.
+        dispatch touch event to views on this application.
+        when any view handle touch event, no longer dispatch touch event to bottom views.
 
         Parameters
         ----------
@@ -219,7 +219,7 @@ class AbsApp(metaclass=ABCMeta):
 
     def dispatchKeyEvent(self, e: InputEvent):
         """
-        dispath key event to views on this application.
+        dispatch key event to views on this application.
 
         Parameters
         ----------
@@ -230,13 +230,13 @@ class AbsApp(metaclass=ABCMeta):
 
     def dispatchScrollEvent(self, start_event: MotionEvent, end_event: MotionEvent, scrollX, scrollY) -> bool:
         """
-        dispath scroll event
+        dispatch scroll event
         """
         return False
 
-    def dispathFlingEvent(self,  start_event: MotionEvent, end_event: MotionEvent, velocityX, velocityY) -> bool:
+    def dispatchFlingEvent(self,  start_event: MotionEvent, end_event: MotionEvent, velocityX, velocityY) -> bool:
         """
-        dispath swipe event.
+        dispatch swipe event.
         if you want to take any action when swipe event occured, please override this method and implements action.
 
         Parameters
@@ -256,9 +256,9 @@ class AbsApp(metaclass=ABCMeta):
         """
         return False
 
-    def dispathLongPressEvent(self, event: MotionEvent):
+    def dispatchLongPressEvent(self, event: MotionEvent):
         """
-        dispath long press event.
+        dispatch long press event.
         if you want to take any action when long press event occured, please override this method and implements action.
 
         Parameters
