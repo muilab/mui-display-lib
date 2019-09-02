@@ -19,6 +19,10 @@ VALUE_MOVE = 2      # event value move
 EV_ABS = 0x03   # event type Axis postion report
 ABS_X = 0x00    # event code Axis X
 ABS_Y = 0x01    # event code Axis Y
+ABS_PRESSURE = 24 # event code Pressure
+
+EV_MSC = 0x04 # event type MSC
+MSC_SERIAL = 0 # event code MSC_SERIAL
 
 ####
 # Keys and buttons defination from Linux Kernel (input-event-codes.h)
@@ -660,7 +664,7 @@ class MotionEvent(object):
 class InputEvent(MotionEvent):
     """
     input event class. 
-    this event include all events of input(touch, buttons, keys).
+    this event include all events of input(touch, buttons, keys, digital-pen).
 
     Attributes
     -----------
@@ -671,16 +675,20 @@ class InputEvent(MotionEvent):
     def __init__(self):
         super().__init__()
         self._code = 0
+        self._id = 0
+        self._press = -1
 
     def __str__(self):
         if self.code == BTN_TOUCH:
-            msg = '--- InputEvent at {:f}, code {}, device : {}, action {:d}, x {:f}, y {:f} ---'
-            return msg.format(self.timestamp, util.resolve_ecodes_dict({1:[self.code]}).__next__()[1], self.dev_name, self.action, self.x, self.y)
+            msg = '--- InputEvent at {:f}, code {}, device : {}, device serial : {}, action {:d}, x {:f}, y {:f}, press {} ---'
+            return msg.format(self.timestamp, util.resolve_ecodes_dict({1:[self.code]}).__next__()[1], self.dev_name, self.id, self.action, self.x, self.y, self.press)
         else:
-            msg = '--- InputEvent at {:f}, code {}, device : {}, action {:d} ---'
-            return msg.format(self.timestamp, util.resolve_ecodes_dict({1:[self.code]}).__next__()[1], self.dev_name, self.action)
+            msg = '--- InputEvent at {:f}, code {}, device : {}, device serial : {}, action {:d} press {}---'
+            return msg.format(self.timestamp, util.resolve_ecodes_dict({1:[self.code]}).__next__()[1], self.dev_name, self.id, self.action, self.press)
 
     def copy(self, e: 'InputEvent'):
+        self._id = e.id
+        self._press = e.press
         self._dev_name = e.dev_name
         self._timestamp = e.timestamp
         self._code = e.code
@@ -689,8 +697,24 @@ class InputEvent(MotionEvent):
         self._y = e.y
         
     @property
+    def id(self):
+        return self._id
+
+    @property
+    def press(self):
+        return self._press
+
+    @property
     def code(self):
         return self._code
+
+    @id.setter
+    def id(self, id):
+        self._id = id
+
+    @press.setter
+    def press(self, press):
+        self._press = press
 
     @code.setter
     def code(self, code):
@@ -783,19 +807,30 @@ class InputHandler(object):
     async def eventLoop(self, device):
         changeKey = False
         async for ev in device.async_read_loop():
-            #print(ev)
+            # print(ev)
 
             # handle input event
             if self.inputEvent == None:
                 self.inputEvent = InputEvent()
-                self.inputEvent.dev_name = device.name
 
             if ev.type == EV_SYN:
+                # digital pen hover event
+                if self.inputEvent.press == -1:
+                    # print('--hover--')
+                    continue
+
                 # last data sing for multi part touch events.
                 if changeKey == False:
                     self.inputEvent.action = VALUE_MOVE
+
+                self.inputEvent.dev_name = device.name
                 self.inputEvent.timestamp = ev.timestamp()
+
                 self.handleInputEvent(self.inputEvent)
+
+                if self.inputEvent.action == VALUE_UP:
+                    self.inputEvent.press = -1
+
                 changeKey = False
                 
             if (ev.type == EV_ABS and ev.code == ABS_X):
@@ -804,8 +839,16 @@ class InputHandler(object):
             if (ev.type == EV_ABS and ev.code == ABS_Y):
                 self.inputEvent.y = (ev.value // 20)
 
+            if (ev.type == EV_ABS and ev.code == ABS_PRESSURE):
+                self.inputEvent.press = ev.value
+
+            if (ev.type == EV_MSC and ev.code == MSC_SERIAL):
+                self.inputEvent.id = ev.value
+
             if (ev.type == EV_KEY):
                 self.inputEvent.action = ev.value
+                if (ev.value == VALUE_DOWN):
+                    self.inputEvent.press = 0
                 self.inputEvent.code = ev.code
                 changeKey = True
 
