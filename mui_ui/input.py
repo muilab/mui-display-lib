@@ -598,16 +598,18 @@ class MotionEvent(object):
     """
 
     def __init__(self):
+        self._dev_name = ''
         self._timestamp = 0
         self._action = VALUE_UP
         self._x = 0
         self._y = 0
 
     def __str__(self):
-        msg = '--- MotionEvent at {:f}, action {:d}, x {:d}, y {:d} ---'
-        return msg.format(self.timestamp, self.action, self.x, self.y)
+        msg = '--- MotionEvent at {:f}, device : {:s}, action {:d}, x {:d}, y {:d} ---'
+        return msg.format(self.timestamp, self.dev_name, self.action, self.x, self.y)
 
     def copy(self, e: 'MotionEvent'):
+        self._dev_name = e.dev_name
         self._timestamp = e.timestamp
         self._action = e.action
         self._x = e.x
@@ -617,6 +619,10 @@ class MotionEvent(object):
     @property
     def timestamp(self):
         return self._timestamp
+
+    @property
+    def dev_name(self):
+        return self._dev_name
 
     @property
     def action(self):
@@ -633,6 +639,10 @@ class MotionEvent(object):
     @timestamp.setter
     def timestamp(self, t):
         self._timestamp = t
+
+    @dev_name.setter
+    def dev_name(self, n):
+        self._dev_name = n
 
     @action.setter
     def action(self, action):
@@ -664,13 +674,14 @@ class InputEvent(MotionEvent):
 
     def __str__(self):
         if self.code == BTN_TOUCH:
-            msg = '--- InputEvent at {:f}, code {}, action {:d}, x {:f}, y {:f} ---'
-            return msg.format(self.timestamp, util.resolve_ecodes_dict({1:[self.code]}).__next__()[1], self.action, self.x, self.y)
+            msg = '--- InputEvent at {:f}, code {}, device : {}, action {:d}, x {:f}, y {:f} ---'
+            return msg.format(self.timestamp, util.resolve_ecodes_dict({1:[self.code]}).__next__()[1], self.dev_name, self.action, self.x, self.y)
         else:
-            msg = '--- InputEvent at {:f}, code {}, action {:d} ---'
-            return msg.format(self.timestamp, util.resolve_ecodes_dict({1:[self.code]}).__next__()[1], self.action)
+            msg = '--- InputEvent at {:f}, code {}, device : {}, action {:d} ---'
+            return msg.format(self.timestamp, util.resolve_ecodes_dict({1:[self.code]}).__next__()[1], self.dev_name, self.action)
 
     def copy(self, e: 'InputEvent'):
+        self._dev_name = e.dev_name
         self._timestamp = e.timestamp
         self._code = e.code
         self._action = e.action
@@ -777,6 +788,7 @@ class InputHandler(object):
             # handle input event
             if self.inputEvent == None:
                 self.inputEvent = InputEvent()
+                self.inputEvent.dev_name = device.name
 
             if ev.type == EV_SYN:
                 # last data sing for multi part touch events.
