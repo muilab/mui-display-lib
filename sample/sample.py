@@ -23,9 +23,113 @@ from app_wifisetting import WiFiSetting
 import os
 dir = os.path.dirname(os.path.abspath(__file__))
 
-class DummyWeatherApp(AbsApp):
+def get_file_path(name):
+    return os.path.normpath(os.path.join(dir, name))
 
-    def __init__(self, appEventListener: AppEventListener, lang='ja-JP'):
+class ImageViewerApp(AbsApp, OnUpdateRequestListener, OnTouchEventListener):
+
+    # please add images to this list.
+    # when tap display, change to next image of this list.
+    # 
+    # image requirements : 
+    # - width 200px
+    # - height 32px
+    # - PNG Image
+    # - RGB format
+    # - black pixel is turn on LED dot
+    IMAGE_LIST = [
+        './images/mount_fuji.png',
+        './images/kyoto_arashiyama.png',
+        './images/moon.png',
+    ]
+
+    def __init__(self, appEventListener: AppEventListener, lang='en-US'):
+        super().__init__(appEventListener)
+
+        self._lang = lang
+
+        # create Image view
+        # this view is fullscreen size
+        def createImageView():
+            widget = Widget(200, 32)
+            self.addView(widget)
+
+            imageView = Image(get_file_path(ImageViewerApp.IMAGE_LIST[self._image_index]))
+            imageView.setSize(0, 0, 200, 32)
+            imageView.addOnTouchViewListener(self)
+            widget.addParts(imageView)
+            self.setView(imageView, 'image_view')
+
+        self._image_index = 0
+        createImageView()
+
+        self._next = None
+        self._prev = None
+
+
+    def setRelativeApps(self, next: AbsApp, prev: AbsApp):
+        self._next = next
+        self._prev = prev
+
+    def _changeToNextImage(self):
+        self._image_index += 1
+        if self._image_index == len(ImageViewerApp.IMAGE_LIST):
+            self._image_index = 0
+
+        imageView = self.getView('image_view')
+        imageView.setImage(get_file_path(ImageViewerApp.IMAGE_LIST[self._image_index]))
+        self.updateRequest(0)
+
+
+    # ------------------------
+    # override AbsApp methods
+
+    def startTask(self):
+        # here is called when start this app
+        pass
+
+    def stopTask(self):
+        pass
+
+    def dispatchFlingEvent(self, e1, e2, x, y):
+        if e1.x > e2.x:
+            # next
+            self.setNextApp(self._next)
+
+        elif e1.x < e2.x:
+            # prev
+            self.setNextApp(self._prev)
+
+        return True
+
+    def onTurnOffDisplay(self):
+        # allow turn off
+        # if you do not want to allow auto turn off, please return False
+        return True
+
+    # ------------------------
+    # OnUpdateRequestListener implementation
+
+    def onUpdateView(self, view):
+        self.updateRequest(0)
+
+    # ------------------------
+    # OnTouchEventListener implementation
+
+    def onTouch(self, view, e):
+        imageView = self.getView('image_view')
+
+        if view == imageView:
+            # change to next image
+            self._changeToNextImage()
+
+
+
+
+
+class DummyWeatherApp(AbsApp, OnUpdateRequestListener, OnTouchEventListener):
+
+    def __init__(self, appEventListener: AppEventListener, lang='en-US'):
         super().__init__(appEventListener)
 
         self._lang = lang
@@ -173,9 +277,9 @@ class DummyWeatherApp(AbsApp):
 
 
 
-class DummyThermoApp(AbsApp):
+class DummyThermoApp(AbsApp, OnUpdateRequestListener, OnTouchEventListener):
 
-    def __init__(self, appEventListener: AppEventListener, lang='ja-JP'):
+    def __init__(self, appEventListener: AppEventListener, lang='en-US'):
         super().__init__(appEventListener)
 
         dummy = Text('dummy thermostat UI')
@@ -270,23 +374,28 @@ class HomeApp(AbsApp, OnUpdateRequestListener, OnTouchEventListener):
         # add menu
         def createMenu():
             # create weahter app icon
-            iconWeather = Image(os.path.normpath(os.path.join(dir, './assets/icon_weather.png')))
+            iconWeather = Image(get_file_path('./assets/icon_weather.png'))
             iconWeather.addOnTouchViewListener(self)
             self.setView(iconWeather, 'icon_weather')
 
             # create thermostat app icon
-            iconThermo = Image(os.path.normpath(os.path.join(dir, './assets/icon_thermo.png')))
+            iconThermo = Image(get_file_path('./assets/icon_thermo.png'))
             iconThermo.addOnTouchViewListener(self)
             self.setView(iconThermo, 'icon_thermo')
 
+            # create image viewer app icon
+            iconImage = Image(get_file_path('./assets/icon_pen.png'))
+            iconImage.addOnTouchViewListener(self)
+            self.setView(iconImage, 'icon_image')
+
             # create wi-fi setting app icon
-            iconWiFi = Image(os.path.normpath(os.path.join(dir, './assets/icon_wifi_enable.png')))
+            iconWiFi = Image(get_file_path('./assets/icon_wifi_enable.png'))
             iconWiFi.addOnTouchViewListener(self)
             self.setView(iconWiFi, 'icon_wifi')
 
             # create menu widget
             menu = Widget(
-                (iconWeather.width + iconThermo.width + 2),
+                (iconWeather.width + iconThermo.width + 2 + iconImage.width + 2),
                 22)
             menu.setPos(0, 11)
             self.addView(menu)
@@ -297,6 +406,9 @@ class HomeApp(AbsApp, OnUpdateRequestListener, OnTouchEventListener):
             iconThermo.x = iconWeather.width + 2
             menu.addParts(iconThermo)
 
+            iconImage.x = iconThermo.x + iconThermo.width + 2
+            menu.addParts(iconImage)
+
             iconWiFi.x = iconWeather.width + 2
             iconWiFi.y = 11
             menu.addParts(iconWiFi)
@@ -305,14 +417,17 @@ class HomeApp(AbsApp, OnUpdateRequestListener, OnTouchEventListener):
         def createApplication():
             weatherApp = DummyWeatherApp(self.appEventListener)
             thermoApp = DummyThermoApp(self.appEventListener)
-            wifiApp = WiFiSetting(self.appEventListener, lang='ja-JP') # if you want to change English, please change to 'en-US'
+            imageApp = ImageViewerApp(self.appEventListener)
+            wifiApp = WiFiSetting(self.appEventListener, lang='en-US') # if you want to change English, please change to 'en-US'
 
-            weatherApp.setRelativeApps(next=thermoApp, prev=thermoApp)
-            thermoApp.setRelativeApps(next=weatherApp, prev=weatherApp)
+            weatherApp.setRelativeApps(next=thermoApp, prev=imageApp)
+            thermoApp.setRelativeApps(next=imageApp, prev=weatherApp)
+            imageApp.setRelativeApps(next=weatherApp, prev=thermoApp)
 
             self._apps = {}
             self._apps['weather'] = weatherApp
             self._apps['thermo'] = thermoApp
+            self._apps['image'] = imageApp
             self._apps['wifi'] = wifiApp
 
 
@@ -359,6 +474,7 @@ class HomeApp(AbsApp, OnUpdateRequestListener, OnTouchEventListener):
     def onTouch(self, view, e):
         iconWeather = self.getView('icon_weather')
         iconThermo = self.getView('icon_thermo')
+        iconImage = self.getView('icon_image')
         iconWiFi = self.getView('icon_wifi')
 
         if view == iconWeather:
@@ -366,6 +482,9 @@ class HomeApp(AbsApp, OnUpdateRequestListener, OnTouchEventListener):
 
         elif view == iconThermo:
             next = self._apps['thermo']
+
+        elif view == iconImage:
+            next = self._apps['image']
 
         elif view == iconWiFi:
             next = self._apps['wifi']
