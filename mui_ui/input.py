@@ -4,7 +4,7 @@
 
 import sys
 import asyncio
-from evdev import InputDevice, categorize, ecodes, list_devices, KeyEvent, util
+from evdev import InputDevice, categorize, ecodes, list_devices, KeyEvent, util, AbsInfo
 
 
 EV_SYN = 0x00   # event type sync
@@ -780,7 +780,7 @@ class InputHandler(object):
     InputEvent
     """
 
-    def __init__(self, listener:InputEventListener, target_device='Atmel maXTouch Touchscreen'):
+    def __init__(self, listener:InputEventListener):
         """
         Parameters
         ------------
@@ -793,10 +793,25 @@ class InputHandler(object):
         self.inputEvent = None
         self.inputEventListener = listener
 
+        self._devices = {}
+
         # get all input devices
         self.devices = [InputDevice(path) for path in list_devices()]
         for device in self.devices:
-            print(device)
+            print(device.name)
+            caps = device.capabilities(absinfo=True)
+            for k, v in caps.items():
+                if k != 3:
+                    continue
+
+                # store AbsInfo
+                print(v[ABS_X][1])
+                print(v[ABS_Y][1])
+                absInfo = {}
+                absInfo[ABS_X] = v[ABS_X][1]
+                absInfo[ABS_Y] = v[ABS_Y][1]
+                self._devices[device.path] = absInfo
+
     
     def startEventLoop(self):
         self.loop = asyncio.get_event_loop()
@@ -834,10 +849,12 @@ class InputHandler(object):
                 changeKey = False
                 
             if (ev.type == EV_ABS and ev.code == ABS_X):
-                self.inputEvent.x = (ev.value // 2)
+                factor_x = self._devices[device.path][ABS_X].max / 200
+                self.inputEvent.x = int(ev.value // factor_x)
 
             if (ev.type == EV_ABS and ev.code == ABS_Y):
-                self.inputEvent.y = (ev.value // 20)
+                factor_y = self._devices[device.path][ABS_Y].max / 32
+                self.inputEvent.y = int(ev.value // factor_y)
 
             if (ev.type == EV_ABS and ev.code == ABS_PRESSURE):
                 self.inputEvent.press = ev.value
@@ -873,5 +890,3 @@ if __name__ == '__main__':
     except (KeyboardInterrupt, EOFError):
         pass
     sys.exit(0)
-
-
