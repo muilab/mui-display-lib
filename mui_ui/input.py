@@ -11,6 +11,7 @@ EV_SYN = 0x00   # event type sync
 SYN_REPORT = 0  # event code sync report
 
 EV_KEY = 0x01       # event type key (touch down or up or hold)
+BTN_DIGI = 0x140    # event code button tool pen
 BTN_TOUCH = 0x14a   # event code touch
 VALUE_UP = 0        # evnet value up
 VALUE_DOWN = 1      # event value down
@@ -588,6 +589,9 @@ class MotionEvent(object):
 
     Attributes
     -----------
+    dev_name : str
+        input device name
+
     timestamp :  float
         timestamp
 
@@ -599,6 +603,12 @@ class MotionEvent(object):
 
     y : int
         touch y position
+
+    org_x : int
+        x-asis originally sense value
+
+    org_y : int
+        y-asis originally sense value
     """
 
     def __init__(self):
@@ -607,6 +617,8 @@ class MotionEvent(object):
         self._action = VALUE_UP
         self._x = 0
         self._y = 0
+        self._org_x = 0
+        self._org_y = 0
 
     def __str__(self):
         msg = '--- MotionEvent at {:f}, device : {:s}, action {:d}, x {:d}, y {:d} ---'
@@ -618,6 +630,8 @@ class MotionEvent(object):
         self._action = e.action
         self._x = e.x
         self._y = e.y
+        self._org_x = e.org_x
+        self._org_y = e.org_y
         
 
     @property
@@ -640,6 +654,14 @@ class MotionEvent(object):
     def y(self):
         return self._y
 
+    @property
+    def org_x(self):
+        return self._org_x
+
+    @property
+    def org_y(self):
+        return self._org_y
+
     @timestamp.setter
     def timestamp(self, t):
         self._timestamp = t
@@ -659,6 +681,14 @@ class MotionEvent(object):
     @y.setter
     def y(self, y):
         self._y = y
+
+    @org_x.setter
+    def org_x(self, org_x):
+        self._org_x = org_x
+
+    @org_y.setter
+    def org_y(self, org_y):
+        self._org_y = org_y
         
 
 class InputEvent(MotionEvent):
@@ -830,7 +860,7 @@ class InputHandler(object):
 
             if ev.type == EV_SYN:
                 # digital pen hover event
-                if self.inputEvent.press == -1:
+                if (self.inputEvent.press == -1):
                     # print('--hover--')
                     continue
 
@@ -851,10 +881,12 @@ class InputHandler(object):
             if (ev.type == EV_ABS and ev.code == ABS_X):
                 factor_x = self._devices[device.path][ABS_X].max / 200
                 self.inputEvent.x = int(ev.value // factor_x)
+                self.inputEvent.org_x = int(ev.value)
 
             if (ev.type == EV_ABS and ev.code == ABS_Y):
                 factor_y = self._devices[device.path][ABS_Y].max / 32
                 self.inputEvent.y = int(ev.value // factor_y)
+                self.inputEvent.org_y = int(ev.value)
 
             if (ev.type == EV_ABS and ev.code == ABS_PRESSURE):
                 self.inputEvent.press = ev.value

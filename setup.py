@@ -13,7 +13,7 @@ with open('LICENSE') as f:
 
 setup(
     name='mui_ui',
-    version='0.2.3',
+    version='0.2.4',
     description='UI Library for mui',
     long_description=readme,
     author='Takuya Kubota',
