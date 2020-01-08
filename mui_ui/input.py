@@ -835,12 +835,15 @@ class InputHandler(object):
                     continue
 
                 # store AbsInfo
-                print(v[ABS_X][1])
-                print(v[ABS_Y][1])
-                absInfo = {}
-                absInfo[ABS_X] = v[ABS_X][1]
-                absInfo[ABS_Y] = v[ABS_Y][1]
-                self._devices[device.path] = absInfo
+                try:
+                    print(v[ABS_X][1])
+                    print(v[ABS_Y][1])
+                    absInfo = {}
+                    absInfo[ABS_X] = v[ABS_X][1]
+                    absInfo[ABS_Y] = v[ABS_Y][1]
+                    self._devices[device.path] = absInfo
+                except Exception as e:
+                    print(e)
 
     
     def startEventLoop(self):
